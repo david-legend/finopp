@@ -157,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: SignUpArrowButton(
                     icon: IconData(0xe901, fontFamily: 'Icons'),
                     iconSize: 9,
-                    onTap: () => print("Signup Tapped"),
+                    onTap: () => initiateSignInProcess(),
                   ),
                 ),
               ],
