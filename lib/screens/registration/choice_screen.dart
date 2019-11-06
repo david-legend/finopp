@@ -34,7 +34,7 @@ class ChoiceScreen extends StatelessWidget {
                     saveAccountType(StringConst.START_UP_VALUE);
                     Navigator.pushNamed(context, SignUpScreen.ROUTE_NAME);
                   },
-                  color: Colors.blue,
+                  color: kFINOP_ORANGE,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
@@ -59,7 +59,7 @@ class ChoiceScreen extends StatelessWidget {
                     saveAccountType(StringConst.INVESTOR_VALUE);
                     Navigator.pushNamed(context, SignUpScreen.ROUTE_NAME);
                   },
-                  color: Colors.blue,
+                  color: kFINOP_ORANGE,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
