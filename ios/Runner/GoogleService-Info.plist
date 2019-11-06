@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>100843279807-jh8ve2dtu01gd8sltg117lveevqp1sot.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.100843279807-jh8ve2dtu01gd8sltg117lveevqp1sot</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>100843279807-ahfo2cmkbrvnoo6romgt593p93um7b80.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAPTTsU3MsgA_bLcvKTXFBKcd-aDKDgJ8k</string>
+	<key>GCM_SENDER_ID</key>
+	<string>100843279807</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.finop</string>
+	<key>PROJECT_ID</key>
+	<string>investors-hub</string>
+	<key>STORAGE_BUCKET</key>
+	<string>investors-hub.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:100843279807:ios:19700f5ba397d0f85dfd0a</string>
+	<key>DATABASE_URL</key>
+	<string>https://investors-hub.firebaseio.com</string>
+</dict>
+</plist>

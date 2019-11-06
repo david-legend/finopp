@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "100843279807",
+    "firebase_url": "https://investors-hub.firebaseio.com",
+    "project_id": "investors-hub",
+    "storage_bucket": "investors-hub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100843279807:android:b85d2a39da202af65dfd0a",
+        "android_client_info": {
+          "package_name": "com.example.finop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100843279807-ahfo2cmkbrvnoo6romgt593p93um7b80.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.finop",
+            "certificate_hash": "741b0b513a5b4b20c5eb0b818b9fcb9098a6fde4"
+          }
+        },
+        {
+          "client_id": "100843279807-baj6kq0d1mtl8uh2ef64fq8viea3g85q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3GjvWbTxVso2pN3RgtmZZAPUCpjNZxL8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100843279807-baj6kq0d1mtl8uh2ef64fq8viea3g85q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
