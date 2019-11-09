@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SetupStartUpScreen extends StatefulWidget {
-  static const String ROUTE_NAME = '/';
+  static const String ROUTE_NAME = '/setupStartUp';
 
 //  static const String ROUTE_NAME = '/setupStartUp';
 
@@ -49,152 +49,144 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen> {
 
   Widget basicInfo() {
     return Expanded(
-      flex: 1,
-      child: ListView(
-        children: <Widget>[
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Text(
-                  StringConst.SETUP_BASIC_INFO,
-                  textAlign: TextAlign.center,
-                  style: setupHeadingStyle,
-                ),
-                SizedBox(height: 20.0),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    filled: false,
-                    hintText: 'Name of your comapany?',
-                    labelText: 'Company name *',
-                  ),
-                  keyboardType: TextInputType.text,
-                ),
-                SizedBox(height: 24.0),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    filled: false,
-                    hintText: 'Where can we reach you?',
-                    labelText: 'Phone Number *',
-                  ),
-                  keyboardType: TextInputType.text,
-                ),
-                SizedBox(height: 24.0),
-                DropdownButton<String>(
-                  value: industryDropdownValue,
-                  isExpanded: true,
-                  icon: Icon(Icons.arrow_drop_down),
-                  hint: Text(' Choose Industry'),
-                  iconSize: 24,
-                  elevation: 16,
-                  style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-                  underline: Container(
-                    height: 2,
-                    color: Colors.grey,
-                  ),
-                  onChanged: (String newValue) {
-                    setState(() {
-                      industryDropdownValue = newValue;
-                    });
-                  },
-                  items: <String>[
-                    'Technology',
-                    'Agriculture',
-                    'Forestry',
-                    'Oil '
-                  ].map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
-                SizedBox(height: 24.0),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText:
-                        'Tell us about your startup (e.g., what your startup does.)',
-                    labelText: 'Description',
-                  ),
-                  maxLines: 4,
-                ),
-              ],
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Text(
+              StringConst.SETUP_BASIC_INFO,
+              textAlign: TextAlign.center,
+              style: setupHeadingStyle,
             ),
-          ),
-        ],
+            SizedBox(height: 20.0),
+            TextFormField(
+              decoration: const InputDecoration(
+                border: UnderlineInputBorder(),
+                filled: false,
+                hintText: 'Name of your comapany?',
+                labelText: 'Company name *',
+              ),
+              keyboardType: TextInputType.text,
+            ),
+            SizedBox(height: 24.0),
+            TextFormField(
+              decoration: const InputDecoration(
+                border: UnderlineInputBorder(),
+                filled: false,
+                hintText: 'Where can we reach you?',
+                labelText: 'Phone Number *',
+              ),
+              keyboardType: TextInputType.text,
+            ),
+            SizedBox(height: 24.0),
+            DropdownButton<String>(
+              value: industryDropdownValue,
+              isExpanded: true,
+              icon: Icon(Icons.arrow_drop_down),
+              hint: Text(' Choose Industry'),
+              iconSize: 24,
+              elevation: 16,
+              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+              underline: Container(
+                height: 2,
+                color: Colors.grey,
+              ),
+              onChanged: (String newValue) {
+                setState(() {
+                  industryDropdownValue = newValue;
+                });
+              },
+              items: <String>[
+                'Technology',
+                'Agriculture',
+                'Forestry',
+                'Oil '
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+            SizedBox(height: 24.0),
+            TextFormField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText:
+                    'Tell us about your startup (e.g., what your startup does.)',
+                labelText: 'Description',
+              ),
+              maxLines: 4,
+            ),
+            skipButton(),
+          ],
+        ),
       ),
     );
   }
 
   Widget locationInfo() {
     return Expanded(
-      flex: 1,
-      child: ListView(
-        children: <Widget>[
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Text(
-                  StringConst.SETUP_LOCATION,
-                  textAlign: TextAlign.center,
-                  style: setupHeadingStyle,
-                ),
-                SizedBox(height: 12.0),
-                Text(
-                  StringConst.SETUP_LOCATION_SUB,
-                  textAlign: TextAlign.center,
-                  style: setupSubtitleStyle,
-                ),
-                SizedBox(height: 24.0),
-                DropdownButton<String>(
-                  value: locationDropdownValue,
-                  isExpanded: true,
-                  icon: Icon(Icons.arrow_drop_down),
-                  hint: Text(' Country/Region'),
-                  iconSize: 24,
-                  elevation: 16,
-                  style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-                  underline: Container(
-                    height: 2,
-                    color: Colors.grey,
-                  ),
-                  onChanged: (String newValue) {
-                    setState(() {
-                      locationDropdownValue = newValue;
-                    });
-                  },
-                  items: <String>[
-                    'Ghana',
-                    'Nigeria',
-                    'Egypt',
-                    'Kenya',
-                    'Rwanda',
-                    'South Africa'
-                  ].map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
-                SizedBox(height: 24.0),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    filled: false,
-                    hintText: 'Postal Code (Optional)',
-                    labelText: 'Postal Code (Optional)',
-                  ),
-                  keyboardType: TextInputType.text,
-                ),
-              ],
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Text(
+              StringConst.SETUP_LOCATION,
+              textAlign: TextAlign.center,
+              style: setupHeadingStyle,
             ),
-          ),
-        ],
+            SizedBox(height: 12.0),
+            Text(
+              StringConst.SETUP_LOCATION_SUB,
+              textAlign: TextAlign.center,
+              style: setupSubtitleStyle,
+            ),
+            SizedBox(height: 24.0),
+            DropdownButton<String>(
+              value: locationDropdownValue,
+              isExpanded: true,
+              icon: Icon(Icons.arrow_drop_down),
+              hint: Text(' Country/Region'),
+              iconSize: 24,
+              elevation: 16,
+              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+              underline: Container(
+                height: 2,
+                color: Colors.grey,
+              ),
+              onChanged: (String newValue) {
+                setState(() {
+                  locationDropdownValue = newValue;
+                });
+              },
+              items: <String>[
+                'Ghana',
+                'Nigeria',
+                'Egypt',
+                'Kenya',
+                'Rwanda',
+                'South Africa'
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+            SizedBox(height: 24.0),
+            TextFormField(
+              decoration: const InputDecoration(
+                border: UnderlineInputBorder(),
+                filled: false,
+                hintText: 'Postal Code (Optional)',
+                labelText: 'Postal Code (Optional)',
+              ),
+              keyboardType: TextInputType.text,
+            ),
+            skipButton(),
+          ],
+        ),
       ),
     );
   }
@@ -225,25 +217,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen> {
                 child: _isImageSet ? _previewImage() : tapToChooseImage(),
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: FlatButton(
-                  onPressed: () {},
-                  child: Container(
-                    margin: EdgeInsets.only(bottom: 12.0),
-                    child: Text(
-                      'Skip',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            )
+            skipButton(),
           ],
         ),
       ),
@@ -264,6 +238,28 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen> {
           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
         ),
       ],
+    );
+  }
+
+  Widget skipButton() {
+    return Expanded(
+      flex: 1,
+      child: Align(
+        alignment: Alignment.bottomLeft,
+        child: FlatButton(
+          onPressed: () {},
+          child: Container(
+            margin: EdgeInsets.only(bottom: 12.0),
+            child: Text(
+              'Skip',
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
