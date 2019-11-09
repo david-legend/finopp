@@ -19,6 +19,17 @@ class StringConst {
   static const String SIGN_IN = "Sign In";
   static const String SIGN_UP_TEXT = "Don't have an account?";
 
+  //Setup startUp
+  static const String SETUP_BASIC_INFO =
+      "Your profile helps you discover people and opportunities";
+  static const String SETUP_LOCATION =
+      "What's your location?";
+  static const String SETUP_LOCATION_SUB =
+      "See startups, investors, innovations and ideas in your area.";
+  static const String SETUP_PROFILE_PHOTO =
+      "Adding a photo helps people recognize you";
+  static const String TAP_TO_ADD_PHOTO = "Tap to upload your logo";
+
   //Toast Messages
   static const String NO_INTERNET_CONNECTION = "Please check your internet connection.";
 
