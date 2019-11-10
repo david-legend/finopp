@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:finop/const/_const.dart';
+import 'package:finop/screens/app/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -38,6 +39,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
     _isOnBasicInfo = true;
     _isOnLocationInfo = false;
     _isOnSetupLogo = false;
+    _initializeStep();
   }
 
   @override
@@ -53,13 +55,13 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
 //              SpinKitDoubleBounce
               _isLoading
                   ? SpinKitWave(
-                    color: Colors.green,
-                    type: SpinKitWaveType.center,
-                    size: 50.0,
-                    controller: AnimationController(
-                        vsync: this,
-                        duration: const Duration(milliseconds: 1000)),
-                  )
+                      color: kFINOP_ORANGE,
+                      type: SpinKitWaveType.center,
+                      size: 50.0,
+                      controller: AnimationController(
+                          vsync: this,
+                          duration: const Duration(milliseconds: 1000)),
+                    )
                   : Container(),
               _isOnBasicInfo ? basicInfo() : Container(),
               _isOnLocationInfo ? locationInfo() : Container(),
@@ -90,8 +92,8 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
       textStyle: TextStyle(height: 1.5, fontFamily: "Roboto", fontSize: 16),
       decoration: InputDecoration(
         // prefixIcon: Icon(Icons.search),
-        // hintText: formControl.hint,
-        labelText: "Industries",
+        hintText: 'Names of Founders',
+        labelText: "Founders",
         // enabled: false,
         // errorText: field.errorText,
       ),
@@ -315,7 +317,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
           margin: EdgeInsets.only(bottom: 12.0),
           child: FlatButton(
             onPressed: () {
-              skipStep();
+              _skipStep();
             },
             child: Text(
               'Skip',
@@ -372,18 +374,29 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
     return null;
   }
 
-  Future<String> checkCurrentStep() async {
+  Future<String> _getCurrentStep() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String currentStep = prefs.getString(StringConst.SETUP_STEP_KEY);
     return currentStep;
   }
 
-  void addCurrentStep(String value) async {
+  void _initializeStep() async {
+    String currentStep = await _getCurrentStep();
+    if (currentStep == StringConst.BASIC_INFO_STEP_VALUE) {
+      _showCurrentScreen(basicInfo: true);
+    } else if (currentStep == StringConst.LOCATION_STEP_VALUE) {
+      _showCurrentScreen(locationInfo: true);
+    } else if (currentStep == StringConst.PROFILE_PHOTO_STEP_VALUE) {
+      _showCurrentScreen(logoInfo: true);
+    }
+  }
+
+  void _addCurrentStep(String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(StringConst.SETUP_STEP_KEY, value);
   }
 
-  void turnOnProgressIndicator() {
+  void _turnOnProgressIndicator() {
     setState(() {
       _isLoading = true;
       _isOnBasicInfo = false;
@@ -392,34 +405,34 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
     });
   }
 
-  void turnOffProgressIndicator() {
+  void _turnOffProgressIndicator() {
     setState(() {
       _isLoading = false;
     });
   }
 
   void _proceedToNextStep() async {
-    turnOnProgressIndicator();
-    String currentStep = await checkCurrentStep();
+    _turnOnProgressIndicator();
+    String currentStep = await _getCurrentStep();
     print("CURRENT STEP:: $currentStep");
 
     Future.delayed(const Duration(seconds: 2), () {
       if (currentStep == StringConst.BASIC_INFO_STEP_VALUE) {
-        addCurrentStep(StringConst.LOCATION_STEP_VALUE);
-        turnOffProgressIndicator();
-        showCurrentScreen(locationInfo: true);
+        _addCurrentStep(StringConst.LOCATION_STEP_VALUE);
+        _turnOffProgressIndicator();
+        _showCurrentScreen(locationInfo: true);
       } else if (currentStep == StringConst.LOCATION_STEP_VALUE) {
-        addCurrentStep(StringConst.PROFILE_PHOTO_STEP_VALUE);
-        turnOffProgressIndicator();
-        showCurrentScreen(logoInfo: true);
+        _addCurrentStep(StringConst.PROFILE_PHOTO_STEP_VALUE);
+        _turnOffProgressIndicator();
+        _showCurrentScreen(logoInfo: true);
       } else if (currentStep == StringConst.PROFILE_PHOTO_STEP_VALUE) {
-        //take user into app
+        _addCurrentStep(StringConst.SETUP_COMPLETE_VALUE);
+        Navigator.pushNamed(context, HomeScreen.ROUTE_NAME);
       }
     });
-
   }
 
-  void showCurrentScreen(
+  void _showCurrentScreen(
       {bool basicInfo = false, bool locationInfo = false, logoInfo = false}) {
     setState(() {
       _isOnBasicInfo = basicInfo;
@@ -428,18 +441,19 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
     });
   }
 
-  void skipStep() async {
-    String currentStep = await checkCurrentStep();
+  void _skipStep() async {
+    String currentStep = await _getCurrentStep();
     print("CURRENT STEP:: $currentStep");
 
     if (currentStep == StringConst.BASIC_INFO_STEP_VALUE) {
-      addCurrentStep(StringConst.LOCATION_STEP_VALUE);
-      showCurrentScreen(locationInfo: true);
+      _addCurrentStep(StringConst.LOCATION_STEP_VALUE);
+      _showCurrentScreen(locationInfo: true);
     } else if (currentStep == StringConst.LOCATION_STEP_VALUE) {
-      addCurrentStep(StringConst.PROFILE_PHOTO_STEP_VALUE);
-      showCurrentScreen(logoInfo: true);
+      _addCurrentStep(StringConst.PROFILE_PHOTO_STEP_VALUE);
+      _showCurrentScreen(logoInfo: true);
     } else if (currentStep == StringConst.PROFILE_PHOTO_STEP_VALUE) {
-      //take user into app
+      _addCurrentStep(StringConst.SETUP_COMPLETE_VALUE);
+      Navigator.pushNamed(context, HomeScreen.ROUTE_NAME);
     }
   }
 }

@@ -44,4 +44,5 @@ class StringConst {
   static const String BASIC_INFO_STEP_VALUE = "basic_info";
   static const String LOCATION_STEP_VALUE = "location_ino";
   static const String PROFILE_PHOTO_STEP_VALUE = "profile_photo_info";
+  static const String SETUP_COMPLETE_VALUE = "setup_complete";
 }

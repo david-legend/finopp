@@ -4,6 +4,7 @@ import 'package:finop/screens/registration/login_screen.dart';
 import 'package:finop/screens/registration/setup_investor_screen.dart';
 import 'package:finop/screens/registration/setup_startup_screen.dart';
 import 'package:finop/screens/registration/signup_screen.dart';
+import 'package:finop/screens/root_page.dart';
 import 'package:finop/services/authentication.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       ),
 //      home: '/choiceScreen',
       routes: {
+        RootPage.ROUTE_NAME: (context) => RootPage(auth: new Auth(),),
         ChoiceScreen.ROUTE_NAME: (context) => ChoiceScreen(),
         LoginScreen.ROUTE_NAME: (context) => LoginScreen(auth: Auth(),),
         SignUpScreen.ROUTE_NAME: (context) => SignUpScreen(auth: Auth(),),
