@@ -4,10 +4,12 @@ import 'package:finop/const/color_const.dart';
 import 'package:finop/const/string_const.dart';
 import 'package:finop/const/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SetupInvestorScreen extends StatefulWidget {
-  static const String ROUTE_NAME = '/';
+//  static const String ROUTE_NAME = '/';
+  static const String ROUTE_NAME = '/setupInvestor';
 
   @override
   _SetupInvestorScreenState createState() => _SetupInvestorScreenState();
@@ -30,9 +32,9 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen> {
           margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0),
           child: Column(
             children: <Widget>[
-              basicInfo(),
+//              basicInfo(),
 //              locationInfo(),
-//              setupProfilePhoto(),
+              setupProfilePhoto(),
             ],
           ),
         ),
@@ -44,6 +46,53 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen> {
         label: const Text('Proceed'),
         icon: const Icon(Icons.arrow_forward),
       ),
+    );
+  }
+
+  Widget chipsInput() {
+    return ChipsInput(
+//              initialValue: [''],
+      keyboardAppearance: Brightness.dark,
+      textCapitalization: TextCapitalization.words,
+      enabled: true,
+      maxChips: 10,
+      textStyle:
+      TextStyle(height: 1.5, fontFamily: "Roboto", fontSize: 16),
+      decoration: InputDecoration(
+        // prefixIcon: Icon(Icons.search),
+        // hintText: formControl.hint,
+        labelText: "Industries",
+        // enabled: false,
+        // errorText: field.errorText,
+      ),
+      findSuggestions: (String query) {
+        if (query.length != 0) {
+          var lowercaseQuery = query.toLowerCase();
+          List<String> industry = [];
+          industry.add(lowercaseQuery);
+          return industry;
+        }
+        return [];
+      },
+      onChanged: (data) {
+        print(data);
+      },
+      chipBuilder: (context, state, profile) {
+        return InputChip(
+          key: ObjectKey(profile),
+          label: Text(profile),
+          onDeleted: () => state.deleteChip(profile),
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        );
+      },
+      suggestionBuilder: (context, state, profile) {
+        return ListTile(
+          key: ObjectKey(profile),
+//          leading: Icon(Icons.security),
+          title: Text(profile),
+          onTap: () => state.selectSuggestion(profile),
+        );
+      },
     );
   }
 
@@ -68,6 +117,8 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen> {
               ),
               keyboardType: TextInputType.text,
             ),
+            SizedBox(height: 24.0),
+            chipsInput(),
             SizedBox(height: 24.0),
             DropdownButton<String>(
               value: industryDropdownValue,

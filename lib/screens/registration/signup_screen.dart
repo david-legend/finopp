@@ -24,6 +24,7 @@ class SignUpScreen extends StatefulWidget {
   final BaseAuth auth;
   final VoidCallback loginCallback;
 
+//  static const String ROUTE_NAME = '/';
   static const String ROUTE_NAME = '/signup';
 
   @override
@@ -254,12 +255,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return accountType;
   }
 
+  Future<void> setCurrentStep() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(StringConst.SETUP_STEP_KEY, StringConst.BASIC_INFO_STEP_VALUE);
+  }
+
   void navigateUserToSetupAccount(String accountType) {
     switch(accountType) {
       case StringConst.START_UP_VALUE:
+        setCurrentStep();
         Navigator.pushNamed(context, SetupStartUpScreen.ROUTE_NAME);
         break;
       case StringConst.INVESTOR_VALUE:
+        setCurrentStep();
         Navigator.pushNamed(context, SetupInvestorScreen.ROUTE_NAME);
         break;
       default:

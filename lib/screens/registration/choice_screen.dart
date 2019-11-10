@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ChoiceScreen extends StatelessWidget {
   static const String ROUTE_NAME = '/';
+//  static const String ROUTE_NAME = '/choiceScreen';
 
   @override
   Widget build(BuildContext context) {

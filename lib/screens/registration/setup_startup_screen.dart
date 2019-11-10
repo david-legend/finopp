@@ -2,18 +2,22 @@ import 'dart:io';
 
 import 'package:finop/const/_const.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chips_input/flutter_chips_input.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SetupStartUpScreen extends StatefulWidget {
-  static const String ROUTE_NAME = '/setupStartUp';
+//  static const String ROUTE_NAME = '/';
 
-//  static const String ROUTE_NAME = '/setupStartUp';
+  static const String ROUTE_NAME = '/setupStartUp';
 
   @override
   _SetupStartUpScreenState createState() => _SetupStartUpScreenState();
 }
 
-class _SetupStartUpScreenState extends State<SetupStartUpScreen> {
+class _SetupStartUpScreenState extends State<SetupStartUpScreen>
+    with TickerProviderStateMixin {
   String industryDropdownValue = 'Technology';
   String locationDropdownValue = 'Ghana';
 
@@ -22,6 +26,20 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen> {
   bool _isImageSet = false;
   String _retrieveDataError;
 
+  bool _isLoading;
+  bool _isOnBasicInfo;
+  bool _isOnLocationInfo;
+  bool _isOnSetupLogo;
+
+  @override
+  void initState() {
+    super.initState();
+    _isLoading = false;
+    _isOnBasicInfo = true;
+    _isOnLocationInfo = false;
+    _isOnSetupLogo = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,10 +47,23 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen> {
         child: Container(
           margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              basicInfo(),
-//              locationInfo(),
-//              setupLogo(),
+//              SpinKitChasingDots
+//              SpinKitDoubleBounce
+              _isLoading
+                  ? SpinKitWave(
+                    color: Colors.green,
+                    type: SpinKitWaveType.center,
+                    size: 50.0,
+                    controller: AnimationController(
+                        vsync: this,
+                        duration: const Duration(milliseconds: 1000)),
+                  )
+                  : Container(),
+              _isOnBasicInfo ? basicInfo() : Container(),
+              _isOnLocationInfo ? locationInfo() : Container(),
+              _isOnSetupLogo ? setupLogo() : Container(),
             ],
           ),
         ),
@@ -40,88 +71,123 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen> {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: kFINOP_ORANGE,
         tooltip: 'Proceed',
-        onPressed: () {},
+        onPressed: () {
+          _proceedToNextStep();
+        },
         label: const Text('Proceed'),
         icon: const Icon(Icons.arrow_forward),
       ),
     );
   }
 
+  Widget chipsInput() {
+    return ChipsInput(
+//              initialValue: [''],
+      keyboardAppearance: Brightness.dark,
+      textCapitalization: TextCapitalization.words,
+      enabled: true,
+      maxChips: 10,
+      textStyle: TextStyle(height: 1.5, fontFamily: "Roboto", fontSize: 16),
+      decoration: InputDecoration(
+        // prefixIcon: Icon(Icons.search),
+        // hintText: formControl.hint,
+        labelText: "Industries",
+        // enabled: false,
+        // errorText: field.errorText,
+      ),
+      findSuggestions: (String query) {
+        if (query.length != 0) {
+          var lowercaseQuery = query.toLowerCase();
+          List<String> industry = [];
+          industry.add(lowercaseQuery);
+          return industry;
+        }
+        return [];
+      },
+      onChanged: (data) {
+        print(data);
+      },
+      chipBuilder: (context, state, profile) {
+        return InputChip(
+          key: ObjectKey(profile),
+          label: Text(profile),
+          onDeleted: () => state.deleteChip(profile),
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        );
+      },
+      suggestionBuilder: (context, state, profile) {
+        return ListTile(
+          key: ObjectKey(profile),
+//          leading: Icon(Icons.security),
+          title: Text(profile),
+          onTap: () => state.selectSuggestion(profile),
+        );
+      },
+    );
+  }
+
   Widget basicInfo() {
     return Expanded(
+      flex: 1,
       child: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Text(
-              StringConst.SETUP_BASIC_INFO,
-              textAlign: TextAlign.center,
-              style: setupHeadingStyle,
+          child: Column(
+        children: <Widget>[
+          Text(
+            StringConst.SETUP_BASIC_INFO,
+            textAlign: TextAlign.center,
+            style: setupHeadingStyle,
+          ),
+          SizedBox(height: 20.0),
+          TextFormField(
+            decoration: const InputDecoration(
+              border: UnderlineInputBorder(),
+              filled: false,
+              hintText: 'Name of your comapany?',
+              labelText: 'Company name *',
             ),
-            SizedBox(height: 20.0),
-            TextFormField(
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-                filled: false,
-                hintText: 'Name of your comapany?',
-                labelText: 'Company name *',
-              ),
-              keyboardType: TextInputType.text,
+            keyboardType: TextInputType.text,
+          ),
+          SizedBox(height: 24.0),
+          chipsInput(),
+          SizedBox(height: 24.0),
+          DropdownButton<String>(
+            value: industryDropdownValue,
+            isExpanded: true,
+            icon: Icon(Icons.arrow_drop_down),
+            hint: Text(' Choose Industry'),
+            iconSize: 24,
+            elevation: 16,
+            style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+            underline: Container(
+              height: 2,
+              color: Colors.grey,
             ),
-            SizedBox(height: 24.0),
-            TextFormField(
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-                filled: false,
-                hintText: 'Where can we reach you?',
-                labelText: 'Phone Number *',
-              ),
-              keyboardType: TextInputType.text,
+            onChanged: (String newValue) {
+              setState(() {
+                industryDropdownValue = newValue;
+              });
+            },
+            items: <String>['Technology', 'Agriculture', 'Forestry', 'Oil ']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
+          SizedBox(height: 24.0),
+          TextFormField(
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText:
+                  'Tell us about your startup (e.g., what your startup does.)',
+              labelText: 'Description',
             ),
-            SizedBox(height: 24.0),
-            DropdownButton<String>(
-              value: industryDropdownValue,
-              isExpanded: true,
-              icon: Icon(Icons.arrow_drop_down),
-              hint: Text(' Choose Industry'),
-              iconSize: 24,
-              elevation: 16,
-              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-              underline: Container(
-                height: 2,
-                color: Colors.grey,
-              ),
-              onChanged: (String newValue) {
-                setState(() {
-                  industryDropdownValue = newValue;
-                });
-              },
-              items: <String>[
-                'Technology',
-                'Agriculture',
-                'Forestry',
-                'Oil '
-              ].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
-            SizedBox(height: 24.0),
-            TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText:
-                    'Tell us about your startup (e.g., what your startup does.)',
-                labelText: 'Description',
-              ),
-              maxLines: 4,
-            ),
-            skipButton(),
-          ],
-        ),
-      ),
+            maxLines: 4,
+          ),
+          skipButton(),
+        ],
+      )),
     );
   }
 
@@ -243,13 +309,14 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen> {
 
   Widget skipButton() {
     return Expanded(
-      flex: 1,
       child: Align(
         alignment: Alignment.bottomLeft,
-        child: FlatButton(
-          onPressed: () {},
-          child: Container(
-            margin: EdgeInsets.only(bottom: 12.0),
+        child: Container(
+          margin: EdgeInsets.only(bottom: 12.0),
+          child: FlatButton(
+            onPressed: () {
+              skipStep();
+            },
             child: Text(
               'Skip',
               style: TextStyle(
@@ -303,5 +370,76 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen> {
       return result;
     }
     return null;
+  }
+
+  Future<String> checkCurrentStep() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String currentStep = prefs.getString(StringConst.SETUP_STEP_KEY);
+    return currentStep;
+  }
+
+  void addCurrentStep(String value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(StringConst.SETUP_STEP_KEY, value);
+  }
+
+  void turnOnProgressIndicator() {
+    setState(() {
+      _isLoading = true;
+      _isOnBasicInfo = false;
+      _isOnLocationInfo = false;
+      _isOnSetupLogo = false;
+    });
+  }
+
+  void turnOffProgressIndicator() {
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  void _proceedToNextStep() async {
+    turnOnProgressIndicator();
+    String currentStep = await checkCurrentStep();
+    print("CURRENT STEP:: $currentStep");
+
+    Future.delayed(const Duration(seconds: 2), () {
+      if (currentStep == StringConst.BASIC_INFO_STEP_VALUE) {
+        addCurrentStep(StringConst.LOCATION_STEP_VALUE);
+        turnOffProgressIndicator();
+        showCurrentScreen(locationInfo: true);
+      } else if (currentStep == StringConst.LOCATION_STEP_VALUE) {
+        addCurrentStep(StringConst.PROFILE_PHOTO_STEP_VALUE);
+        turnOffProgressIndicator();
+        showCurrentScreen(logoInfo: true);
+      } else if (currentStep == StringConst.PROFILE_PHOTO_STEP_VALUE) {
+        //take user into app
+      }
+    });
+
+  }
+
+  void showCurrentScreen(
+      {bool basicInfo = false, bool locationInfo = false, logoInfo = false}) {
+    setState(() {
+      _isOnBasicInfo = basicInfo;
+      _isOnLocationInfo = locationInfo;
+      _isOnSetupLogo = logoInfo;
+    });
+  }
+
+  void skipStep() async {
+    String currentStep = await checkCurrentStep();
+    print("CURRENT STEP:: $currentStep");
+
+    if (currentStep == StringConst.BASIC_INFO_STEP_VALUE) {
+      addCurrentStep(StringConst.LOCATION_STEP_VALUE);
+      showCurrentScreen(locationInfo: true);
+    } else if (currentStep == StringConst.LOCATION_STEP_VALUE) {
+      addCurrentStep(StringConst.PROFILE_PHOTO_STEP_VALUE);
+      showCurrentScreen(logoInfo: true);
+    } else if (currentStep == StringConst.PROFILE_PHOTO_STEP_VALUE) {
+      //take user into app
+    }
   }
 }

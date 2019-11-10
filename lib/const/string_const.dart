@@ -38,4 +38,10 @@ class StringConst {
   static const String USER_ID_KEY = "user_id";
   static const String START_UP_VALUE = "start_up";
   static const String INVESTOR_VALUE = "investor";
+
+  //SharedPreferences setup steps
+  static const String SETUP_STEP_KEY = "current_step";
+  static const String BASIC_INFO_STEP_VALUE = "basic_info";
+  static const String LOCATION_STEP_VALUE = "location_ino";
+  static const String PROFILE_PHOTO_STEP_VALUE = "profile_photo_info";
 }
