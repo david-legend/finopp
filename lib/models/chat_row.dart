@@ -16,49 +16,49 @@ class ChatRow {
 class ChatRowsProvider {
   static final List<ChatRow> chatRows = [
     ChatRow(
-        name: "Sirichai Chan",
+        name: "Kwabena Darkwa",
         unreadMessages: 2,
         lastMessage: "I am cooking food",
         timestamp: "01:05 PM",
         profileUrl:
             "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.uW116YzG5BztduTPZc7uegHaEt%26pid%3DApi&f=1"),
     ChatRow(
-        name: "Asep Jojodog",
+        name: "Bilbo Baggins",
         unreadMessages: 0,
         lastMessage: "I am in supermarket...tell me what you want",
         timestamp: "01:02 PM",
         profileUrl:
             "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.onUzDzIaCFlh1LgLyhdK2AHaE7%26pid%3DApi&f=1"),
     ChatRow(
-        name: "James Down",
+        name: "Michael Hammond",
         unreadMessages: 0,
         lastMessage: "I don't know what to do. I am confused",
         timestamp: "09:23 AM",
         profileUrl:
             "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.onUzDzIaCFlh1LgLyhdK2AHaE7%26pid%3DApi&f=1"),
     ChatRow(
-        name: "Katty Wan",
+        name: "Neila Opoku",
         unreadMessages: 1,
         lastMessage: "How to do it ?",
         timestamp: "11:49 AM",
         profileUrl:
             "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.vqlkxb-pA65TdJ5PvwBdBAHaE2%26pid%3DApi&f=1"),
     ChatRow(
-        name: "Natasha Noor",
+        name: "Pauline Cobbina",
         unreadMessages: 2,
         lastMessage: "Otw",
         timestamp: "09:12AM",
         profileUrl:
             "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.onUzDzIaCFlh1LgLyhdK2AHaE7%26pid%3DApi&f=1"),
     ChatRow(
-        name: "Joana Jedrzkjn",
+        name: "Eric Asare",
         unreadMessages: 0,
         lastMessage: "I am in supermarket...tell me what you want",
         timestamp: "01:02 PM",
         profileUrl:
             "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.v9tUwCUgmDHmYqxi_65nKAHaE8%26pid%3DApi&f=1"),
     ChatRow(
-      name: "Paula",
+      name: "Romeo Foli",
       unreadMessages: 0,
       lastMessage: "I don't know what to do. I am confused",
       timestamp: "09:23 AM",
