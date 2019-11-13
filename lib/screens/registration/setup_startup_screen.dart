@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:finop/const/_const.dart';
-import 'package:finop/screens/app/home_screen.dart';
+import 'package:finop/screens/app/navigation_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -427,7 +427,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
         _showCurrentScreen(logoInfo: true);
       } else if (currentStep == StringConst.PROFILE_PHOTO_STEP_VALUE) {
         _addCurrentStep(StringConst.SETUP_COMPLETE_VALUE);
-        Navigator.pushNamed(context, HomeScreen.ROUTE_NAME);
+        Navigator.pushNamed(context, NavigationHomeScreen.ROUTE_NAME);
       }
     });
   }
@@ -453,7 +453,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
       _showCurrentScreen(logoInfo: true);
     } else if (currentStep == StringConst.PROFILE_PHOTO_STEP_VALUE) {
       _addCurrentStep(StringConst.SETUP_COMPLETE_VALUE);
-      Navigator.pushNamed(context, HomeScreen.ROUTE_NAME);
+      Navigator.pushNamed(context, NavigationHomeScreen.ROUTE_NAME);
     }
   }
 }

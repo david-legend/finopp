@@ -1,5 +1,5 @@
 import 'package:finop/const/string_const.dart';
-import 'package:finop/screens/app/home_screen.dart';
+import 'package:finop/screens/app/navigation_home_screen.dart';
 import 'package:finop/screens/registration/choice_screen.dart';
 import 'package:finop/screens/registration/setup_investor_screen.dart';
 import 'package:finop/screens/registration/setup_startup_screen.dart';
@@ -74,7 +74,7 @@ class _RootPageState extends State<RootPage> {
 
   Future<Widget> determineScreenToShow() async {
     if((await checkIfAccountSetupIsComplete()) && (_userId.length > 0) && (_userId != null)) {
-      return HomeScreen();
+      return NavigationHomeScreen();
     } else if(await getAccountType() == StringConst.START_UP_VALUE) {
         return SetupStartUpScreen();
     } else if(await getAccountType() == StringConst.INVESTOR_VALUE) {

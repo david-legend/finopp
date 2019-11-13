@@ -1,6 +1,6 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:finop/helpers/helpers.dart';
-import 'package:finop/screens/app/home_screen.dart';
+import 'package:finop/screens/app/navigation_home_screen.dart';
 import 'package:finop/services/authentication.dart';
 import 'package:flutter/material.dart';
 
@@ -248,7 +248,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
   void navigateUserToHome() {
-    Navigator.pushNamed(context, HomeScreen.ROUTE_NAME);
+    Navigator.pushNamed(context, NavigationHomeScreen.ROUTE_NAME);
   }
 
 }
