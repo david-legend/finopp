@@ -1,6 +1,8 @@
 import 'package:finop/models/chat_model.dart';
 import 'package:flutter/material.dart';
 
+//TODO:: change color of back button
+
 class ChatScreen extends StatefulWidget {
   final String name;
   final String profileImage;
@@ -102,7 +104,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                     "last seen. 18:00",
                     style: new TextStyle(
                         fontSize: 13.0,
-                        color: Colors.white,
+                        color: Colors.black,
                         fontStyle: FontStyle.italic),
                   ),
                 ],

@@ -8,6 +8,8 @@ import 'package:finop/services/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'app/view_startup_profile.dart';
+
 enum AuthStatus {
   NOT_DETERMINED,
   NOT_LOGGED_IN,
@@ -74,6 +76,7 @@ class _RootPageState extends State<RootPage> {
 
   Future<Widget> determineScreenToShow() async {
     if((await checkIfAccountSetupIsComplete()) && (_userId.length > 0) && (_userId != null)) {
+//      return UserProfileScreen();
       return NavigationHomeScreen();
     } else if(await getAccountType() == StringConst.START_UP_VALUE) {
         return SetupStartUpScreen();

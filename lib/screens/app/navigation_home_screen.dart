@@ -1,3 +1,4 @@
+import 'package:finop/screens/app/user_profile_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -5,6 +6,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'chats.dart';
 import 'chats2.dart';
 import 'home_screen.dart';
+import 'investor_feed_screen.dart';
+import 'view_startup_profile.dart';
 
 class NavigationIconView {
   NavigationIconView({
@@ -79,7 +82,6 @@ class NavigationIconView {
   }
 }
 
-
 class NavigationHomeScreen extends StatefulWidget {
   static const String ROUTE_NAME = '/navigationHomeScreen';
 
@@ -92,13 +94,18 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   static const List<String> _drawerContents = <String>[
-    'Settings',
-    'Chats',
-    'Account',
     'Profile',
+    'Chats',
+    'Settings',
     'Sign out',
   ];
 
+  String pageTitle = 'Home';
+
+   List<Widget> _widgetOptions = <Widget>[
+    HomeScreen(),
+    InvestorFeedScreen(),
+  ];
   static final Animatable<Offset> _drawerDetailsTween = Tween<Offset>(
     begin: const Offset(0.0, -1.0),
     end: Offset.zero,
@@ -137,26 +144,10 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
       ),
       NavigationIconView(
         icon: const Icon(
-          Icons.search,
+          FontAwesomeIcons.briefcase,
           color: Colors.grey,
         ),
-        title: 'Search',
-        vsync: this,
-      ),
-      NavigationIconView(
-        icon: const Icon(
-          Icons.notifications,
-          color: Colors.grey,
-        ),
-        title: 'Nofications',
-        vsync: this,
-      ),
-      NavigationIconView(
-        icon: const Icon(
-          Icons.mail_outline,
-          color: Colors.grey,
-        ),
-        title: 'Messages',
+        title: 'Investors',
         vsync: this,
       ),
     ];
@@ -174,9 +165,10 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
   void _showNotImplementedMessage() {
     Navigator.pop(context); // Dismiss the drawer.
     _scaffoldKey.currentState.showSnackBar(const SnackBar(
-      content: Text("The drawer's items don't do anything"),
+      content: Text("This feature has not been implemented yet!"),
     ));
   }
+
 
   Widget _buildTransitionsStack() {
     final List<FadeTransition> transitions = <FadeTransition>[
@@ -205,10 +197,16 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
           .toList(),
       currentIndex: _currentIndex,
       type: _type,
+      selectedItemColor: Colors.purple,
       onTap: (int index) {
         setState(() {
           _navigationViews[_currentIndex].controller.reverse();
           _currentIndex = index;
+          if(_currentIndex == 0) {
+            pageTitle = 'Home';
+          } else {
+            pageTitle = 'Investors';
+          }
           _navigationViews[_currentIndex].controller.forward();
         });
       },
@@ -237,9 +235,8 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
             ),
           ),
         ),
-        centerTitle: true,
-        title: const Text(
-          'Home',
+        title: Text(
+          pageTitle,
           style: TextStyle(
             color: Colors.black,
             fontSize: 22.0,
@@ -285,13 +282,34 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: _drawerContents.map<Widget>((String id) {
-                              return ListTile(
+                            children: <Widget>[
+                              ListTile(
+                                leading: Icon(Icons.person),
+                                title: Text('Profile'),
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, UserProfileScreen.ROUTE_NAME);
+                                },
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.chat),
+                                title: Text('Chat'),
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, Chats.ROUTE_NAME);
+                                },
+                              ),
+                              ListTile(
                                 leading: Icon(Icons.settings),
-                                title: Text('$id'),
+                                title: Text('Settings'),
                                 onTap: _showNotImplementedMessage,
-                              );
-                            }).toList(),
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.power_settings_new),
+                                title: Text('Sign Out'),
+                                onTap: _showNotImplementedMessage,
+                              ),
+                            ],
                           ),
                         ),
                         // The drawer's "details" view.
@@ -326,10 +344,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
           ],
         ),
       ),
-      body: ChatsPage(), //HomeScreen(), //Chats(),
-//      Center(
-//        child: _buildTransitionsStack(),
-//      ),
+      body: _widgetOptions.elementAt(_currentIndex),//HomeScreen(), //Chats(),
       bottomNavigationBar: botNavBar,
     );
   }

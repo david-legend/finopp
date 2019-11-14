@@ -59,7 +59,7 @@ flutter:
   assets:
     - assets/images/registration/
     - assets/images/finop/
-    - assets/images/supportIcon.png
+    - assets/
 
 
   fonts:
