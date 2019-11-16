@@ -61,8 +61,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: <Widget>[
                           Center(
                             child: Image.asset(
-                              'assets/images/finop/finopp.jpeg',
-//                              RegistrationImagePath.SignUpLogo,
+//                              'assets/images/finop/finopp.jpeg',
+                              RegistrationImagePath.SignUpLogo,
                               height: _media.height / 7,
                             ),
                           ),

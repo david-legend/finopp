@@ -82,23 +82,23 @@ class ChoiceScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    InkWell(
-                      onTap: (){
-                        Navigator.pushNamed(context, LoginScreen.ROUTE_NAME);
-                      },
-                      child: Text(
-                        'Already have an account ? Login',
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+//              Padding(
+//                padding: const EdgeInsets.all(12.0),
+//                child: Column(
+//                  mainAxisAlignment: MainAxisAlignment.end,
+//                  children: <Widget>[
+//                    InkWell(
+//                      onTap: (){
+//                        Navigator.pushNamed(context, LoginScreen.ROUTE_NAME);
+//                      },
+//                      child: Text(
+//                        'Already have an account ? Login',
+//                        style: TextStyle(fontSize: 16.0),
+//                      ),
+//                    ),
+//                  ],
+//                ),
+//              ),
             ],
           ),
         ),

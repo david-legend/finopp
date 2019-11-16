@@ -1,16 +1,20 @@
-# finop
 
-A new Flutter application.
 
-## Getting Started
+Built With Flutter
 
-This project is a starting point for a Flutter application.
+## Finopp
 
-A few resources to get you started if this is your first Flutter project:
+This app aims to connect startUps with Investors.
+For now it is mostly UI, But Login and SignUp connects to FireBase
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Screenshot](assets/images/screen_pics/login_screen.png)
+![Screenshot](assets/images/screen_pics/signup_screen.png)
+![Screenshot](assets/images/screen_pics/signup_basic_info.png)
+![Screenshot](assets/images/screen_pics/signup_location.png)
+![Screenshot](assets/images/screen_pics/signup_profile_photo.png)
+![Screenshot](assets/images/screen_pics/navigation.png)
+![Screenshot](assets/images/screen_pics/startup_feed.png)
+![Screenshot](assets/images/screen_pics/investor_feed.png)
+![Screenshot](assets/images/screen_pics/chats.png)
+![Screenshot](assets/images/screen_pics/investor_profile.png)
+![Screenshot](assets/images/screen_pics/messaging.png)

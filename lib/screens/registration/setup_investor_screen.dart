@@ -167,7 +167,7 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
 //            skipButton(),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
