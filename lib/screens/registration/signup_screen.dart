@@ -18,7 +18,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 
 class SignUpScreen extends StatefulWidget {
-
   SignUpScreen({this.auth, this.loginCallback});
 
   final BaseAuth auth;
@@ -48,7 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           width: double.infinity,
           decoration: BoxDecoration(
 //            gradient: SIGNUP_BACKGROUND,
-          ),
+              ),
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Stack(
@@ -63,8 +62,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: <Widget>[
                           Center(
                             child: Image.asset(
-                              RegistrationImagePath.SignUpLogo,
-                              height: _media.height / 7,
+                              'assets/images/finop/finopp.png',
+//                              RegistrationImagePath.SignUpLogo,
+                              height: _media.height / 9,
                             ),
                           ),
                           SizedBox(
@@ -123,8 +123,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     color: Colors.black,
                                   ),
                                   Expanded(
-                                      child: inputText(
-                                          "PASSWORD", '******', _password, true)),
+                                      child: inputText("PASSWORD", '******',
+                                          _password, true)),
                                 ],
                               ),
                             ),
@@ -132,22 +132,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ],
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          StringConst.SIGN_UP_TEXT,
-                          style: TextStyle(color: MAIN_COLOR),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, LoginScreen.ROUTE_NAME),
-                          child: Text(StringConst.SIGN_IN),
-                        ),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            StringConst.SIGN_UP_TEXT,
+                            style: TextStyle(color: MAIN_COLOR),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          InkWell(
+                            onTap: () => Navigator.pushNamed(
+                                context, LoginScreen.ROUTE_NAME),
+                            child: Text(StringConst.SIGN_IN),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 50,
@@ -172,11 +176,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget inputText(
-      String fieldName,
-      String hintText,
-      TextEditingController controller,
-      bool obSecure,
-      ) {
+    String fieldName,
+    String hintText,
+    TextEditingController controller,
+    bool obSecure,
+  ) {
     return TextField(
       style: TextStyle(height: 1.3),
       controller: controller,
@@ -209,13 +213,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Future<String> signUserUp(String email, String password) async {
-    String  userId = await widget.auth.signUp(email, password);
+    String userId = await widget.auth.signUp(email, password);
     return userId;
   }
 
   Future<bool> checkInternetConnection() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
       return true;
     } else if (connectivityResult == ConnectivityResult.none) {
       showToast(StringConst.NO_INTERNET_CONNECTION, duration: 3);
@@ -228,12 +233,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   initiateSignInProcess() async {
-    if(await checkInternetConnection()){
-      try{
+    if (await checkInternetConnection()) {
+      try {
         turnOnProgressIndicator();
         String userId = await signUserUp(_email.text, _password.text);
 
-        if(userId.length > 0 && userId != null ){
+        if (userId.length > 0 && userId != null) {
           //save user ID and navigate to setup
           print("USER_ID:: $userId");
           Helper.saveUserId(userId);
@@ -242,7 +247,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         } else {
           turnOffProgressIndicator();
         }
-      } catch(e) {
+      } catch (e) {
         print("ERROR:: $e");
         turnOffProgressIndicator();
       }
@@ -257,11 +262,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future<void> setCurrentStep() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(StringConst.SETUP_STEP_KEY, StringConst.BASIC_INFO_STEP_VALUE);
+    prefs.setString(
+        StringConst.SETUP_STEP_KEY, StringConst.BASIC_INFO_STEP_VALUE);
   }
 
   void navigateUserToSetupAccount(String accountType) {
-    switch(accountType) {
+    switch (accountType) {
       case StringConst.START_UP_VALUE:
         setCurrentStep();
         Navigator.pushNamed(context, SetupStartUpScreen.ROUTE_NAME);

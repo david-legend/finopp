@@ -16,12 +16,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 
 class LoginScreen extends StatefulWidget {
-
   LoginScreen({this.auth, this.loginCallback});
 
   final BaseAuth auth;
   final VoidCallback loginCallback;
-
 
   static const String ROUTE_NAME = '/login';
 
@@ -46,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
           width: double.infinity,
           decoration: BoxDecoration(
 //            gradient: SIGNUP_BACKGROUND,
-          ),
+              ),
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Stack(
@@ -61,8 +59,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: <Widget>[
                           Center(
                             child: Image.asset(
-//                              'assets/images/finop/finopp.jpeg',
-                              RegistrationImagePath.SignUpLogo,
+                              'assets/images/finop/finopp.png',
+//                              RegistrationImagePath.SignUpLogo,
                               height: _media.height / 7,
                             ),
                           ),
@@ -122,8 +120,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     color: Colors.black,
                                   ),
                                   Expanded(
-                                      child: inputText(
-                                          "PASSWORD", '******', _password, true)),
+                                      child: inputText("PASSWORD", '******',
+                                          _password, true)),
                                 ],
                               ),
                             ),
@@ -131,22 +129,26 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          StringConst.SIGN_UP_TEXT,
-                          style: TextStyle(color: MAIN_COLOR),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, SignUpScreen.ROUTE_NAME),
-                          child: Text(StringConst.SIGN_UP),
-                        ),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            StringConst.SIGN_UP_TEXT,
+                            style: TextStyle(color: MAIN_COLOR),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          InkWell(
+                            onTap: () => Navigator.pushNamed(
+                                context, SignUpScreen.ROUTE_NAME),
+                            child: Text(StringConst.SIGN_UP),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 50,
@@ -171,11 +173,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget inputText(
-      String fieldName,
-      String hintText,
-      TextEditingController controller,
-      bool obSecure,
-      ) {
+    String fieldName,
+    String hintText,
+    TextEditingController controller,
+    bool obSecure,
+  ) {
     return TextField(
       style: TextStyle(height: 1.3),
       controller: controller,
@@ -208,13 +210,14 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<String> signUserIn(String email, String password) async {
-    String  userId = await widget.auth.signIn(email, password);
+    String userId = await widget.auth.signIn(email, password);
     return userId;
   }
 
   Future<bool> checkInternetConnection() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
       return true;
     } else if (connectivityResult == ConnectivityResult.none) {
       showToast(StringConst.NO_INTERNET_CONNECTION, duration: 3);
@@ -227,12 +230,12 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   initiateSignInProcess() async {
-    if(await checkInternetConnection()){
-      try{
+    if (await checkInternetConnection()) {
+      try {
         turnOnProgressIndicator();
         String userId = await signUserIn(_email.text, _password.text);
 
-        if(userId.length > 0 && userId != null ){
+        if (userId.length > 0 && userId != null) {
           //save user ID and navigate to setup
           print("USER_ID:: $userId");
           Helper.saveUserId(userId);
@@ -240,17 +243,14 @@ class _LoginScreenState extends State<LoginScreen> {
         } else {
           turnOffProgressIndicator();
         }
-      } catch(e) {
+      } catch (e) {
         print("ERROR:: $e");
         turnOffProgressIndicator();
       }
     }
   }
 
-
-
   void navigateUserToHome() {
     Navigator.pushNamed(context, NavigationHomeScreen.ROUTE_NAME);
   }
-
 }
