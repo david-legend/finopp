@@ -27,7 +27,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     );
     setState(() {
       _messages.insert(0, message);
-      var data = messageData.firstWhere((t) => t.name == widget.name);
+      var data = messageData.firstWhere((t) => t.name != widget.name);
       data.message = message.text;
     });
     message.animationController.forward();
@@ -84,7 +84,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
               // padding: const EdgeInsets.fromLTRB(0, 0, 3.0, 0),
               child: new Center(
                   child: CircleAvatar(
-                backgroundImage: NetworkImage(widget.profileImage),
+                backgroundImage: AssetImage(widget.profileImage),
                 maxRadius: 22,
               )),
             ),

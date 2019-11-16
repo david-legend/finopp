@@ -31,7 +31,7 @@ class _ChatsState extends State<Chats> {
               new ListTile(
                 leading: new CircleAvatar(
                   maxRadius: 25,
-                  backgroundImage: NetworkImage(messageData[i].imageUrl),
+                  backgroundImage: AssetImage(messageData[i].imageUrl),
                 ),
                 title: new Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

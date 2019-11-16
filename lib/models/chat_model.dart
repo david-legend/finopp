@@ -9,53 +9,53 @@ class ChatModel {
 
 List<ChatModel> messageData = [
   new ChatModel(
-    name: "Kwabena Darkwa",
+    name: "Novastar",
     message:
         "I am glad you are here with me. Here at the end of all things, David.",
     time: "12:12",
     imageUrl:
-        "https://i0.wp.com/www.jovenescatolicos.es/wp-content/uploads/2014/01/0005-FrodoBaggins.jpg",
+        "assets/images/finop/novastar.jpg",
   ),
   new ChatModel(
-    name: "CYST",
+    name: "Kenza",
     message: "I have found a new niche and I want to discuss it with you.",
     time: "02:16",
     imageUrl:
-        "https://vignette.wikia.nocookie.net/thehobbitfilm/images/f/f0/Bilbo_empire_magizine_photo.png",
+        "assets/images/finop/kenza_lahlou.jpg",
   ),
   new ChatModel(
-    name: "Osei Andy",
+    name: "Muthoni",
     message: "I have to pitch this idea on 7th December.",
     time: "11:11",
     imageUrl:
-        "https://vignette.wikia.nocookie.net/lotr/images/c/c1/1oshuart_-_Saruman.jpg",
+        "assets/images/finop/muthoni_wachira.jpg",
   ),
   new ChatModel(
-    name: "Neila Opoku",
+    name: "Mehak",
     message: "I am working on the new feature.",
     time: "20:21",
     imageUrl:
-        "http://www.thelandofshadow.com/wp-content/uploads/2014/09/Celebrimbor10a-200x200.jpg",
+        "assets/images/finop/mehak_malik.jpg",
   ),
   new ChatModel(
-    name: "Pauline Cobbina",
+    name: "Bare Hands",
     message: "I will send you the prototype next week.",
     time: "1:12",
     imageUrl:
-        "https://vignette.wikia.nocookie.net/eldragonverde/images/5/5a/Gandalf-el-gris.jpg/revision/latest?cb=20110323154536&path-prefix=es",
+        "assets/images/finop/logo1.jpeg",
   ),
   new ChatModel(
-    name: "Eric Asare",
+    name: "Takuma",
     message: "I don't believe in this idea anymore. I want to quit.",
     time: "1:12",
     imageUrl:
-        "https://vignette.wikia.nocookie.net/eldragonverde/images/5/5a/Gandalf-el-gris.jpg/revision/latest?cb=20110323154536&path-prefix=es",
+        "assets/images/finop/takuma_terakubo.jpg",
   ),
   new ChatModel(
-    name: "Romeo Foli",
+    name: "Yassine",
     message: "Please, when are we meeting the investor.",
     time: "1:12",
     imageUrl:
-        "https://vignette.wikia.nocookie.net/eldragonverde/images/5/5a/Gandalf-el-gris.jpg/revision/latest?cb=20110323154536&path-prefix=es",
+        "assets/images/finop/yassine_oussaifi.jpg",
   ),
 ];

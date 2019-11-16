@@ -7,6 +7,26 @@ import 'package:video_player/video_player.dart';
 import '../../hotelAppTheme.dart';
 import 'view_startup_profile.dart';
 
+class StartUpArguments {
+  String name;
+  String companyName;
+  String industry;
+  String goal;
+  String equity;
+  String companyWebsite;
+  String dateEstablished;
+  String imageUrl;
+
+  StartUpArguments(
+      {this.name = '',
+        this.companyName = '',
+        this.industry,
+        this.goal = '',
+        this.equity = '',
+        this.imageUrl = '',
+        this.companyWebsite = '',
+        this.dateEstablished = ''});
+}
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -43,28 +63,107 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
           child: ListView(
-            scrollDirection: Axis.vertical,
-            children: <Widget>[
-              videoCards(),
-              videoCards(),
-              videoCards(),
-              videoCards(),
-              videoCards(),
-              videoCards(),
-              videoCards(),
-            ],
-          )
-      ),
+        scrollDirection: Axis.vertical,
+        children: <Widget>[
+          videoCards(
+            dataSource: 'assets/videos/pitch1.mp4',
+            startUpName: 'Bare Hands',
+            industry: 'Technology',
+            companyWebsite: 'barehands.com',
+            imageUrl: 'assets/images/finop/logo1.jpeg',
+            rating: 4.6,
+            numberOfReviews: '415',
+            goal: '32K',
+            equity: '32%',
+          ),
+          videoCards(
+            dataSource: 'assets/videos/pitch2.mp4',
+            startUpName: 'Home Base',
+            companyWebsite: 'homebase.com',
+            imageUrl: 'assets/images/finop/logo2.jpeg',
+            industry: 'Agriculture',
+            rating: 5.0,
+            numberOfReviews: '387',
+            goal: '100K',
+            equity: '51%',
+          ),
+          videoCards(
+            dataSource: 'assets/videos/pitch3.mp4',
+            startUpName: 'Andela',
+            companyWebsite: 'andela.com',
+            imageUrl: 'assets/images/finop/logo3.jpeg',
+            industry: 'Technology',
+            rating: 3.5,
+            numberOfReviews: '21',
+            goal: '46K',
+            equity: '34%',
+          ),
+          videoCards(
+            dataSource: 'assets/videos/pitch2.mp4',
+            startUpName: 'Paystack',
+            companyWebsite: 'paystack.com',
+            imageUrl: 'assets/images/finop/logo4.jpeg',
+            industry: 'Network',
+            rating: 3.0,
+            numberOfReviews: '81',
+            goal: '\$78K',
+            equity: '17%',
+          ),
+          videoCards(
+            dataSource: 'assets/videos/pitch1.mp4',
+            startUpName: 'Flutterwave',
+            companyWebsite: 'flutterwave.com',
+            imageUrl: 'assets/images/finop/logo5.jpeg',
+            industry: 'Technology',
+            rating: 2.0,
+            numberOfReviews: '66',
+            goal: '\$12K',
+            equity: '8%',
+          ),
+          videoCards(
+            dataSource: 'assets/videos/pitch3.mp4',
+            startUpName: 'Bitpesa',
+            companyWebsite: 'bitpesa.com',
+            imageUrl: 'assets/images/finop/logo6.jpeg',
+            industry: 'Agriculture',
+            rating: 1.5,
+            numberOfReviews: '145',
+            goal: '\$67.5K',
+            equity: '9%',
+          ),
+          videoCards(
+            dataSource: 'assets/videos/pitch1.mp4',
+            startUpName: 'Ibisu Cement',
+            companyWebsite: 'ibisucement.com',
+            imageUrl: 'assets/images/finop/logo1.jpeg',
+            industry: 'Construction',
+            rating: 1.0,
+            numberOfReviews: '415',
+            goal: '\$32K',
+            equity: '18%',
+          ),
+        ],
+      )),
     );
   }
 
-  Widget videoCards() {
+  Widget videoCards({
+    String dataSource,
+    String startUpName,
+    String industry,
+    String numberOfReviews,
+    double rating,
+    String goal,
+    String equity,
+    String companyWebsite,
+    String imageUrl,
+    String dateEstablished,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Container(
@@ -87,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   AspectRatio(
                     aspectRatio: 2,
                     child: InkWell(
-                      onTap: (){
+                      onTap: () {
                         setState(() {
                           // If the video is playing, pause it.
                           if (_controller.value.isPlaying) {
@@ -98,36 +197,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           }
                         });
                       },
-                      child:  NetworkPlayerLifeCycle(
-                        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-                            (BuildContext context,
-                            VideoPlayerController controller) =>
+                      child: AssetPlayerLifeCycle(
+                        dataSource,
+                        (BuildContext context,
+                                VideoPlayerController controller) =>
                             AspectRatioVideo(controller),
                       ),
-//                      FutureBuilder(
-//                        future: _initializeVideoPlayerFuture,
-//                        builder: (context, snapshot) {
-//                          if (snapshot.connectionState == ConnectionState.done) {
-//                            // If the VideoPlayerController has finished initialization, use
-//                            // the data it provides to limit the aspect ratio of the video.
-//                            return AspectRatio(
-//                              aspectRatio: _controller.value.aspectRatio,
-//                              // Use the VideoPlayer widget to display the video.
-//                              child: VideoPlayer(_controller),
-//
-//                            );
-//                          } else {
-//                            // If the VideoPlayerController is still initializing, show a
-//                            // loading spinner.
-//                            return Center(child: CircularProgressIndicator());
-//                          }
-//                        },
-//                      ),
                     ),
-//                    Image.asset(
-//                      'assets/images/finop/finop_1.png',
-//                      fit: BoxFit.cover,
-//                    ),
                   ),
                   Container(
                     color: HotelAppTheme.buildLightTheme().backgroundColor,
@@ -138,17 +214,36 @@ class _HomeScreenState extends State<HomeScreen> {
                         Expanded(
                           child: Container(
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 16, top: 8, bottom: 8),
+                              padding: const EdgeInsets.only(
+                                  left: 16, top: 8, bottom: 8),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   InkWell(
                                     onTap: () {
-                                      Navigator.pushNamed(context, ViewStartUpProfileScreen.ROUTE_NAME);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ViewStartUpProfileScreen(),
+                                          settings: RouteSettings(
+                                            arguments: StartUpArguments(
+                                              name: startUpName,
+                                              equity: equity,
+                                              industry: industry,
+                                              companyName: startUpName,
+                                              goal: goal,
+                                              companyWebsite: companyWebsite,
+                                              imageUrl: imageUrl,
+                                              dateEstablished: dateEstablished,
+                                            ),
+                                          ),
+                                        ),
+                                      );
                                     },
                                     child: Text(
-                                      'Faska Motors',
+                                      startUpName,
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
@@ -157,28 +252,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: <Widget>[
                                       Text(
-                                        'Technology',
-                                        style: TextStyle(fontSize: 14, color: Colors.grey.withOpacity(0.8)),
+                                        industry,
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color:
+                                                Colors.grey.withOpacity(0.8)),
                                       ),
-//                                      SizedBox(
-//                                        width: 4,
-//                                      ),
-//                                      Icon(
-//                                        FontAwesomeIcons.mapMarkerAlt,
-//                                        size: 12,
-//                                        color: HotelAppTheme.buildLightTheme().primaryColor,
-//                                      ),
-//                                      Expanded(
-//                                        child: Text(
-//                                          "30 km to city",
-//                                          overflow: TextOverflow.ellipsis,
-//                                          style: TextStyle(fontSize: 14, color: Colors.grey.withOpacity(0.8)),
-//                                        ),
-//                                      ),
                                     ],
                                   ),
                                   Padding(
@@ -188,14 +272,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                         SmoothStarRating(
                                           allowHalfRating: true,
                                           starCount: 5,
-                                          rating: 4.4,
+                                          rating: rating,
                                           size: 20,
-                                          color: HotelAppTheme.buildLightTheme().primaryColor,
-                                          borderColor: HotelAppTheme.buildLightTheme().primaryColor,
+                                          color: HotelAppTheme.buildLightTheme()
+                                              .primaryColor,
+                                          borderColor:
+                                              HotelAppTheme.buildLightTheme()
+                                                  .primaryColor,
                                         ),
                                         Text(
-                                          "80 Reviews",
-                                          style: TextStyle(fontSize: 14, color: Colors.grey.withOpacity(0.8)),
+                                          "$numberOfReviews Reviews",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color:
+                                                  Colors.grey.withOpacity(0.8)),
                                         ),
                                       ],
                                     ),
@@ -212,7 +302,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
                               Text(
-                                "\$180 K",
+                                goal,
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
@@ -220,8 +310,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               Text(
-                                "20% equity",
-                                style: TextStyle(fontSize: 14, color: Colors.grey.withOpacity(0.8)),
+                                "$equity equity",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.grey.withOpacity(0.8)),
                               ),
                             ],
                           ),
@@ -257,6 +349,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
 }
-

@@ -236,10 +236,12 @@ packages:
   video_player:
     dependency: "direct main"
     description:
-      name: video_player
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.10.2+5"
+      path: "packages/video_player"
+      ref: HEAD
+      resolved-ref: "1b5eae5135cae27e103095249b64dad8212f74eb"
+      url: "https://github.com/flutter/plugins.git"
+    source: git
+    version: "0.10.3"
 sdks:
   dart: ">=2.2.2 <3.0.0"
-  flutter: ">=1.6.7 <2.0.0"
+  flutter: ">=1.9.1+hotfix.5 <2.0.0"

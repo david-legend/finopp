@@ -29,7 +29,10 @@ dependencies:
   flutter_chips_input: ^1.6.0
 
   image_picker: ^0.6.1+10
-  video_player: ^0.10.2+5
+  video_player:
+    git:
+      url: https://github.com/flutter/plugins.git
+      path: packages/video_player
 
   intl: ^0.16.0
   toast: ^0.1.5
@@ -60,6 +63,7 @@ flutter:
     - assets/images/registration/
     - assets/images/finop/
     - assets/
+    - assets/videos/
 
 
   fonts:

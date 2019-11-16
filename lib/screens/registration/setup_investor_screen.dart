@@ -54,7 +54,7 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
             children: <Widget>[
               _isLoading
                   ? SpinKitWave(
-                      color: kFINOP_ORANGE,
+                      color: kFINOP_TEAL,
                       type: SpinKitWaveType.center,
                       size: 50.0,
                       controller: AnimationController(
@@ -70,7 +70,7 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: kFINOP_ORANGE,
+        backgroundColor: kFINOP_TEAL,
         tooltip: 'Proceed',
         onPressed: () {
           _proceedToNextStep();
@@ -129,41 +129,46 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
 
   Widget basicInfo() {
     return Expanded(
-      child: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Text(
-              StringConst.SETUP_BASIC_INFO,
-              textAlign: TextAlign.center,
-              style: setupHeadingStyle,
-            ),
-            SizedBox(height: 20.0),
-            TextFormField(
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-                filled: false,
-                hintText: 'Name of your company?',
-                labelText: 'Company name *',
-              ),
-              keyboardType: TextInputType.text,
-            ),
-            SizedBox(height: 24.0),
-            chipsInput(),
-            SizedBox(height: 24.0),
-            TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText:
+      flex: 1,
+      child: ListView(
+        children: <Widget>[
+          Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Text(
+                  StringConst.SETUP_BASIC_INFO,
+                  textAlign: TextAlign.center,
+                  style: setupHeadingStyle,
+                ),
+                SizedBox(height: 20.0),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    filled: false,
+                    hintText: 'Name of your company?',
+                    labelText: 'Company name *',
+                  ),
+                  keyboardType: TextInputType.text,
+                ),
+                SizedBox(height: 24.0),
+                chipsInput(),
+                SizedBox(height: 24.0),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText:
                     'Tell us about your company (e.g., what type of businesses'
-                    ' are you looking to invest in.)',
-                labelText: 'Description',
-              ),
-              maxLines: 4,
+                        ' are you looking to invest in.)',
+                    labelText: 'Description',
+                  ),
+                  maxLines: 4,
+                ),
+//            skipButton(),
+              ],
             ),
-            skipButton(),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

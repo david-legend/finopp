@@ -1,6 +1,7 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:finop/helpers/helpers.dart';
 import 'package:finop/screens/app/navigation_home_screen.dart';
+import 'package:finop/screens/registration/signup_screen.dart';
 import 'package:finop/services/authentication.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
           height: double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
-            gradient: SIGNUP_BACKGROUND,
+//            gradient: SIGNUP_BACKGROUND,
           ),
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
@@ -60,7 +61,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: <Widget>[
                           Center(
                             child: Image.asset(
-                              RegistrationImagePath.SignUpLogo,
+                              'assets/images/finop/finopp.jpeg',
+//                              RegistrationImagePath.SignUpLogo,
                               height: _media.height / 7,
                             ),
                           ),
@@ -141,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: 5,
                         ),
                         GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, LoginScreen.ROUTE_NAME),
+                          onTap: () => Navigator.pushNamed(context, SignUpScreen.ROUTE_NAME),
                           child: Text(StringConst.SIGN_UP),
                         ),
                       ],

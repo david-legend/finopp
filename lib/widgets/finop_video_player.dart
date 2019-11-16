@@ -36,7 +36,7 @@ class _VideoPlayPauseState extends State<VideoPlayPause> {
     super.initState();
     controller.addListener(listener);
     controller.setVolume(1.0);
-    controller.play();
+//    controller.play();
   }
 
   @override
@@ -53,6 +53,7 @@ class _VideoPlayPauseState extends State<VideoPlayPause> {
         child: VideoPlayer(controller),
         onTap: () {
           if (!controller.value.initialized) {
+            controller.initialize();
             return;
           }
           if (controller.value.isPlaying) {
@@ -193,7 +194,7 @@ abstract class _PlayerLifeCycleState extends State<PlayerLifeCycle> {
     });
     controller.initialize();
     controller.setLooping(false);
-    controller.play();
+//    controller.play();
   }
 
   @override

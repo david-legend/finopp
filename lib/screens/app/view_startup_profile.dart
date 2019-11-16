@@ -4,17 +4,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:toast/toast.dart';
 
 import 'chat_screen.dart';
+import 'home_screen.dart';
 
 class ViewStartUpProfileScreen extends StatefulWidget {
   static const String ROUTE_NAME = '/viewStartUpProfileScreen';
 
   @override
-  _ViewStartUpProfileScreenState createState() => _ViewStartUpProfileScreenState();
+  _ViewStartUpProfileScreenState createState() =>
+      _ViewStartUpProfileScreenState();
 }
 
 class _ViewStartUpProfileScreenState extends State<ViewStartUpProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    final StartUpArguments args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -27,11 +30,8 @@ class _ViewStartUpProfileScreenState extends State<ViewStartUpProfileScreen> {
                   Container(
                     width: 60.0,
                     height: 60.0,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/finop/david.jpg'),
-                      ),
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage(args.imageUrl),
                     ),
                   ),
                   SizedBox(
@@ -45,7 +45,7 @@ class _ViewStartUpProfileScreenState extends State<ViewStartUpProfileScreen> {
                         Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Text(
-                            'CYST',
+                            args.name,
                             textAlign: TextAlign.start,
                             style: TextStyle(
                                 fontSize: 16.0, fontWeight: FontWeight.w600),
@@ -54,7 +54,7 @@ class _ViewStartUpProfileScreenState extends State<ViewStartUpProfileScreen> {
                         Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Text(
-                            'Technology',
+                            args.industry,
                             textAlign: TextAlign.start,
                             style: TextStyle(
                               fontSize: 16.0,
@@ -72,9 +72,9 @@ class _ViewStartUpProfileScreenState extends State<ViewStartUpProfileScreen> {
                       onPressed: () {
                         var route = new MaterialPageRoute(
                           builder: (BuildContext context) => ChatScreen(
-                              name: 'CYST',
-                              profileImage:
-                                  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.onUzDzIaCFlh1LgLyhdK2AHaE7%26pid%3DApi&f=1"),
+                            name: args.companyName,
+                            profileImage: args.imageUrl,
+                          ),
                         );
                         Navigator.of(context).push(route);
                       },
@@ -161,8 +161,8 @@ class _ViewStartUpProfileScreenState extends State<ViewStartUpProfileScreen> {
               ),
               Container(
                 child: Text(
-                  'CYST is a software innovation company which believes strongly '
-                  'in challenging conventions. Cystians are passionate people '
+                  '${args.name} is a software innovation company which believes strongly '
+                  'in challenging conventions. ${args.name} are passionate people '
                   'who care about solving our everyday problems using technology. '
                   'Everything we do is value-centered and geared towards the '
                   'redefining of the African stereotype.',
@@ -182,7 +182,7 @@ class _ViewStartUpProfileScreenState extends State<ViewStartUpProfileScreen> {
                       ),
                       SizedBox(width: 5.0),
                       Text(
-                        '\$500,000',
+                        '${args.goal}',
                       ),
                       SizedBox(width: 10.0),
                       Text(
@@ -193,7 +193,7 @@ class _ViewStartUpProfileScreenState extends State<ViewStartUpProfileScreen> {
                       ),
                       SizedBox(width: 5.0),
                       Text(
-                        '20%',
+                        '${args.equity}',
                       ),
                     ],
                   ),
@@ -211,7 +211,7 @@ class _ViewStartUpProfileScreenState extends State<ViewStartUpProfileScreen> {
                         ),
                         SizedBox(width: 10.0),
                         Text(
-                          'teamcyst.com',
+                          '${args.companyWebsite}',
                         ),
                         SizedBox(width: 20.0),
                         Icon(
@@ -232,9 +232,9 @@ class _ViewStartUpProfileScreenState extends State<ViewStartUpProfileScreen> {
                         onPressed: () {
                           var route = new MaterialPageRoute(
                             builder: (BuildContext context) => ChatScreen(
-                                name: 'CYST',
-                                profileImage:
-                                "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.onUzDzIaCFlh1LgLyhdK2AHaE7%26pid%3DApi&f=1"),
+                              name: args.companyName,
+                              profileImage: args.imageUrl,
+                            ),
                           );
                           Navigator.of(context).push(route);
                         },
@@ -256,8 +256,13 @@ class _ViewStartUpProfileScreenState extends State<ViewStartUpProfileScreen> {
                             side: BorderSide(color: Colors.grey[400])),
                       ),
                     ],
-                  )
+                  ),
                 ],
+              ),
+              SizedBox(height: 20.0),
+              Text(
+                'Gallery',
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 20.0),
               Divider(
@@ -269,9 +274,7 @@ class _ViewStartUpProfileScreenState extends State<ViewStartUpProfileScreen> {
               Wrap(
                 direction: Axis.vertical,
                 children: <Widget>[
-                  gallery(),
-                  gallery(),
-                  gallery(),
+                  gallery(args.imageUrl),
                 ],
               )
             ],
@@ -281,7 +284,7 @@ class _ViewStartUpProfileScreenState extends State<ViewStartUpProfileScreen> {
     );
   }
 
-  Widget gallery() {
+  Widget gallery(String imageUrl) {
     return Container(
       margin: EdgeInsets.only(top: 4.0),
       child: Row(
@@ -291,31 +294,7 @@ class _ViewStartUpProfileScreenState extends State<ViewStartUpProfileScreen> {
             child: ClipRRect(
               borderRadius: new BorderRadius.circular(8.0),
               child: Image.asset(
-                'assets/images/finop/david.jpg',
-                width: 120,
-                height: 120,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 4.0),
-            child: ClipRRect(
-              borderRadius: new BorderRadius.circular(8.0),
-              child: Image.asset(
-                'assets/images/finop/finop_2.png',
-                width: 120,
-                height: 120,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 0.0),
-            child: ClipRRect(
-              borderRadius: new BorderRadius.circular(8.0),
-              child: Image.asset(
-                'assets/images/finop/finop_3.png',
+                imageUrl,
                 width: 120,
                 height: 120,
                 fit: BoxFit.fill,

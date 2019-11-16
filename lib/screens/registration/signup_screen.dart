@@ -47,7 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           height: double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
-            gradient: SIGNUP_BACKGROUND,
+//            gradient: SIGNUP_BACKGROUND,
           ),
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
@@ -271,7 +271,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         Navigator.pushNamed(context, SetupInvestorScreen.ROUTE_NAME);
         break;
       default:
-        Navigator.pushNamed(context, ChoiceScreen.ROUTE_NAME);
+        Navigator.pushNamed(context, SetupStartUpScreen.ROUTE_NAME);
     }
   }
 }

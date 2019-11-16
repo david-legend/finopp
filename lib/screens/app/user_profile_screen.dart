@@ -236,6 +236,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 ],
               ),
               SizedBox(height: 20.0),
+              Text('Gallery', style: TextStyle(fontWeight: FontWeight.bold),),
+              SizedBox(height: 20.0),
               Divider(
                 height: 0,
                 thickness: 2,
@@ -245,8 +247,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               Wrap(
                 direction: Axis.vertical,
                 children: <Widget>[
-                  gallery(),
-                  gallery(),
                   gallery(),
                 ],
               )
@@ -267,31 +267,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             child: ClipRRect(
               borderRadius: new BorderRadius.circular(8.0),
               child: Image.asset(
-                'assets/images/finop/david.jpg',
-                width: 120,
-                height: 120,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 4.0),
-            child: ClipRRect(
-              borderRadius: new BorderRadius.circular(8.0),
-              child: Image.asset(
-                'assets/images/finop/finop_2.png',
-                width: 120,
-                height: 120,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 0.0),
-            child: ClipRRect(
-              borderRadius: new BorderRadius.circular(8.0),
-              child: Image.asset(
-                'assets/images/finop/finop_3.png',
+                'assets/images/finop/logo2.jpeg',
                 width: 120,
                 height: 120,
                 fit: BoxFit.fill,

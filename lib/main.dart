@@ -1,4 +1,5 @@
 import 'package:finop/screens/app/chats.dart';
+import 'package:finop/screens/app/investor_profile_screen.dart';
 import 'package:finop/screens/app/navigation_home_screen.dart';
 import 'package:finop/screens/app/user_profile_screen.dart';
 import 'package:finop/screens/registration/choice_screen.dart';
@@ -13,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'screens/app/view_startup_profile.dart';
 
 void main() => runApp(MyApp());
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -34,6 +36,7 @@ class MyApp extends StatelessWidget {
         SetupInvestorScreen.ROUTE_NAME: (context) => SetupInvestorScreen(),
         NavigationHomeScreen.ROUTE_NAME: (context) => NavigationHomeScreen(),
         ViewStartUpProfileScreen.ROUTE_NAME: (context) => ViewStartUpProfileScreen(),
+        InvestorProfileScreen.ROUTE_NAME: (context) => InvestorProfileScreen(),
         UserProfileScreen.ROUTE_NAME: (context) => UserProfileScreen(),
         Chats.ROUTE_NAME: (context) => Chats(),
       },

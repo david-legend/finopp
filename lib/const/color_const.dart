@@ -17,4 +17,5 @@ const TEXT_BLACK = Color(0xFF353535);
 const TEXT_BLACK_LIGHT = Color(0xFF34323D);
 
 const kFINOP_ORANGE = Color(0xFFFC7422);
+const kFINOP_TEAL = Color(0xFF078EA6);
 const kFINOP_DARK_BLUE = Color(0xFF001848);

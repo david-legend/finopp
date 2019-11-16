@@ -55,7 +55,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
 //              SpinKitDoubleBounce
               _isLoading
                   ? SpinKitWave(
-                      color: kFINOP_ORANGE,
+                      color: kFINOP_TEAL,
                       type: SpinKitWaveType.center,
                       size: 50.0,
                       controller: AnimationController(
@@ -71,7 +71,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: kFINOP_ORANGE,
+        backgroundColor: kFINOP_TEAL,
         tooltip: 'Proceed',
         onPressed: () {
           _proceedToNextStep();
@@ -131,65 +131,70 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
   Widget basicInfo() {
     return Expanded(
       flex: 1,
-      child: Container(
-          child: Column(
+      child: ListView(
+        scrollDirection: Axis.vertical,
         children: <Widget>[
-          Text(
-            StringConst.SETUP_BASIC_INFO,
-            textAlign: TextAlign.center,
-            style: setupHeadingStyle,
-          ),
-          SizedBox(height: 20.0),
-          TextFormField(
-            decoration: const InputDecoration(
-              border: UnderlineInputBorder(),
-              filled: false,
-              hintText: 'Name of your comapany?',
-              labelText: 'Company name *',
-            ),
-            keyboardType: TextInputType.text,
-          ),
-          SizedBox(height: 24.0),
-          chipsInput(),
-          SizedBox(height: 24.0),
-          DropdownButton<String>(
-            value: industryDropdownValue,
-            isExpanded: true,
-            icon: Icon(Icons.arrow_drop_down),
-            hint: Text(' Choose Industry'),
-            iconSize: 24,
-            elevation: 16,
-            style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-            underline: Container(
-              height: 2,
-              color: Colors.grey,
-            ),
-            onChanged: (String newValue) {
-              setState(() {
-                industryDropdownValue = newValue;
-              });
-            },
-            items: <String>['Technology', 'Agriculture', 'Forestry', 'Oil ']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-          ),
-          SizedBox(height: 24.0),
-          TextFormField(
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText:
-                  'Tell us about your startup (e.g., what your startup does.)',
-              labelText: 'Description',
-            ),
-            maxLines: 4,
-          ),
-          skipButton(),
+          Container(
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    StringConst.SETUP_BASIC_INFO,
+                    textAlign: TextAlign.center,
+                    style: setupHeadingStyle,
+                  ),
+                  SizedBox(height: 20.0),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      filled: false,
+                      hintText: 'Name of your comapany?',
+                      labelText: 'Company name *',
+                    ),
+                    keyboardType: TextInputType.text,
+                  ),
+                  SizedBox(height: 24.0),
+                  chipsInput(),
+                  SizedBox(height: 24.0),
+                  DropdownButton<String>(
+                    value: industryDropdownValue,
+                    isExpanded: true,
+                    icon: Icon(Icons.arrow_drop_down),
+                    hint: Text(' Choose Industry'),
+                    iconSize: 24,
+                    elevation: 16,
+                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                    underline: Container(
+                      height: 2,
+                      color: Colors.grey,
+                    ),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        industryDropdownValue = newValue;
+                      });
+                    },
+                    items: <String>['Technology', 'Agriculture', 'Forestry', 'Oil ']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                  SizedBox(height: 24.0),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText:
+                      'Tell us about your startup (e.g., what your startup does.)',
+                      labelText: 'Description',
+                    ),
+                    maxLines: 4,
+                  ),
+//          skipButton(),
+                ],
+              )),
         ],
-      )),
+      ),
     );
   }
 
