@@ -1,11 +1,12 @@
 import 'package:finop/const/_const.dart';
 import 'package:finop/screens/registration/login_screen.dart';
+import 'package:finop/screens/registration/onboarding_investor_screen.dart';
 import 'package:finop/screens/registration/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'onbarding_startup_screen.dart';
+import 'onboarding_startup_screen.dart';
 
 class ChoiceScreen extends StatelessWidget {
 //  static const String ROUTE_NAME = '/';
@@ -72,7 +73,7 @@ class ChoiceScreen extends StatelessWidget {
                             onPressed: () {
 //                              saveAccountType(StringConst.INVESTOR_VALUE);
                               Navigator.pushNamed(
-                                  context, SignUpScreen.ROUTE_NAME);
+                                  context, InvestorOnboardingScreen.ROUTE_NAME);
                             },
                             color: kFINOP_SECONDARY,
                             child: Padding(
