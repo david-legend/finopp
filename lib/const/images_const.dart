@@ -38,3 +38,19 @@ class RegistrationImagePath {
   static const String choiceScreen = "$image_path/welcome.svg";
   static const String SignUpPage_8_Bg = "$image_path/signup_page_8_bg.png";
 }
+
+class OnboardingImagePath {
+  //path to onboarding startup images
+  static const String startup_image_path = "assets/images/onboarding/startup";
+  //path to onboarding investor images
+  static const String investor_image_path = "assets/images/onboarding/investor";
+  //onboarding startup images
+  static const String onboardingStartUp1= "$startup_image_path/onboarding_startup_1.svg";
+  static const String onboardingStartUp2= "$startup_image_path/onboarding_startup_2.svg";
+  static const String onboardingStartUp3= "$startup_image_path/onboarding_startup_3.svg";
+  static const String onboardingStartUp4= "$startup_image_path/onboarding_startup_4.svg";
+  //onboarding investor images
+  static const String onboardingInvestor1 = "$investor_image_path/onboarding_investor_1.svg";
+  static const String onboardingInvestor2 = "$investor_image_path/onboarding_investor_2.svg";
+}
+

@@ -4,6 +4,7 @@ import 'package:finop/screens/app/navigation_home_screen.dart';
 import 'package:finop/screens/app/user_profile_screen.dart';
 import 'package:finop/screens/registration/choice_screen.dart';
 import 'package:finop/screens/registration/login_screen.dart';
+import 'package:finop/screens/registration/onbarding_startup_screen.dart';
 import 'package:finop/screens/registration/setup_investor_screen.dart';
 import 'package:finop/screens/registration/setup_startup_screen.dart';
 import 'package:finop/screens/registration/signup_screen.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
       routes: {
         RootPage.ROUTE_NAME: (context) => RootPage(auth: new Auth(),),
         ChoiceScreen.ROUTE_NAME: (context) => ChoiceScreen(),
+        StartUpOnboardingScreen.ROUTE_NAME: (context) => StartUpOnboardingScreen(),
         LoginScreen.ROUTE_NAME: (context) => LoginScreen(auth: Auth(),),
         SignUpScreen.ROUTE_NAME: (context) => SignUpScreen(auth: Auth(),),
         SetupStartUpScreen.ROUTE_NAME: (context) => SetupStartUpScreen(),

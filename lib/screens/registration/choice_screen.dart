@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'onbarding_startup_screen.dart';
+
 class ChoiceScreen extends StatelessWidget {
 //  static const String ROUTE_NAME = '/';
   static const String ROUTE_NAME = '/choiceScreen';
@@ -45,9 +47,9 @@ class ChoiceScreen extends StatelessWidget {
                           ),
                           child: RaisedButton(
                             onPressed: () {
-                              saveAccountType(StringConst.START_UP_VALUE);
+//                              saveAccountType(StringConst.START_UP_VALUE);
                               Navigator.pushNamed(
-                                  context, SignUpScreen.ROUTE_NAME);
+                                  context, StartUpOnboardingScreen.ROUTE_NAME);
                             },
                             color: kFINOP_PRIMARY,
                             child: Padding(
@@ -68,7 +70,7 @@ class ChoiceScreen extends StatelessWidget {
                           ),
                           child: RaisedButton(
                             onPressed: () {
-                              saveAccountType(StringConst.INVESTOR_VALUE);
+//                              saveAccountType(StringConst.INVESTOR_VALUE);
                               Navigator.pushNamed(
                                   context, SignUpScreen.ROUTE_NAME);
                             },
@@ -114,23 +116,6 @@ class ChoiceScreen extends StatelessWidget {
                   ],
                 ),
               ),
-//              Padding(
-//                padding: const EdgeInsets.all(12.0),
-//                child: Column(
-//                  mainAxisAlignment: MainAxisAlignment.end,
-//                  children: <Widget>[
-//                    InkWell(
-//                      onTap: (){
-//                        Navigator.pushNamed(context, LoginScreen.ROUTE_NAME);
-//                      },
-//                      child: Text(
-//                        'Already have an account ? Login',
-//                        style: TextStyle(fontSize: 16.0),
-//                      ),
-//                    ),
-//                  ],
-//                ),
-//              ),
             ],
           ),
         ),
@@ -138,8 +123,8 @@ class ChoiceScreen extends StatelessWidget {
     );
   }
 
-  Future<void> saveAccountType(String value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(StringConst.ACCOUNT_TYPE_KEY, value);
-  }
+//  Future<void> saveAccountType(String value) async {
+//    SharedPreferences prefs = await SharedPreferences.getInstance();
+//    prefs.setString(StringConst.ACCOUNT_TYPE_KEY, value);
+//  }
 }
