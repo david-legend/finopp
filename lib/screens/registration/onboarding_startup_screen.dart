@@ -19,21 +19,18 @@ class _StartUpOnboardingScreenState extends State<StartUpOnboardingScreen> {
     OnboardingImagePath.onboardingStartUp1,
     OnboardingImagePath.onboardingStartUp2,
     OnboardingImagePath.onboardingStartUp3,
-    OnboardingImagePath.onboardingStartUp4,
   ];
 
   final List<String> text0 = [
     "Pitch your ideas",
-    "Enjoy teaching...",
-    "Showcase your skills",
-    "Friendship is great"
+    "Get found by investors",
+    "Get funded by investors",
   ];
 
   final List<String> text1 = [
     "App for food lovers, satisfy your taste",
     "Find best meals in your area, simply",
     "Have fun while eating your relatives and more",
-    "Meet new friends from all over the world"
   ];
 
   final IndexController _controller = IndexController();
