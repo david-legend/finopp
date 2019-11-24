@@ -79,6 +79,7 @@ class _StartUpOnboardingScreenState extends State<StartUpOnboardingScreen> {
                         ParallaxContainer(
                           child: Text(
                             text0[info.index],
+                            textAlign: TextAlign.center,
                             style: bigHeadingStyle,
                           ),
                           position: info.position,
