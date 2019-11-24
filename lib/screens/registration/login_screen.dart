@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: <Widget>[
                   Image.asset(
                     'assets/images/finop/finopp.png',
-                    height: _media.height / 10,
+                    height: _media.height / 12,
                   ),
                 ],
               ),
@@ -121,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   InkWell(
                     onTap: (){
-                      Navigator.pushNamed(context, LoginScreen.ROUTE_NAME);
+                      Navigator.pushNamed(context, SignUpScreen.ROUTE_NAME);
                     },
                     child: Text(
                       StringConst.SIGN_UP,
