@@ -54,7 +54,7 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
             children: <Widget>[
               _isLoading
                   ? SpinKitWave(
-                      color: kFINOP_TEAL,
+                      color: kFINOP_PRIMARY,
                       type: SpinKitWaveType.center,
                       size: 50.0,
                       controller: AnimationController(
@@ -70,7 +70,7 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: kFINOP_TEAL,
+        backgroundColor: kFINOP_PRIMARY,
         tooltip: 'Proceed',
         onPressed: () {
           _proceedToNextStep();
@@ -333,7 +333,7 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
                     child: Icon(
                       Icons.camera_alt,
                       size: 40.0,
-                      color: kFINOP_DARK_BLUE,
+                      color: kFINOP_DARK_SHADE,
                     ),
                   ),
                   SizedBox(width: 20),
@@ -342,7 +342,7 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
                     child: Icon(
                       Icons.photo_library,
                       size: 40.0,
-                      color: kFINOP_DARK_BLUE,
+                      color: kFINOP_DARK_SHADE,
                     ),
                   )
                 ],

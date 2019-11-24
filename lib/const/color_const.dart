@@ -16,6 +16,8 @@ const RED_LIGHT = Color(0xffFFC3A0);
 const TEXT_BLACK = Color(0xFF353535);
 const TEXT_BLACK_LIGHT = Color(0xFF34323D);
 
-const kFINOP_ORANGE = Color(0xFFFC7422);
-const kFINOP_TEAL = Color(0xFF078EA6);
-const kFINOP_DARK_BLUE = Color(0xFF001848);
+const kFINOP_PRIMARY = Color(0xFF008DA4);
+const kFINOP_SECONDARY = Color(0xFFC75E82);
+const kFINOP_DARK_SHADE = Color(0xFF003D52);
+const kFINOP_DARKER_SHADE = Color(0xFF324A51);
+const kFINOP_TEXT_COLOR = Color(0xFFE6F4F1);

@@ -55,7 +55,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
 //              SpinKitDoubleBounce
               _isLoading
                   ? SpinKitWave(
-                      color: kFINOP_TEAL,
+                      color: kFINOP_PRIMARY,
                       type: SpinKitWaveType.center,
                       size: 50.0,
                       controller: AnimationController(
@@ -71,7 +71,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: kFINOP_TEAL,
+        backgroundColor: kFINOP_PRIMARY,
         tooltip: 'Proceed',
         onPressed: () {
           _proceedToNextStep();

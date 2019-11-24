@@ -35,6 +35,6 @@ class RegistrationImagePath {
   static const String image_path = "assets/images/registration";
   static const String SignUpLogo = "$image_path/logo_signup.png";
   static const String SignUpPage_11_Bg = "$image_path/signup_page_11_bg.png";
-  static const String choiceScreen = "$image_path/welcome.png";
+  static const String choiceScreen = "$image_path/welcome.svg";
   static const String SignUpPage_8_Bg = "$image_path/signup_page_8_bg.png";
 }
