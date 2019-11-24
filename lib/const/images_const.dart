@@ -51,6 +51,6 @@ class OnboardingImagePath {
   //onboarding investor images
   static const String onboardingInvestor1 = "$investor_image_path/onboarding_investor_1.svg";
   static const String onboardingInvestor2 = "$investor_image_path/onboarding_investor_2.svg";
-  static const String onboardingInvestor3= "$startup_image_path/onboarding_investor_3.svg";
+  static const String onboardingInvestor3= "$investor_image_path/onboarding_investor_3.svg";
 }
 
