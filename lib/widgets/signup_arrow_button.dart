@@ -1,3 +1,4 @@
+import 'package:finop/const/_const.dart';
 import 'package:flutter/material.dart';
 
 class SignUpArrowButton extends StatelessWidget {
@@ -14,7 +15,7 @@ class SignUpArrowButton extends StatelessWidget {
     this.onTap,
     this.height = 50.0,
     this.width = 50.0,
-    this.iconColor = const Color(0xFFdbedb0),
+    this.iconColor = kFINOP_WHITE,
   });
 
   @override
@@ -26,22 +27,7 @@ class SignUpArrowButton extends StatelessWidget {
         width: width,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black12,
-                blurRadius: 15,
-                spreadRadius: 0,
-                offset: Offset(0.0, 16.0)),
-          ],
-          gradient: LinearGradient(begin: FractionalOffset.centerLeft,
-// Add one stop for each color. Stops should increase from 0 to 1
-              stops: [
-                0.2,
-                1
-              ], colors: [
-            Color(0xff000000),
-            Color(0xff434343),
-          ]),
+          color: kFINOP_PRIMARY,
         ),
         child: Icon(
           icon,

@@ -1,6 +1,7 @@
 import 'package:finop/const/string_const.dart';
 import 'package:finop/screens/app/navigation_home_screen.dart';
 import 'package:finop/screens/registration/choice_screen.dart';
+import 'package:finop/screens/registration/login_screen.dart';
 import 'package:finop/screens/registration/setup_investor_screen.dart';
 import 'package:finop/screens/registration/setup_startup_screen.dart';
 import 'package:finop/screens/registration/signup_screen.dart';
@@ -97,7 +98,8 @@ class _RootPageState extends State<RootPage> {
         return buildWaitingScreen();
         break;
       case AuthStatus.NOT_LOGGED_IN:
-        return ChoiceScreen();
+        return LoginScreen();
+//        return ChoiceScreen();
         break;
       case AuthStatus.LOGGED_IN:
         return home;

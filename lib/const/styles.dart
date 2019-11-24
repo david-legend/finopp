@@ -33,3 +33,21 @@ TextStyle submitButtonStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.w400,
 );
+
+TextStyle textWithPrimaryColorStyle = TextStyle(
+  color: kFINOP_PRIMARY,
+  fontSize: 16.0,
+  fontWeight: FontWeight.bold,
+);
+
+TextStyle textWithSecondaryColorStyle = TextStyle(
+  color: kFINOP_SECONDARY,
+  fontSize: 16.0,
+  fontWeight: FontWeight.bold,
+);
+
+TextStyle textWithTextColorStyle = TextStyle(
+  color: kFINOP_TEXT_COLOR,
+  fontSize: 14.0,
+  fontWeight: FontWeight.bold,
+);

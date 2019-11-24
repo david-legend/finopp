@@ -19,6 +19,7 @@ class StringConst {
   static const String SIGN_IN = "Sign In";
   static const String SIGN_UP_TEXT = "Don't have an account?";
   static const String SIGN_IN_TEXT = "Already have an account?";
+  static const String REGISTER_INFO_TEXT = "Give us some information";
 
   //Setup startUp
   static const String SETUP_BASIC_INFO =

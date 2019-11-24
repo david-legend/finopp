@@ -1,4 +1,5 @@
 import 'package:connectivity/connectivity.dart';
+import 'package:finop/const/styles.dart';
 import 'package:finop/helpers/helpers.dart';
 import 'package:finop/screens/app/navigation_home_screen.dart';
 import 'package:finop/screens/registration/signup_screen.dart';
@@ -40,132 +41,99 @@ class _LoginScreenState extends State<LoginScreen> {
       body: ModalProgressHUD(
         inAsyncCall: _isSigningInUser,
         child: Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: BoxDecoration(
-//            gradient: SIGNUP_BACKGROUND,
-              ),
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Stack(
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 60.0, horizontal: 40),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Center(
-                            child: Image.asset(
-                              'assets/images/finop/finopp.png',
-//                              RegistrationImagePath.SignUpLogo,
-                              height: _media.height / 7,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Text(
-                            "WELCOME BACK!",
-                            style: TextStyle(
-                              letterSpacing: 4,
-                              fontFamily: "Montserrat",
-                              fontWeight: FontWeight.bold,
-                              fontSize: TEXT_LARGE_SIZE,
-                            ),
-                          ),
-                          SizedBox(height: 30),
-                          Text(
-                            'Log in',
-                            style: TextStyle(
-                                fontFamily: "Montserrat",
-                                fontWeight: FontWeight.w200,
-                                fontSize: 40),
-                          ),
-                          Text(
-                            'to continue.',
-                            style: TextStyle(
-                                fontFamily: "Montserrat",
-                                fontWeight: FontWeight.w200,
-                                fontSize: 40),
-                          ),
-                          SizedBox(
-                            height: 50,
-                          ),
-                          Container(
-                            height: _media.height / 3.8,
-                            decoration: BoxDecoration(
-                              gradient: SIGNUP_CARD_BACKGROUND,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 15,
-                                  spreadRadius: 8,
-                                ),
-                              ],
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(30.0),
-                              child: Column(
-                                children: <Widget>[
-                                  Expanded(
-                                    child: inputText("USERNAME",
-                                        'example@gmail.com', _email, false),
-                                  ),
-                                  Divider(
-                                    height: 5,
-                                    color: Colors.black,
-                                  ),
-                                  Expanded(
-                                      child: inputText("PASSWORD", '******',
-                                          _password, true)),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            StringConst.SIGN_UP_TEXT,
-                            style: TextStyle(color: MAIN_COLOR),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          InkWell(
-                            onTap: () => Navigator.pushNamed(
-                                context, SignUpScreen.ROUTE_NAME),
-                            child: Text(StringConst.SIGN_UP),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                    )
-                  ],
-                ),
-                Positioned(
-                  bottom: _media.height / 6.3,
-                  right: 15,
-                  child: SignUpArrowButton(
-                    icon: IconData(0xe901, fontFamily: 'Icons'),
-                    iconSize: 9,
-                    onTap: () => initiateSignInProcess(),
+          margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Image.asset(
+                    'assets/images/finop/finopp.png',
+                    height: _media.height / 10,
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
+              Column(
+                children: <Widget>[
+                  Text(
+                    StringConst.REGISTER_INFO_TEXT,
+                    textAlign: TextAlign.center,
+                    style: textWithSecondaryColorStyle,
+                  ),
+                  SizedBox(height: 20.0),
+                  Container(
+                    height: 300.0,
+                    decoration: BoxDecoration(
+                      color: kFINOP_DARK_SHADE,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 12,
+                          spreadRadius: 4,
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(40.0),
+                      child: Column(
+                        children: <Widget>[
+                          inputText(
+                              "Email", 'example@gmail.com', _email, false),
+                          SizedBox(height: 40.0),
+                          inputText("Password", '******', _password, true),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        StringConst.SIGN_IN,
+                        style: textWithPrimaryColorStyle,
+                      ),
+                      SizedBox(width: 20.0),
+                      SignUpArrowButton(
+                        height: 60,
+                        width: 60,
+                        icon: Icons.arrow_forward,
+                        iconSize: 25,
+                        onTap: () {},
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    StringConst.SIGN_IN_TEXT,
+                    style: TextStyle(
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 5.0,
+                  ),
+                  InkWell(
+                    onTap: (){
+                      Navigator.pushNamed(context, LoginScreen.ROUTE_NAME);
+                    },
+                    child: Text(
+                      StringConst.SIGN_UP,
+                      style: TextStyle(
+                          color: kFINOP_SECONDARY,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
@@ -178,22 +146,37 @@ class _LoginScreenState extends State<LoginScreen> {
     TextEditingController controller,
     bool obSecure,
   ) {
-    return TextField(
-      style: TextStyle(height: 1.3),
-      controller: controller,
-      decoration: InputDecoration(
-        hintText: hintText,
-        labelText: fieldName,
-        labelStyle: TextStyle(
-          fontSize: TEXT_NORMAL_SIZE,
-          fontFamily: "Montserrat",
-          fontWeight: FontWeight.w400,
-          letterSpacing: 1,
-          height: 0,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          fieldName,
+          style: textWithTextColorStyle,
         ),
-        border: InputBorder.none,
-      ),
-      obscureText: obSecure,
+        TextField(
+          style: TextStyle(
+            height: 1.3,
+            color: kFINOP_TEXT_COLOR,
+          ),
+          controller: controller,
+          decoration: InputDecoration(
+            hintText: hintText,
+            hintStyle: TextStyle(
+              fontSize: TEXT_NORMAL_SIZE,
+              color: kFINOP_TEXT_COLOR,
+              fontWeight: FontWeight.w400,
+            ),
+            labelStyle: TextStyle(
+              fontSize: TEXT_NORMAL_SIZE,
+              color: kFINOP_TEXT_COLOR,
+              fontWeight: FontWeight.w400,
+              letterSpacing: 1,
+              height: 0,
+            ),
+          ),
+          obscureText: obSecure,
+        )
+      ],
     );
   }
 
