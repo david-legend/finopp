@@ -52,7 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Image.asset(
-                    'assets/images/finop/finopp.png',
+                    AppImagePath.finoppLogo,
                     height: _media.height / 12,
                   ),
                 ],

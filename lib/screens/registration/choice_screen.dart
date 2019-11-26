@@ -8,6 +8,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'onboarding_startup_screen.dart';
 
+class OriginArguments {
+  final bool origin;
+  final String message;
+
+  OriginArguments(this.origin, this.message);
+}
+
 class ChoiceScreen extends StatelessWidget {
 //  static const String ROUTE_NAME = '/';
   static const String ROUTE_NAME = '/choiceScreen';
@@ -48,7 +55,7 @@ class ChoiceScreen extends StatelessWidget {
                           ),
                           child: RaisedButton(
                             onPressed: () {
-//                              saveAccountType(StringConst.START_UP_VALUE);
+                              saveAccountType(StringConst.START_UP_VALUE);
                               Navigator.pushNamed(
                                   context, StartUpOnboardingScreen.ROUTE_NAME);
                             },
@@ -71,7 +78,7 @@ class ChoiceScreen extends StatelessWidget {
                           ),
                           child: RaisedButton(
                             onPressed: () {
-//                              saveAccountType(StringConst.INVESTOR_VALUE);
+                              saveAccountType(StringConst.INVESTOR_VALUE);
                               Navigator.pushNamed(
                                   context, InvestorOnboardingScreen.ROUTE_NAME);
                             },
@@ -103,6 +110,18 @@ class ChoiceScreen extends StatelessWidget {
                         InkWell(
                           onTap: (){
                             Navigator.pushNamed(context, LoginScreen.ROUTE_NAME);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginScreen(),
+                                settings: RouteSettings(
+                                  arguments: OriginArguments(
+                                    true,
+                                    'coming in from choice screen',
+                                  ),
+                                ),
+                              ),
+                            );
                           },
                           child: Text(
                             StringConst.SIGN_IN,
@@ -124,8 +143,8 @@ class ChoiceScreen extends StatelessWidget {
     );
   }
 
-//  Future<void> saveAccountType(String value) async {
-//    SharedPreferences prefs = await SharedPreferences.getInstance();
-//    prefs.setString(StringConst.ACCOUNT_TYPE_KEY, value);
-//  }
+  Future<void> saveAccountType(String value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(StringConst.ACCOUNT_TYPE_KEY, value);
+  }
 }

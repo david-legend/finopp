@@ -2,6 +2,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:finop/const/styles.dart';
 import 'package:finop/helpers/helpers.dart';
 import 'package:finop/screens/app/navigation_home_screen.dart';
+import 'package:finop/screens/registration/choice_screen.dart';
 import 'package:finop/screens/registration/signup_screen.dart';
 import 'package:finop/services/authentication.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final OriginArguments args = ModalRoute.of(context).settings.arguments;
     final _media = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -49,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Image.asset(
-                    'assets/images/finop/finopp.png',
+                    AppImagePath.finoppLogo,
                     height: _media.height / 12,
                   ),
                 ],
@@ -120,8 +122,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 5.0,
                   ),
                   InkWell(
-                    onTap: (){
-                      Navigator.pushNamed(context, SignUpScreen.ROUTE_NAME);
+                    onTap: () {
+                      args.origin
+                          ? navigateUserToChoiceAndPop()
+                          : Navigator.pushNamed(
+                              context, SignUpScreen.ROUTE_NAME);
                     },
                     child: Text(
                       StringConst.SIGN_UP,
@@ -235,5 +240,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void navigateUserToHome() {
     Navigator.pushNamed(context, NavigationHomeScreen.ROUTE_NAME);
+  }
+
+  void navigateUserToChoiceAndPop() {
+    Navigator.of(context).pop();
+    Navigator.pushNamed(context, ChoiceScreen.ROUTE_NAME);
   }
 }
