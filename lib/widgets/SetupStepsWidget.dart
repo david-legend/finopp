@@ -38,6 +38,7 @@ class _SetupStepsState extends State<SetupSteps> {
   Widget build(BuildContext context) {
     return Container(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           ...buildSteps(),
         ],

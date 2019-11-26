@@ -51,3 +51,21 @@ TextStyle textWithTextColorStyle = TextStyle(
   fontSize: 14.0,
   fontWeight: FontWeight.bold,
 );
+
+TextStyle textWithBlack = TextStyle(
+  color: Colors.black,
+  fontSize: 16.0,
+  fontWeight: FontWeight.w400,
+);
+
+TextStyle regularHintStyle = TextStyle(
+  fontSize: TEXT_NORMAL_SIZE,
+  color: kFINOP_PRIMARY,
+  fontWeight: FontWeight.w400,
+);
+
+TextStyle proceedButtonStyle = TextStyle(
+  fontSize: 14,
+  color: Colors.white,
+  fontWeight: FontWeight.w600,
+);

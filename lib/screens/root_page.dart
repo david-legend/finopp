@@ -98,7 +98,8 @@ class _RootPageState extends State<RootPage> {
         return buildWaitingScreen();
         break;
       case AuthStatus.NOT_LOGGED_IN:
-        return SignUpScreen();
+        return SetupStartUpScreen();
+//        return SignUpScreen();
 //        return LoginScreen();
 //        return ChoiceScreen();
         break;

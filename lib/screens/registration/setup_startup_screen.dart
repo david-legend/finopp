@@ -2,10 +2,14 @@ import 'dart:io';
 
 import 'package:finop/const/_const.dart';
 import 'package:finop/screens/app/navigation_home_screen.dart';
+import 'package:finop/widgets/SetupStepsWidget.dart';
+import 'package:finop/widgets/finopp_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SetupStartUpScreen extends StatefulWidget {
@@ -19,8 +23,17 @@ class SetupStartUpScreen extends StatefulWidget {
 
 class _SetupStartUpScreenState extends State<SetupStartUpScreen>
     with TickerProviderStateMixin {
+  int step = 1;
+  String subtitle = StringConst.SETUP_BASIC_INFO;
+  TextEditingController _companyName = TextEditingController();
+  TextEditingController _founders = TextEditingController();
+  TextEditingController _industry = TextEditingController();
+  TextEditingController _description = TextEditingController();
+  TextEditingController _location = TextEditingController();
+  TextEditingController _postalCode = TextEditingController();
   String industryDropdownValue = 'Technology';
   String locationDropdownValue = 'Ghana';
+  Color color = kFINOP_SECONDARY;
 
   File _imageFile;
   dynamic _pickImageError;
@@ -46,85 +59,150 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-//              SpinKitChasingDots
-//              SpinKitDoubleBounce
-              _isLoading
-                  ? SpinKitWave(
-                      color: kFINOP_PRIMARY,
-                      type: SpinKitWaveType.center,
-                      size: 50.0,
-                      controller: AnimationController(
-                          vsync: this,
-                          duration: const Duration(milliseconds: 1000)),
-                    )
-                  : Container(),
-              _isOnBasicInfo ? basicInfo() : Container(),
-              _isOnLocationInfo ? locationInfo() : Container(),
-              _isOnSetupLogo ? setupLogo() : Container(),
-            ],
+        child: ModalProgressHUD(
+          inAsyncCall: _isLoading,
+          child: Container(
+            margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0),
+            child: Column(
+//            shrinkWrap: true,
+//            scrollDirection: Axis.vertical,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Image.asset(
+                      AppImagePath.finoppLogo,
+                      height: 35,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 14.0),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      StringConst.SETUP_TITLE,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 24.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 14.0),
+                    Text(
+                      subtitle,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 16.0,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 14.0),
+                SetupSteps(
+                  activeStep: step,
+                ),
+                SizedBox(height: 30.0),
+                _isOnBasicInfo ? basicInfo() : Container(),
+                _isOnLocationInfo ? locationInfo() : Container(),
+                _isOnSetupLogo ? setupLogo() : Container(),
+              ],
+            ),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: kFINOP_PRIMARY,
-        tooltip: 'Proceed',
-        onPressed: () {
-          _proceedToNextStep();
-        },
-        label: const Text('Proceed'),
-        icon: const Icon(Icons.arrow_forward),
       ),
     );
   }
 
+  Widget inputText(String fieldName, String hintText,
+      TextEditingController controller, bool obSecure,
+      {int maxLines}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          fieldName,
+          style: textWithBlack,
+        ),
+        SizedBox(height: 10.0),
+        TextField(
+          style: textWithBlack,
+          controller: controller,
+          decoration: InputDecoration(
+              hintText: hintText,
+              filled: true,
+              hintStyle: regularHintStyle,
+              contentPadding: EdgeInsets.all(18.0),
+              labelStyle: TextStyle(
+                fontSize: TEXT_NORMAL_SIZE,
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                letterSpacing: 1,
+                height: 0,
+              ),
+              border: InputBorder.none),
+          maxLines: maxLines,
+          obscureText: obSecure,
+        )
+      ],
+    );
+  }
+
   Widget chipsInput() {
-    return ChipsInput(
-//              initialValue: [''],
-      keyboardAppearance: Brightness.dark,
-      textCapitalization: TextCapitalization.words,
-      enabled: true,
-      maxChips: 10,
-      textStyle: TextStyle(height: 1.5, fontFamily: "Roboto", fontSize: 16),
-      decoration: InputDecoration(
-        // prefixIcon: Icon(Icons.search),
-        hintText: 'Names of Founders',
-        labelText: "Founders",
-        // enabled: false,
-        // errorText: field.errorText,
-      ),
-      findSuggestions: (String query) {
-        if (query.length != 0) {
-          var lowercaseQuery = query.toLowerCase();
-          List<String> industry = [];
-          industry.add(lowercaseQuery);
-          return industry;
-        }
-        return [];
-      },
-      onChanged: (data) {
-        print(data);
-      },
-      chipBuilder: (context, state, profile) {
-        return InputChip(
-          key: ObjectKey(profile),
-          label: Text(profile),
-          onDeleted: () => state.deleteChip(profile),
-          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        );
-      },
-      suggestionBuilder: (context, state, profile) {
-        return ListTile(
-          key: ObjectKey(profile),
-//          leading: Icon(Icons.security),
-          title: Text(profile),
-          onTap: () => state.selectSuggestion(profile),
-        );
-      },
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Text(
+          'Founders',
+          textAlign: TextAlign.start,
+          style: textWithBlack,
+        ),
+        SizedBox(height: 10.0),
+        ChipsInput(
+          keyboardAppearance: Brightness.dark,
+          textCapitalization: TextCapitalization.words,
+          enabled: true,
+          maxChips: 10,
+          textStyle: textWithBlack,
+          decoration: InputDecoration(
+            filled: true,
+            hintText: 'Names of Founders',
+            hintStyle: regularHintStyle,
+            border: InputBorder.none,
+          ),
+          findSuggestions: (String query) {
+            if (query.length != 0) {
+              var lowercaseQuery = query.toLowerCase();
+              List<String> industry = [];
+              industry.add(lowercaseQuery);
+              return industry;
+            }
+            return [];
+          },
+          onChanged: (data) {
+            print(data);
+          },
+          chipBuilder: (context, state, profile) {
+            return InputChip(
+              key: ObjectKey(profile),
+              label: Text(profile),
+              onDeleted: () => state.deleteChip(profile),
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            );
+          },
+          suggestionBuilder: (context, state, profile) {
+            return ListTile(
+              key: ObjectKey(profile),
+              title: Text(profile),
+              onTap: () => state.selectSuggestion(profile),
+            );
+          },
+        ),
+      ],
     );
   }
 
@@ -132,67 +210,56 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
     return Expanded(
       flex: 1,
       child: ListView(
+        shrinkWrap: true,
         scrollDirection: Axis.vertical,
         children: <Widget>[
-          Container(
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    StringConst.SETUP_BASIC_INFO,
-                    textAlign: TextAlign.center,
-                    style: setupHeadingStyle,
-                  ),
-                  SizedBox(height: 20.0),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      filled: false,
-                      hintText: 'Name of your comapany?',
-                      labelText: 'Company name *',
-                    ),
-                    keyboardType: TextInputType.text,
-                  ),
-                  SizedBox(height: 24.0),
-                  chipsInput(),
-                  SizedBox(height: 24.0),
-                  DropdownButton<String>(
-                    value: industryDropdownValue,
-                    isExpanded: true,
-                    icon: Icon(Icons.arrow_drop_down),
-                    hint: Text(' Choose Industry'),
-                    iconSize: 24,
-                    elevation: 16,
-                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.grey,
-                    ),
-                    onChanged: (String newValue) {
-                      setState(() {
-                        industryDropdownValue = newValue;
-                      });
-                    },
-                    items: <String>['Technology', 'Agriculture', 'Forestry', 'Oil ']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                  SizedBox(height: 24.0),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText:
-                      'Tell us about your startup (e.g., what your startup does.)',
-                      labelText: 'Description',
-                    ),
-                    maxLines: 4,
-                  ),
-//          skipButton(),
-                ],
-              )),
+          inputText("Email", 'example@gmail.com', _companyName, false),
+          SizedBox(height: 14.0),
+          chipsInput(),
+          SizedBox(height: 14.0),
+          DropdownButton<String>(
+            value: industryDropdownValue,
+            isExpanded: true,
+            icon: Icon(Icons.keyboard_arrow_down),
+            hint: Text(' Choose Industry'),
+            iconSize: 24,
+            elevation: 16,
+            style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+            underline: Container(
+              height: 2,
+              color: Colors.grey,
+            ),
+            onChanged: (String newValue) {
+              setState(() {
+                industryDropdownValue = newValue;
+              });
+            },
+            items: <String>['Technology', 'Agriculture', 'Forestry', 'Oil ']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
+          SizedBox(height: 14.0),
+          inputText(
+            "Description",
+            'Tell us about your startup (e.g., what your startup does.)',
+            _description,
+            false,
+            maxLines: 4,
+          ),
+          SizedBox(
+            height: 20.0,
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: FinoppPrimaryButton(
+              width: MediaQuery.of(context).size.width / 3,
+              action: _proceedToNextStep,
+            ),
+          ),
         ],
       ),
     );
@@ -203,19 +270,8 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
       child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(
-              StringConst.SETUP_LOCATION,
-              textAlign: TextAlign.center,
-              style: setupHeadingStyle,
-            ),
-            SizedBox(height: 12.0),
-            Text(
-              StringConst.SETUP_LOCATION_SUB,
-              textAlign: TextAlign.center,
-              style: setupSubtitleStyle,
-            ),
-            SizedBox(height: 24.0),
             DropdownButton<String>(
               value: locationDropdownValue,
               isExpanded: true,
@@ -248,16 +304,25 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
               }).toList(),
             ),
             SizedBox(height: 24.0),
-            TextFormField(
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-                filled: false,
-                hintText: 'Postal Code (Optional)',
-                labelText: 'Postal Code (Optional)',
+            inputText("Postal Code", '00233', _postalCode, false),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(bottom: 12.0),
+                child: Row(
+                  children: <Widget>[
+                    skipButton(),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: FinoppPrimaryButton(
+                          width: MediaQuery.of(context).size.width /3,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              keyboardType: TextInputType.text,
             ),
-            skipButton(),
           ],
         ),
       ),
@@ -270,27 +335,40 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: <Widget>[
-            Text(
-              StringConst.SETUP_PROFILE_PHOTO,
-              textAlign: TextAlign.center,
-              style: setupHeadingStyle,
-            ),
-            SizedBox(height: 24.0),
             GestureDetector(
               onTap: () {
                 _onImageButtonPressed(ImageSource.gallery);
                 print("add logo");
               },
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                margin: EdgeInsets.symmetric(horizontal: 32.0),
                 width: MediaQuery.of(context).size.width,
-                height: 400.0,
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.grey)),
+                height: 350.0,
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  border: Border.all(color: Colors.grey),
+                ),
                 child: _isImageSet ? _previewImage() : tapToChooseImage(),
               ),
             ),
-            skipButton(),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(bottom: 12.0),
+                child: Row(
+                  children: <Widget>[
+                    skipButton(),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: FinoppPrimaryButton(
+                          width: MediaQuery.of(context).size.width /3,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -302,13 +380,18 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Icon(
-          Icons.camera_enhance,
+//          Icons.camera_alt,
+          FontAwesomeIcons.cameraRetro,
           size: 80,
         ),
         SizedBox(height: 10.0),
         Text(
           StringConst.TAP_TO_ADD_PHOTO,
-          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+          style: TextStyle(
+            color: Colors.grey[600],
+            fontSize: 16.0,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ],
     );
@@ -319,7 +402,6 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
       child: Align(
         alignment: Alignment.bottomLeft,
         child: Container(
-          margin: EdgeInsets.only(bottom: 12.0),
           child: FlatButton(
             onPressed: () {
               _skipStep();
@@ -462,3 +544,4 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
     }
   }
 }
+

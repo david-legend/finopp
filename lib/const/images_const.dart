@@ -15,28 +15,14 @@ class ImagePath {
   static const String nbImage = "$imageDir/nb.jpeg";
 }
 
-class MainImagePath {
-  static const String image_path = "assets/images/main";
-  static const String image_app = "assets/images/media/ic_launcher.png";
-  static const String image_header = "$image_path/pic04.png";
-  static const String image_sign_up = "$image_path/pic03.png";
-  static const String image_walk_through = "$image_path/pic01.png";
-  static const String image_navigation = "$image_path/pic05.png";
-  static const String image_profile = "$image_path/pic06.png";
-  static const String image_feed = "$image_path/pic02.png";
-  static const String image_chat = "$image_path/pic08.png";
-  static const String image_shopping = "$image_path/pic09.png";
-  static const String image_statistic = "$image_path/pic10.png";
-  static const String image_media = "$image_path/pic11.png";
-  static const String image_camera = "$image_path/pic01.png";
+class AppImagePath {
+  static const String image_path = "assets/images/finopp";
+  static const String finoppLogo = "$image_path/finopp.png";
 }
 
 class RegistrationImagePath {
   static const String image_path = "assets/images/registration";
-  static const String SignUpLogo = "$image_path/logo_signup.png";
-  static const String SignUpPage_11_Bg = "$image_path/signup_page_11_bg.png";
   static const String choiceScreen = "$image_path/welcome.svg";
-  static const String SignUpPage_8_Bg = "$image_path/signup_page_8_bg.png";
 }
 
 class OnboardingImagePath {

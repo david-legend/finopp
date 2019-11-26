@@ -16,12 +16,14 @@ class StringConst {
   static const String PROFESSION = "Flutter Developer";
   static const String DEV_EMAIL = "niebin312@gmail.com";
   static const String SIGN_UP = "Sign Up";
+  static const String PROCEED = "Proceed";
   static const String SIGN_IN = "Sign In";
   static const String SIGN_UP_TEXT = "Don't have an account?";
   static const String SIGN_IN_TEXT = "Already have an account?";
   static const String REGISTER_INFO_TEXT = "Give us some information";
 
   //Setup startUp
+  static const String SETUP_TITLE = "Setup up your profile";
   static const String SETUP_BASIC_INFO =
       "Your profile helps you discover people and opportunities";
   static const String SETUP_LOCATION =
@@ -30,7 +32,7 @@ class StringConst {
       "See startups, investors, innovations and ideas in your area.";
   static const String SETUP_PROFILE_PHOTO =
       "Adding a photo helps people recognize you";
-  static const String TAP_TO_ADD_PHOTO = "Tap to upload your logo";
+  static const String TAP_TO_ADD_PHOTO = "Upload logo";
 
   //Toast Messages
   static const String NO_INTERNET_CONNECTION = "Please check your internet connection.";
