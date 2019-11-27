@@ -110,7 +110,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ],
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(40.0),
+                      padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 40.0),
                       child: Column(
                         children: <Widget>[
                           Form(
@@ -131,7 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       validator: Helper.validateEmail,
                                       obscure: false,
                                     ),
-                                    SizedBox(height: 40.0),
+                                    SizedBox(height: 30.0),
                                     inputText(
                                       fieldName: "Password",
                                       hintText: '',
