@@ -42,28 +42,31 @@ class _LoginScreenState extends State<LoginScreen> {
     if (form == null || !Helper.formWasEdited || form.validate()) return true;
 
     return await showDialog<bool>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('This form has errors'),
-          content: const Text('Really leave this form?'),
-          actions: <Widget>[
-            FlatButton(
-              child: const Text('YES'),
-              onPressed: () {
-                Navigator.of(context).pop(true);
-              },
-            ),
-            FlatButton(
-              child: const Text('NO'),
-              onPressed: () {
-                Navigator.of(context).pop(false);
-              },
-            ),
-          ],
-        );
-      },
-    ) ??
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text(
+                'This form has errors',
+                style: TextStyle(color: kFINOP_PRIMARY),
+              ),
+              content: const Text('Are you sure you want to leave this form ?'),
+              actions: <Widget>[
+                FlatButton(
+                  child: const Text('YES'),
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                  },
+                ),
+                FlatButton(
+                  child: const Text('NO'),
+                  onPressed: () {
+                    Navigator.of(context).pop(false);
+                  },
+                ),
+              ],
+            );
+          },
+        ) ??
         false;
   }
 
@@ -111,7 +114,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 40.0),
+                      padding: const EdgeInsets.only(
+                          left: 30.0, right: 30.0, top: 40.0),
                       child: Column(
                         children: <Widget>[
                           Form(
@@ -195,17 +199,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      args.origin
-                          ? navigateUserToChoiceAndPop()
-                          : Navigator.pushNamed(
-                              context, SignUpScreen.ROUTE_NAME);
+                      args?.origin == null
+                          ? navigateUserToSignUpScreen()
+                          : navigateUserToChoiceAndPop();
                     },
                     child: Text(
                       StringConst.SIGN_UP,
                       style: TextStyle(
-                          color: kFINOP_SECONDARY,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold),
+                        color: kFINOP_SECONDARY,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
@@ -314,6 +318,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void navigateUserToHome() {
     Navigator.pushNamed(context, NavigationHomeScreen.ROUTE_NAME);
+  }
+
+  void navigateUserToSignUpScreen() {
+    Navigator.of(context).pop();
+    Navigator.pushNamed(context, SignUpScreen.ROUTE_NAME);
   }
 
   void navigateUserToChoiceAndPop() {

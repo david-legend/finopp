@@ -166,7 +166,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
           keyboardAppearance: Brightness.dark,
           textCapitalization: TextCapitalization.words,
           enabled: true,
-          maxChips: 10,
+          maxChips: 6,
           textStyle: textWithBlack,
           decoration: InputDecoration(
             filled: true,
@@ -316,6 +316,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
                         alignment: Alignment.bottomRight,
                         child: FinoppPrimaryButton(
                           width: MediaQuery.of(context).size.width /3,
+                          action: _proceedToNextStep,
                         ),
                       ),
                     ),
@@ -362,6 +363,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
                         alignment: Alignment.bottomRight,
                         child: FinoppPrimaryButton(
                           width: MediaQuery.of(context).size.width /3,
+                          action: _proceedToNextStep,
                         ),
                       ),
                     ),
@@ -486,9 +488,9 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
   void _turnOnProgressIndicator() {
     setState(() {
       _isLoading = true;
-      _isOnBasicInfo = false;
-      _isOnLocationInfo = false;
-      _isOnSetupLogo = false;
+//      _isOnBasicInfo = false;
+//      _isOnLocationInfo = false;
+//      _isOnSetupLogo = false;
     });
   }
 
@@ -507,10 +509,12 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
       if (currentStep == StringConst.BASIC_INFO_STEP_VALUE) {
         _addCurrentStep(StringConst.LOCATION_STEP_VALUE);
         _turnOffProgressIndicator();
+        _increaseProgressStep(3, StringConst.SETUP_LOCATION_SUB);
         _showCurrentScreen(locationInfo: true);
       } else if (currentStep == StringConst.LOCATION_STEP_VALUE) {
         _addCurrentStep(StringConst.PROFILE_PHOTO_STEP_VALUE);
         _turnOffProgressIndicator();
+        _increaseProgressStep(5, StringConst.SETUP_PROFILE_PHOTO);
         _showCurrentScreen(logoInfo: true);
       } else if (currentStep == StringConst.PROFILE_PHOTO_STEP_VALUE) {
         _addCurrentStep(StringConst.SETUP_COMPLETE_VALUE);
@@ -542,6 +546,13 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
       _addCurrentStep(StringConst.SETUP_COMPLETE_VALUE);
       Navigator.pushNamed(context, NavigationHomeScreen.ROUTE_NAME);
     }
+  }
+
+  void _increaseProgressStep(int nextStep, String subtitle) {
+    setState(() {
+      this.step = nextStep;
+      this.subtitle = subtitle;
+    });
   }
 }
 

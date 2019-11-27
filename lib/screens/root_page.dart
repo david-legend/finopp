@@ -12,10 +12,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app/view_startup_profile.dart';
 
 
-//TODO:: make validation login screen
 //TODO:: make sign up take you to the appropriate setup process
 //TODO:: make sign up setup simulation seamless
 //TODO:: replicate the same for investor startup
+//TODO:: fix onboarding slide issue -- make sure you can't slide again when you're on last index
+
 enum AuthStatus {
   NOT_DETERMINED,
   NOT_LOGGED_IN,

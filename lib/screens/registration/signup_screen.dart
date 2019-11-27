@@ -45,8 +45,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text('This form has errors'),
-              content: const Text('Really leave this form?'),
+              title: Text(
+                'This form has errors',
+                style: TextStyle(color: kFINOP_PRIMARY),
+              ),
+              content: const Text('Are you sure you want to leave this form ?'),
               actions: <Widget>[
                 FlatButton(
                   child: const Text('YES'),
@@ -110,7 +113,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ],
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 40.0),
+                      padding: const EdgeInsets.only(
+                          left: 30.0, right: 30.0, top: 40.0),
                       child: Column(
                         children: <Widget>[
                           Form(
