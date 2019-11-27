@@ -1,4 +1,5 @@
 import 'package:finop/const/_const.dart';
+import 'package:finop/screens/registration/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:transformer_page_view/index_controller.dart';
@@ -115,11 +116,24 @@ class _InvestorOnboardingScreenState extends State<InvestorOnboardingScreen> {
                           numberOfDots: images.length,
                         ),
                       ),
-                      Text(
-                        'Next',
-                        style: TextStyle(
-                            color: kFINOP_PRIMARY, fontWeight: FontWeight.bold),
-                      )
+                      InkWell(
+                        onTap: () {
+                          bool didSliderMove = moveSlider(_slideIndex, images.length);
+                          if (didSliderMove == false) {
+                            Navigator.pushNamed(
+                                context, SignUpScreen.ROUTE_NAME);
+                          }
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Next',
+                            style: TextStyle(
+                                color: kFINOP_PRIMARY,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
                     ],
                   )
                 ],
@@ -135,6 +149,16 @@ class _InvestorOnboardingScreenState extends State<InvestorOnboardingScreen> {
       backgroundColor: Colors.white,
       body: transformerPageView,
     );
+  }
+
+  bool moveSlider(int index, int numberOfSliders) {
+    print("INDEX : $index NUM OF SLIDERS : $numberOfSliders");
+    if (index <= numberOfSliders - 2) {
+      _controller.move(index + 1);
+      return true;
+    }
+
+    return false;
   }
 }
 

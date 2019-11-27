@@ -133,7 +133,7 @@ class _StartUpOnboardingScreenState extends State<StartUpOnboardingScreen> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                        )
+                        ),
                       ],
                     )
                   ],
