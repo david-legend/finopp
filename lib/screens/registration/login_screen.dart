@@ -5,6 +5,7 @@ import 'package:finop/screens/app/navigation_home_screen.dart';
 import 'package:finop/screens/registration/choice_screen.dart';
 import 'package:finop/screens/registration/signup_screen.dart';
 import 'package:finop/services/authentication.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:finop/const/color_const.dart';
@@ -33,6 +34,38 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
   bool _isSigningInUser = false;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool _autoValidate = true;
+
+  Future<bool> _warnUserAboutInvalidData() async {
+    final FormState form = _formKey.currentState;
+    if (form == null || !Helper.formWasEdited || form.validate()) return true;
+
+    return await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('This form has errors'),
+          content: const Text('Really leave this form?'),
+          actions: <Widget>[
+            FlatButton(
+              child: const Text('YES'),
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+            ),
+            FlatButton(
+              child: const Text('NO'),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+          ],
+        );
+      },
+    ) ??
+        false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,13 +111,40 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(40.0),
+                      padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 40.0),
                       child: Column(
                         children: <Widget>[
-                          inputText(
-                              "Email", 'example@gmail.com', _email, false),
-                          SizedBox(height: 40.0),
-                          inputText("Password", '******', _password, true),
+                          Form(
+                            key: _formKey,
+                            autovalidate: _autoValidate,
+                            onWillPop: _warnUserAboutInvalidData,
+                            child: Scrollbar(
+                              child: SingleChildScrollView(
+                                dragStartBehavior: DragStartBehavior.down,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    inputText(
+                                      fieldName: "Email",
+                                      hintText: "example@gmail.com",
+                                      controller: _email,
+                                      validator: Helper.validateEmail,
+                                      obscure: false,
+                                    ),
+                                    SizedBox(height: 40.0),
+                                    inputText(
+                                      fieldName: "Password",
+                                      hintText: '',
+                                      controller: _password,
+                                      validator: Helper.validatePassword,
+                                      obscure: true,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -103,7 +163,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: 60,
                         icon: Icons.arrow_forward,
                         iconSize: 25,
-                        onTap: () {},
+                        onTap: () {
+                          if (_email.text.length == 0 &&
+                              _password.text.length == 0) {
+                            showToast(StringConst.FILL_INPUT_FIELDS,
+                                duration: 3);
+                          } else if (Helper.isEmailValid &&
+                              Helper.isPasswordValid) {
+                            initiateSignInProcess();
+                          } else {
+                            showToast(StringConst.FILL_INPUT_ERRORS,
+                                duration: 3);
+                          }
+                        },
                       )
                     ],
                   ),
@@ -145,12 +217,13 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget inputText(
+  Widget inputText({
     String fieldName,
     String hintText,
+    FormFieldValidator<String> validator,
     TextEditingController controller,
-    bool obSecure,
-  ) {
+    bool obscure,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -158,12 +231,13 @@ class _LoginScreenState extends State<LoginScreen> {
           fieldName,
           style: textWithTextColorStyle,
         ),
-        TextField(
+        TextFormField(
           style: TextStyle(
             height: 1.3,
             color: kFINOP_TEXT_COLOR,
           ),
           controller: controller,
+          validator: validator,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: TextStyle(
@@ -179,7 +253,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 0,
             ),
           ),
-          obscureText: obSecure,
+          obscureText: obscure,
         )
       ],
     );
