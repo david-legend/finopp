@@ -11,8 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/view_startup_profile.dart';
 
-//TODO:: make next on onboarding screens slide to next screen
-//TODO:: make next on the last onboarding screen take you to sign up
+//TODO:: add email validation to signup
+//TODO:: make validation login and signup screens
 //TODO:: make sign up take you to the appropriate setup process
 //TODO:: make sign up setup simulation seamless
 //TODO:: replicate the same for investor startup

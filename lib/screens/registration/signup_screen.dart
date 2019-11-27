@@ -1,15 +1,14 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:finop/const/styles.dart';
 import 'package:finop/helpers/helpers.dart';
-import 'package:finop/screens/registration/choice_screen.dart';
 import 'package:finop/screens/registration/login_screen.dart';
 import 'package:finop/screens/registration/setup_investor_screen.dart';
 import 'package:finop/screens/registration/setup_startup_screen.dart';
 import 'package:finop/services/authentication.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:finop/const/color_const.dart';
-import 'package:finop/const/gradient_const.dart';
 import 'package:finop/const/images_const.dart';
 import 'package:finop/const/size_const.dart';
 import 'package:finop/const/string_const.dart';
@@ -34,7 +33,39 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _isSigningUpUser = false;
+  bool _autoValidate = true;
+
+  Future<bool> _warnUserAboutInvalidData() async {
+    final FormState form = _formKey.currentState;
+    if (form == null || !Helper.formWasEdited || form.validate()) return true;
+
+    return await showDialog<bool>(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('This form has errors'),
+              content: const Text('Really leave this form?'),
+              actions: <Widget>[
+                FlatButton(
+                  child: const Text('YES'),
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                  },
+                ),
+                FlatButton(
+                  child: const Text('NO'),
+                  onPressed: () {
+                    Navigator.of(context).pop(false);
+                  },
+                ),
+              ],
+            );
+          },
+        ) ??
+        false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,10 +113,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       padding: const EdgeInsets.all(40.0),
                       child: Column(
                         children: <Widget>[
-                          inputText(
-                              "Email", 'example@gmail.com', _email, false),
-                          SizedBox(height: 40.0),
-                          inputText("Password", '******', _password, true),
+                          Form(
+                            key: _formKey,
+                            autovalidate: _autoValidate,
+                            onWillPop: _warnUserAboutInvalidData,
+                            child: Scrollbar(
+                              child: SingleChildScrollView(
+                                dragStartBehavior: DragStartBehavior.down,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    inputText(
+                                      fieldName: "Email",
+                                      hintText: "example@gmail.com",
+                                      controller: _email,
+                                      validator: Helper.validateEmail,
+                                      obscure: false,
+                                    ),
+                                    SizedBox(height: 40.0),
+                                    inputText(
+                                      fieldName: "Password",
+                                      hintText: '',
+                                      controller: _password,
+                                      validator: Helper.validatePassword,
+                                      obscure: true,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -104,7 +162,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         width: 60,
                         icon: Icons.arrow_forward,
                         iconSize: 25,
-                        onTap: () {},
+                        onTap: () {
+                          if (_email.text.length == 0 &&
+                              _password.text.length == 0) {
+                            showToast(StringConst.FILL_INPUT_FIELDS,
+                                duration: 3);
+                          } else if (Helper.isEmailValid &&
+                              Helper.isPasswordValid) {
+                            initiateSignInProcess();
+                          } else {
+                            showToast(StringConst.FILL_INPUT_ERRORS,
+                                duration: 3);
+                          }
+                        },
                       )
                     ],
                   ),
@@ -123,7 +193,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     width: 5.0,
                   ),
                   InkWell(
-                    onTap: (){
+                    onTap: () {
                       Navigator.pushNamed(context, LoginScreen.ROUTE_NAME);
                     },
                     child: Text(
@@ -143,12 +213,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  Widget inputText(
-      String fieldName,
-      String hintText,
-      TextEditingController controller,
-      bool obSecure,
-      ) {
+  Widget inputText({
+    String fieldName,
+    String hintText,
+    FormFieldValidator<String> validator,
+    TextEditingController controller,
+    bool obscure,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -156,12 +227,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
           fieldName,
           style: textWithTextColorStyle,
         ),
-        TextField(
+        TextFormField(
           style: TextStyle(
             height: 1.3,
             color: kFINOP_TEXT_COLOR,
           ),
           controller: controller,
+          validator: validator,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: TextStyle(
@@ -177,7 +249,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 0,
             ),
           ),
-          obscureText: obSecure,
+          obscureText: obscure,
         )
       ],
     );

@@ -36,6 +36,8 @@ class StringConst {
 
   //Toast Messages
   static const String NO_INTERNET_CONNECTION = "Please check your internet connection.";
+  static const String FILL_INPUT_FIELDS = "Input fields can't be empty";
+  static const String FILL_INPUT_ERRORS = "Please fix the errors in red before submitting";
 
   //SharedPreferences
   static const String ACCOUNT_TYPE_KEY = "account_type";
