@@ -64,8 +64,6 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
           child: Container(
             margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0),
             child: Column(
-//            shrinkWrap: true,
-//            scrollDirection: Axis.vertical,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Row(
@@ -245,7 +243,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
           SizedBox(height: 14.0),
           inputText(
             "Description",
-            'Tell us about your startup (e.g., what your startup does.)',
+            'Tell us about your startup \n(e.g., what your startup does.)',
             _description,
             false,
             maxLines: 4,
@@ -339,7 +337,6 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
             GestureDetector(
               onTap: () {
                 _onImageButtonPressed(ImageSource.gallery);
-                print("add logo");
               },
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 32.0),
@@ -382,13 +379,12 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Icon(
-//          Icons.camera_alt,
           FontAwesomeIcons.cameraRetro,
           size: 80,
         ),
         SizedBox(height: 10.0),
         Text(
-          StringConst.TAP_TO_ADD_PHOTO,
+          StringConst.TAP_TO_ADD_LOGO,
           style: TextStyle(
             color: Colors.grey[600],
             fontSize: 16.0,
@@ -472,10 +468,13 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
   void _initializeStep() async {
     String currentStep = await _getCurrentStep();
     if (currentStep == StringConst.BASIC_INFO_STEP_VALUE) {
+      _increaseProgressStep(1, StringConst.SETUP_BASIC_INFO);
       _showCurrentScreen(basicInfo: true);
     } else if (currentStep == StringConst.LOCATION_STEP_VALUE) {
+      _increaseProgressStep(3, StringConst.SETUP_LOCATION_SUB);
       _showCurrentScreen(locationInfo: true);
     } else if (currentStep == StringConst.PROFILE_PHOTO_STEP_VALUE) {
+      _increaseProgressStep(5, StringConst.SETUP_PROFILE_PHOTO);
       _showCurrentScreen(logoInfo: true);
     }
   }
@@ -488,9 +487,6 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
   void _turnOnProgressIndicator() {
     setState(() {
       _isLoading = true;
-//      _isOnBasicInfo = false;
-//      _isOnLocationInfo = false;
-//      _isOnSetupLogo = false;
     });
   }
 

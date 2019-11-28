@@ -32,7 +32,8 @@ class StringConst {
       "See startups, investors, innovations and ideas in your area.";
   static const String SETUP_PROFILE_PHOTO =
       "Adding a photo helps people recognize you";
-  static const String TAP_TO_ADD_PHOTO = "Upload logo";
+  static const String TAP_TO_ADD_LOGO = "Upload logo";
+  static const String TAP_TO_ADD_PHOTO = "Upload profile photo";
 
   //Toast Messages
   static const String NO_INTERNET_CONNECTION = "Please check your internet connection.";

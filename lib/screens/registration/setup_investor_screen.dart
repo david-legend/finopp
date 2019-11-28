@@ -1,13 +1,19 @@
 import 'dart:io';
 
 import 'package:finop/const/color_const.dart';
+import 'package:finop/const/images_const.dart';
+import 'package:finop/const/size_const.dart';
 import 'package:finop/const/string_const.dart';
 import 'package:finop/const/styles.dart';
 import 'package:finop/screens/app/navigation_home_screen.dart';
+import 'package:finop/widgets/SetupStepsWidget.dart';
+import 'package:finop/widgets/finopp_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SetupInvestorScreen extends StatefulWidget {
@@ -20,6 +26,14 @@ class SetupInvestorScreen extends StatefulWidget {
 
 class _SetupInvestorScreenState extends State<SetupInvestorScreen>
     with TickerProviderStateMixin {
+  int step = 1;
+  String subtitle = StringConst.SETUP_BASIC_INFO;
+  TextEditingController _companyName = TextEditingController();
+  TextEditingController _founders = TextEditingController();
+  TextEditingController _industry = TextEditingController();
+  TextEditingController _description = TextEditingController();
+  TextEditingController _location = TextEditingController();
+  TextEditingController _postalCode = TextEditingController();
   String industryDropdownValue = 'Technology';
   String locationDropdownValue = 'Ghana';
 
@@ -47,83 +61,148 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              _isLoading
-                  ? SpinKitWave(
-                      color: kFINOP_PRIMARY,
-                      type: SpinKitWaveType.center,
-                      size: 50.0,
-                      controller: AnimationController(
-                          vsync: this,
-                          duration: const Duration(milliseconds: 1000)),
-                    )
-                  : Container(),
-              _isOnBasicInfo ? basicInfo() : Container(),
-              _isOnLocationInfo ? locationInfo() : Container(),
-              _isOnSetupProfilePhoto ? setupProfilePhoto() : Container(),
-            ],
+        child: ModalProgressHUD(
+          inAsyncCall: _isLoading,
+          child: Container(
+            margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Image.asset(
+                      AppImagePath.finoppLogo,
+                      height: 35,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 14.0),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      StringConst.SETUP_TITLE,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 24.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 14.0),
+                    Text(
+                      subtitle,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 16.0,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 14.0),
+                SetupSteps(
+                  activeStep: step,
+                ),
+                SizedBox(height: 30.0),
+                _isOnBasicInfo ? basicInfo() : Container(),
+                _isOnLocationInfo ? locationInfo() : Container(),
+                _isOnSetupProfilePhoto ? setupProfilePhoto() : Container(),
+              ],
+            ),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: kFINOP_PRIMARY,
-        tooltip: 'Proceed',
-        onPressed: () {
-          _proceedToNextStep();
-        },
-        label: const Text('Proceed'),
-        icon: const Icon(Icons.arrow_forward),
       ),
     );
   }
 
+  Widget inputText(String fieldName, String hintText,
+      TextEditingController controller, bool obSecure,
+      {int maxLines}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          fieldName,
+          style: textWithBlack,
+        ),
+        SizedBox(height: 10.0),
+        TextField(
+          style: textWithBlack,
+          controller: controller,
+          decoration: InputDecoration(
+              hintText: hintText,
+              filled: true,
+              hintStyle: regularHintStyle,
+              contentPadding: EdgeInsets.all(18.0),
+              labelStyle: TextStyle(
+                fontSize: TEXT_NORMAL_SIZE,
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                letterSpacing: 1,
+                height: 0,
+              ),
+              border: InputBorder.none),
+          maxLines: maxLines,
+          obscureText: obSecure,
+        )
+      ],
+    );
+  }
+
   Widget chipsInput() {
-    return ChipsInput(
-//              initialValue: [''],
-      keyboardAppearance: Brightness.dark,
-      textCapitalization: TextCapitalization.words,
-      enabled: true,
-      maxChips: 10,
-      textStyle: TextStyle(height: 1.5, fontFamily: "Roboto", fontSize: 16),
-      decoration: InputDecoration(
-        // prefixIcon: Icon(Icons.search),
-        hintText: 'Add industries that interests you',
-        labelText: "Industries",
-        // enabled: false,
-        // errorText: field.errorText,
-      ),
-      findSuggestions: (String query) {
-        if (query.length != 0) {
-          var lowercaseQuery = query.toLowerCase();
-          List<String> industry = [];
-          industry.add(lowercaseQuery);
-          return industry;
-        }
-        return [];
-      },
-      onChanged: (data) {
-        print(data);
-      },
-      chipBuilder: (context, state, profile) {
-        return InputChip(
-          key: ObjectKey(profile),
-          label: Text(profile),
-          onDeleted: () => state.deleteChip(profile),
-          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        );
-      },
-      suggestionBuilder: (context, state, profile) {
-        return ListTile(
-          key: ObjectKey(profile),
-//          leading: Icon(Icons.security),
-          title: Text(profile),
-          onTap: () => state.selectSuggestion(profile),
-        );
-      },
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Text(
+          'Industry',
+          textAlign: TextAlign.start,
+          style: textWithBlack,
+        ),
+        SizedBox(height: 10.0),
+        ChipsInput(
+          keyboardAppearance: Brightness.dark,
+          textCapitalization: TextCapitalization.words,
+          enabled: true,
+          maxChips: 6,
+          textStyle: textWithBlack,
+          decoration: InputDecoration(
+            filled: true,
+            hintText: "Add industries you're interested in",
+            hintStyle: regularHintStyle,
+            border: InputBorder.none,
+          ),
+          findSuggestions: (String query) {
+            if (query.length != 0) {
+              var lowercaseQuery = query.toLowerCase();
+              List<String> industry = [];
+              industry.add(lowercaseQuery);
+              return industry;
+            }
+            return [];
+          },
+          onChanged: (data) {
+            print(data);
+          },
+          chipBuilder: (context, state, profile) {
+            return InputChip(
+              key: ObjectKey(profile),
+              label: Text(profile),
+              onDeleted: () => state.deleteChip(profile),
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            );
+          },
+          suggestionBuilder: (context, state, profile) {
+            return ListTile(
+              key: ObjectKey(profile),
+              title: Text(profile),
+              onTap: () => state.selectSuggestion(profile),
+            );
+          },
+        ),
+      ],
     );
   }
 
@@ -132,40 +211,25 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
       flex: 1,
       child: ListView(
         children: <Widget>[
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Text(
-                  StringConst.SETUP_BASIC_INFO,
-                  textAlign: TextAlign.center,
-                  style: setupHeadingStyle,
-                ),
-                SizedBox(height: 20.0),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    filled: false,
-                    hintText: 'Name of your company?',
-                    labelText: 'Company name *',
-                  ),
-                  keyboardType: TextInputType.text,
-                ),
-                SizedBox(height: 24.0),
-                chipsInput(),
-                SizedBox(height: 24.0),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText:
-                    'Tell us about your company (e.g., what type of businesses'
-                        ' are you looking to invest in.)',
-                    labelText: 'Description',
-                  ),
-                  maxLines: 4,
-                ),
-//            skipButton(),
-              ],
+          inputText("Company", 'Enter you company name', _companyName, false),
+          SizedBox(height: 24.0),
+          chipsInput(),
+          SizedBox(height: 24.0),
+          inputText(
+            "Description",
+            'Tell us about your company \n(e.g., what you look for in a startup)',
+            _description,
+            false,
+            maxLines: 4,
+          ),
+          SizedBox(
+            height: 40.0,
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: FinoppPrimaryButton(
+              width: MediaQuery.of(context).size.width / 3,
+              action: _proceedToNextStep,
             ),
           ),
         ],
@@ -178,19 +242,8 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
       child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(
-              StringConst.SETUP_LOCATION,
-              textAlign: TextAlign.center,
-              style: setupHeadingStyle,
-            ),
-            SizedBox(height: 12.0),
-            Text(
-              StringConst.SETUP_LOCATION_SUB,
-              textAlign: TextAlign.center,
-              style: setupSubtitleStyle,
-            ),
-            SizedBox(height: 24.0),
             DropdownButton<String>(
               value: locationDropdownValue,
               isExpanded: true,
@@ -223,16 +276,26 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
               }).toList(),
             ),
             SizedBox(height: 24.0),
-            TextFormField(
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-                filled: false,
-                hintText: 'Postal Code (Optional)',
-                labelText: 'Postal Code (Optional)',
+            inputText("Postal Code", '00233', _postalCode, false),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(bottom: 12.0),
+                child: Row(
+                  children: <Widget>[
+                    skipButton(),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: FinoppPrimaryButton(
+                          width: MediaQuery.of(context).size.width /3,
+                          action: _proceedToNextStep,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              keyboardType: TextInputType.text,
             ),
-            skipButton(),
           ],
         ),
       ),
@@ -245,26 +308,40 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: <Widget>[
-            Text(
-              StringConst.SETUP_PROFILE_PHOTO,
-              textAlign: TextAlign.center,
-              style: setupHeadingStyle,
-            ),
-            SizedBox(height: 24.0),
             GestureDetector(
               onTap: () {
                 showBottomModalSheet();
               },
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                margin: EdgeInsets.symmetric(horizontal: 32.0),
                 width: MediaQuery.of(context).size.width,
-                height: 400.0,
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.grey)),
+                height: 350.0,
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  border: Border.all(color: Colors.grey),
+                ),
                 child: _isImageSet ? _previewImage() : tapToChooseImage(),
               ),
             ),
-            skipButton(),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(bottom: 12.0),
+                child: Row(
+                  children: <Widget>[
+                    skipButton(),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: FinoppPrimaryButton(
+                          width: MediaQuery.of(context).size.width /3,
+                          action: _proceedToNextStep,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -276,13 +353,17 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Icon(
-          Icons.camera_enhance,
+          FontAwesomeIcons.cameraRetro,
           size: 80,
         ),
         SizedBox(height: 10.0),
         Text(
           StringConst.TAP_TO_ADD_PHOTO,
-          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+          style: TextStyle(
+            color: Colors.grey[600],
+            fontSize: 16.0,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ],
     );
@@ -290,15 +371,13 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
 
   Widget skipButton() {
     return Expanded(
-      flex: 1,
       child: Align(
         alignment: Alignment.bottomLeft,
-        child: FlatButton(
-          onPressed: () {
-            _skipStep();
-          },
-          child: Container(
-            margin: EdgeInsets.only(bottom: 12.0),
+        child: Container(
+          child: FlatButton(
+            onPressed: () {
+              _skipStep();
+            },
             child: Text(
               'Skip',
               style: TextStyle(
@@ -326,25 +405,45 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
             child: Padding(
               padding: const EdgeInsets.all(32.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   GestureDetector(
-                    onTap: () => _onImageButtonPressed(ImageSource.camera),
-                    child: Icon(
-                      Icons.camera_alt,
-                      size: 40.0,
-                      color: kFINOP_DARK_SHADE,
+                    onTap: () => _onImageButtonPressed(ImageSource.gallery),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Icon(
+                            FontAwesomeIcons.images,
+                            size: 40.0,
+                            color: kFINOP_DARK_SHADE,
+                          ),
+                          SizedBox(height: 10),
+                          Text('Album')
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(width: 20),
                   GestureDetector(
-                    onTap: () => _onImageButtonPressed(ImageSource.gallery),
-                    child: Icon(
-                      Icons.photo_library,
-                      size: 40.0,
-                      color: kFINOP_DARK_SHADE,
+                    onTap: () => _onImageButtonPressed(ImageSource.camera),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Icon(
+                            FontAwesomeIcons.camera,
+                            size: 40.0,
+                            color: kFINOP_DARK_SHADE,
+                          ),
+                          SizedBox(height: 10),
+                          Text('Camera')
+                        ],
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -403,10 +502,13 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
   void _initializeStep() async {
     String currentStep = await _getCurrentStep();
     if (currentStep == StringConst.BASIC_INFO_STEP_VALUE) {
+      _increaseProgressStep(1, StringConst.SETUP_BASIC_INFO);
       _showCurrentScreen(basicInfo: true);
     } else if (currentStep == StringConst.LOCATION_STEP_VALUE) {
+      _increaseProgressStep(3, StringConst.SETUP_LOCATION_SUB);
       _showCurrentScreen(locationInfo: true);
     } else if (currentStep == StringConst.PROFILE_PHOTO_STEP_VALUE) {
+      _increaseProgressStep(5, StringConst.SETUP_PROFILE_PHOTO);
       _showCurrentScreen(logoInfo: true);
     }
   }
@@ -419,9 +521,6 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
   void _turnOnProgressIndicator() {
     setState(() {
       _isLoading = true;
-      _isOnBasicInfo = false;
-      _isOnLocationInfo = false;
-      _isOnSetupProfilePhoto = false;
     });
   }
 
@@ -440,10 +539,12 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
       if (currentStep == StringConst.BASIC_INFO_STEP_VALUE) {
         _addCurrentStep(StringConst.LOCATION_STEP_VALUE);
         _turnOffProgressIndicator();
+        _increaseProgressStep(3, StringConst.SETUP_LOCATION_SUB);
         _showCurrentScreen(locationInfo: true);
       } else if (currentStep == StringConst.LOCATION_STEP_VALUE) {
         _addCurrentStep(StringConst.PROFILE_PHOTO_STEP_VALUE);
         _turnOffProgressIndicator();
+        _increaseProgressStep(5, StringConst.SETUP_PROFILE_PHOTO);
         _showCurrentScreen(logoInfo: true);
       } else if (currentStep == StringConst.PROFILE_PHOTO_STEP_VALUE) {
         _addCurrentStep(StringConst.SETUP_COMPLETE_VALUE);
@@ -475,5 +576,12 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
       _addCurrentStep(StringConst.SETUP_COMPLETE_VALUE);
       Navigator.pushNamed(context, NavigationHomeScreen.ROUTE_NAME);
     }
+  }
+
+  void _increaseProgressStep(int nextStep, String subtitle) {
+    setState(() {
+      this.step = nextStep;
+      this.subtitle = subtitle;
+    });
   }
 }
