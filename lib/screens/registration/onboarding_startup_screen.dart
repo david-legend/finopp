@@ -39,110 +39,112 @@ class _StartUpOnboardingScreenState extends State<StartUpOnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     TransformerPageView transformerPageView = TransformerPageView(
-        pageSnapping: true,
-        onPageChanged: (index) {
-          setState(() {
-            this._slideIndex = index;
-          });
-        },
-        loop: false,
-        controller: _controller,
-        transformer:
-            PageTransformerBuilder(builder: (Widget child, TransformInfo info) {
-          return Material(
+      pageSnapping: true,
+      onPageChanged: (index) {
+        setState(() {
+          this._slideIndex = index;
+        });
+      },
+      loop: false,
+      controller: _controller,
+      transformer:
+          PageTransformerBuilder(builder: (Widget child, TransformInfo info) {
+        return Material(
+          color: Colors.white,
+          elevation: 8.0,
+          textStyle: TextStyle(color: Colors.white),
+          borderRadius: BorderRadius.circular(12.0),
+          child: Container(
+            alignment: Alignment.center,
             color: Colors.white,
-            elevation: 8.0,
-            textStyle: TextStyle(color: Colors.white),
-            borderRadius: BorderRadius.circular(12.0),
-            child: Container(
-              alignment: Alignment.center,
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        ParallaxContainer(
-                          child: SvgPicture.asset(
-                            images[info.index],
-                            fit: BoxFit.contain,
-                            height: 250,
+            child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      ParallaxContainer(
+                        child: SvgPicture.asset(
+                          images[info.index],
+                          fit: BoxFit.contain,
+                          height: 250,
+                        ),
+                        position: info.position,
+                        translationFactor: 400.0,
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: <Widget>[
+                      ParallaxContainer(
+                        child: Text(
+                          text0[info.index],
+                          textAlign: TextAlign.center,
+                          style: bigHeadingStyle,
+                        ),
+                        position: info.position,
+                        opacityFactor: .8,
+                        translationFactor: 400.0,
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      ParallaxContainer(
+                        child: Text(
+                          text1[info.index],
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.black,
                           ),
-                          position: info.position,
-                          translationFactor: 400.0,
                         ),
-                      ],
-                    ),
-                    Column(
-                      children: <Widget>[
-                        ParallaxContainer(
+                        position: info.position,
+                        translationFactor: 300.0,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      ParallaxContainer(
+                        position: info.position,
+                        translationFactor: 500.0,
+                        child: Dots(
+                          controller: _controller,
+                          slideIndex: _slideIndex,
+                          numberOfDots: images.length,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          bool didSliderMove =
+                              moveSlider(_slideIndex, images.length);
+                          if (didSliderMove == false) {
+                            Navigator.pushNamed(
+                                context, SignUpScreen.ROUTE_NAME);
+                          }
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            text0[info.index],
-                            textAlign: TextAlign.center,
-                            style: bigHeadingStyle,
-                          ),
-                          position: info.position,
-                          opacityFactor: .8,
-                          translationFactor: 400.0,
-                        ),
-                        SizedBox(
-                          height: 20.0,
-                        ),
-                        ParallaxContainer(
-                          child: Text(
-                            text1[info.index],
-                            textAlign: TextAlign.center,
+                            'Next',
                             style: TextStyle(
-                              fontSize: 16.0,
-                              color: Colors.black,
-                            ),
-                          ),
-                          position: info.position,
-                          translationFactor: 300.0,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        ParallaxContainer(
-                          position: info.position,
-                          translationFactor: 500.0,
-                          child: Dots(
-                            controller: _controller,
-                            slideIndex: _slideIndex,
-                            numberOfDots: images.length,
+                                color: kFINOP_PRIMARY,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
-                        InkWell(
-                          onTap: () {
-                            bool didSliderMove = moveSlider(_slideIndex, images.length);
-                            if (didSliderMove == false) {
-                              Navigator.pushNamed(
-                                  context, SignUpScreen.ROUTE_NAME);
-                            }
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              'Next',
-                              style: TextStyle(
-                                  color: kFINOP_PRIMARY,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
-          );
-        }),
-        itemCount: 4);
+          ),
+        );
+      }),
+      itemCount: 3,
+    );
 
     return Scaffold(
       backgroundColor: Colors.white,
