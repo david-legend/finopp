@@ -1,16 +1,15 @@
 import 'package:finop/const/color_const.dart';
 import 'package:finop/const/images_const.dart';
+import 'package:finop/screens/app/home.dart';
+import 'package:finop/screens/app/startup_feed.dart';
 import 'package:finop/screens/app/user_profile_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'chats.dart';
-import 'chats2.dart';
-import 'feeds.dart';
-import 'home_screen.dart';
+import 'investor_feed.dart';
 import 'investor_feed_screen.dart';
-import 'view_startup_profile.dart';
 
 class NavigationIconView {
   NavigationIconView({
@@ -25,8 +24,11 @@ class NavigationIconView {
         item = BottomNavigationBarItem(
           icon: icon,
           activeIcon: activeIcon,
-          title: Text(
-            title,
+          title: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Text(
+              title,
+            ),
           ),
           backgroundColor: color,
         ),
@@ -103,10 +105,10 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
   String pageTitle = 'Home';
 
   List<Widget> _widgetOptions = <Widget>[
-    Feeds(),
-    HomeScreen(),
-    InvestorFeedScreen(),
-    InvestorFeedScreen(),
+    Home(),
+    StartUpFeed(),
+    InvestorFeed(),
+    InvestorFeed(),
   ];
   static final Animatable<Offset> _drawerDetailsTween = Tween<Offset>(
     begin: const Offset(0.0, -1.0),
@@ -139,31 +141,27 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
       NavigationIconView(
         icon: const Icon(
           FontAwesomeIcons.home,
-//          color: Colors.grey,
         ),
         title: 'Home',
         vsync: this,
       ),
       NavigationIconView(
         icon: const Icon(
-          FontAwesomeIcons.stamp,
-//          color: Colors.grey,
+          FontAwesomeIcons.chartLine,
         ),
         title: 'Startups',
         vsync: this,
       ),
       NavigationIconView(
         icon: const Icon(
-          FontAwesomeIcons.chartLine,
-//          color: Colors.grey,
+          FontAwesomeIcons.donate,
         ),
         title: 'Investors',
         vsync: this,
       ),
       NavigationIconView(
         icon: const Icon(
-          FontAwesomeIcons.affiliatetheme,
-//          color: Colors.grey,
+          FontAwesomeIcons.plus,
         ),
         title: 'Add',
         vsync: this,
@@ -251,8 +249,11 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
         backgroundColor: Colors.white,
         leading: Padding(
           padding: const EdgeInsets.only(left: 4.0, top: 4.0, bottom: 4.0),
-          child: CircleAvatar(
-            backgroundImage: AssetImage(AppImagePath.accountProfilePhoto),
+          child: InkWell(
+            onTap: () => _scaffoldKey.currentState.openDrawer(),
+            child: CircleAvatar(
+              backgroundImage: AssetImage(AppImagePath.accountProfilePhoto),
+            ),
           ),
         ),
         elevation: 0.0,
@@ -273,7 +274,10 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
                   style: BorderStyle.none,
                 ),
               ),
-              suffixIcon: IconButton(icon: Icon(Icons.search), onPressed: (){}),
+              suffixIcon: IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () {},
+              ),
               filled: true,
               hintStyle: TextStyle(color: Colors.grey[800]),
               hintText: "Search for startups or investors",
@@ -284,7 +288,13 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
         actions: <Widget>[
           Stack(
             children: <Widget>[
-              IconButton(icon: Icon(Icons.chat, color: Colors.black,), onPressed: () {},),
+              IconButton(
+                icon: Icon(
+                  Icons.chat,
+                  color: Colors.black,
+                ),
+                onPressed: () => Navigator.pushNamed(context, Chats.ROUTE_NAME),
+              ),
               Positioned(
                 right: 11,
                 top: 11,
@@ -321,7 +331,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
                 accountName: const Text('David Cobbina'),
                 accountEmail: const Text('david.cobbina@example.com'),
                 currentAccountPicture: const CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/finop/david.jpg'),
+                  backgroundImage: AssetImage(AppImagePath.accountProfilePhoto),
                 ),
                 margin: EdgeInsets.zero,
                 onDetailsPressed: () {

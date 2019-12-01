@@ -85,7 +85,7 @@ class _FinoppPostCardState extends State<FinoppPostCard> {
                           SizedBox(width: 4.0),
                           Text(
                             widget.industry,
-                            style: verySmallText,
+                            style: smallGreyText,
                           ),
                           SizedBox(width: 10.0),
                           bullet(
@@ -97,7 +97,7 @@ class _FinoppPostCardState extends State<FinoppPostCard> {
                           SizedBox(width: 4.0),
                           Text(
                             widget.postDate,
-                            style: verySmallText,
+                            style: smallGreyText,
                           ),
                         ],
                       ),

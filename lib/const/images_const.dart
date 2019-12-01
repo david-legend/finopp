@@ -18,7 +18,19 @@ class ImagePath {
 class AppImagePath {
   static const String image_path = "assets/images/finopp";
   static const String finoppLogo = "$image_path/finopp.png";
-  static const String accountProfilePhoto = "$image_path/garyvee.jpg";
+  static const String accountProfilePhoto = "$image_path/david.jpg";
+  static const String eric = "$image_path/eric_osiakwan.jpg";
+  static const String florian = "$image_path/florian.jpg";
+  static const String garyVee = "$image_path/garyvee.jpg";
+  static const String garyVee2 = "$image_path/garyvee.jpeg";
+  static const String keetVan = "$image_path/keet_van.jpg";
+  static const String kenzaLahlou = "$image_path/kenza_lahlou.jpg";
+  static const String novaStar = "$image_path/novastar.jpg";
+  static const String ouiCapital = "$image_path/oui_capital.jpg";
+  static const String takuma = "$image_path/takuma_terakubo.jpg";
+  static const String yassineOussaifi = "$image_path/yassine_oussaifi.jpg";
+  static const String muthoniWachira = "$image_path/muthoni_wachira.jpg";
+  static const String mehakMalik = "$image_path/mehak_malik.jpg";
 }
 
 class RegistrationImagePath {

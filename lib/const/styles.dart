@@ -99,9 +99,17 @@ const TextStyle lightButtonStyle = TextStyle(
     fontFamily: 'Raleway'
 );
 
-const TextStyle verySmallText = TextStyle(
+//Grey TextStyles
+const TextStyle smallGreyText = TextStyle(
   fontSize: 12,
   color: Colors.grey,
   fontWeight: FontWeight.w600,
   fontFamily: 'Raleway'
+);
+
+const TextStyle mediumGreyText = TextStyle(
+    fontSize: 14,
+    color: Colors.grey,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Raleway'
 );

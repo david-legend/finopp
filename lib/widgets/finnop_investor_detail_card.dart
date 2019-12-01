@@ -30,6 +30,7 @@ class _FinoppInvestorDetailCardState extends State<FinoppInvestorDetailCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 10.0),
       width: MediaQuery.of(context).size.width,
       height: 400.0,
       child: Card(
