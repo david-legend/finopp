@@ -1,3 +1,5 @@
+import 'package:finop/const/color_const.dart';
+import 'package:finop/const/images_const.dart';
 import 'package:finop/screens/app/user_profile_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'chats.dart';
 import 'chats2.dart';
+import 'feeds.dart';
 import 'home_screen.dart';
 import 'investor_feed_screen.dart';
 import 'view_startup_profile.dart';
@@ -24,9 +27,6 @@ class NavigationIconView {
           activeIcon: activeIcon,
           title: Text(
             title,
-            style: TextStyle(
-              color: Colors.grey,
-            ),
           ),
           backgroundColor: color,
         ),
@@ -102,8 +102,10 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
 
   String pageTitle = 'Home';
 
-   List<Widget> _widgetOptions = <Widget>[
+  List<Widget> _widgetOptions = <Widget>[
+    Feeds(),
     HomeScreen(),
+    InvestorFeedScreen(),
     InvestorFeedScreen(),
   ];
   static final Animatable<Offset> _drawerDetailsTween = Tween<Offset>(
@@ -136,18 +138,34 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
     _navigationViews = <NavigationIconView>[
       NavigationIconView(
         icon: const Icon(
-          Icons.home,
-          color: Colors.grey,
+          FontAwesomeIcons.home,
+//          color: Colors.grey,
         ),
         title: 'Home',
         vsync: this,
       ),
       NavigationIconView(
         icon: const Icon(
-          FontAwesomeIcons.briefcase,
-          color: Colors.grey,
+          FontAwesomeIcons.stamp,
+//          color: Colors.grey,
+        ),
+        title: 'Startups',
+        vsync: this,
+      ),
+      NavigationIconView(
+        icon: const Icon(
+          FontAwesomeIcons.chartLine,
+//          color: Colors.grey,
         ),
         title: 'Investors',
+        vsync: this,
+      ),
+      NavigationIconView(
+        icon: const Icon(
+          FontAwesomeIcons.affiliatetheme,
+//          color: Colors.grey,
+        ),
+        title: 'Add',
         vsync: this,
       ),
     ];
@@ -168,7 +186,6 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
       content: Text("This feature has not been implemented yet!"),
     ));
   }
-
 
   Widget _buildTransitionsStack() {
     final List<FadeTransition> transitions = <FadeTransition>[
@@ -197,52 +214,103 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
           .toList(),
       currentIndex: _currentIndex,
       type: _type,
-      selectedItemColor: Colors.purple,
+      selectedItemColor: kFINOP_PRIMARY,
+      unselectedItemColor: Colors.grey,
+      selectedLabelStyle: TextStyle(
+        color: Colors.purple,
+        fontWeight: FontWeight.bold,
+      ),
       onTap: (int index) {
         setState(() {
           _navigationViews[_currentIndex].controller.reverse();
           _currentIndex = index;
-          if(_currentIndex == 0) {
-            pageTitle = 'Home';
-          } else {
-            pageTitle = 'Investors';
+          switch (_currentIndex) {
+            case 0:
+              pageTitle = 'Home';
+              break;
+            case 1:
+              pageTitle = 'Startups';
+              break;
+            case 2:
+              pageTitle = 'Investors';
+              break;
+            case 3:
+              pageTitle = 'Add';
+              break;
           }
           _navigationViews[_currentIndex].controller.forward();
         });
       },
     );
 
+//    _scaffoldKey.currentState.openDrawer();
     return Scaffold(
       drawerDragStartBehavior: DragStartBehavior.down,
       key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: InkWell(
-          onTap: () {
-            _scaffoldKey.currentState.openDrawer();
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: 25.0,
-              height: 25.0,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage('assets/images/finop/david.jpg'),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 4.0, top: 4.0, bottom: 4.0),
+          child: CircleAvatar(
+            backgroundImage: AssetImage(AppImagePath.accountProfilePhoto),
+          ),
+        ),
+        elevation: 0.0,
+        title: Padding(
+          padding: const EdgeInsets.only(top: 6.0, bottom: 6.0),
+          child: TextField(
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(
+                left: 25.0,
+                top: 12.0,
+                bottom: 12.0,
+                right: 10.0,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40.0),
+                borderSide: BorderSide(
+                  width: 0.0,
+                  style: BorderStyle.none,
                 ),
               ),
+              suffixIcon: IconButton(icon: Icon(Icons.search), onPressed: (){}),
+              filled: true,
+              hintStyle: TextStyle(color: Colors.grey[800]),
+              hintText: "Search for startups or investors",
+              fillColor: kFINOP_SEARCH_BAR_BG,
             ),
           ),
         ),
-        title: Text(
-          pageTitle,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 22.0,
-            fontWeight: FontWeight.w600,
+        actions: <Widget>[
+          Stack(
+            children: <Widget>[
+              IconButton(icon: Icon(Icons.chat, color: Colors.black,), onPressed: () {},),
+              Positioned(
+                right: 11,
+                top: 11,
+                child: Container(
+                  padding: EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    color: kFINOP_SECONDARY,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  constraints: BoxConstraints(
+                    minWidth: 14,
+                    minHeight: 14,
+                  ),
+                  child: Text(
+                    '4',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 8,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ),
+        ],
       ),
       drawer: Drawer(
         child: Column(
@@ -344,7 +412,9 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
           ],
         ),
       ),
-      body: _widgetOptions.elementAt(_currentIndex),//HomeScreen(), //Chats(),
+      body: SafeArea(
+        child: _widgetOptions.elementAt(_currentIndex),
+      ),
       bottomNavigationBar: botNavBar,
     );
   }

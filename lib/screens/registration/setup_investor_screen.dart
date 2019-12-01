@@ -119,7 +119,7 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
   }
 
   Widget inputText(String fieldName, String hintText,
-      TextEditingController controller, bool obSecure,
+      TextEditingController controller, bool obscure,
       {int maxLines}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,20 +133,21 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
           style: textWithBlack,
           controller: controller,
           decoration: InputDecoration(
-              hintText: hintText,
-              filled: true,
-              hintStyle: regularHintStyle,
-              contentPadding: EdgeInsets.all(18.0),
-              labelStyle: TextStyle(
-                fontSize: TEXT_NORMAL_SIZE,
-                color: Colors.black,
-                fontWeight: FontWeight.w400,
-                letterSpacing: 1,
-                height: 0,
-              ),
-              border: InputBorder.none),
+            hintText: hintText,
+            filled: true,
+            hintStyle: regularHintStyle,
+            contentPadding: EdgeInsets.all(18.0),
+            labelStyle: TextStyle(
+              fontSize: TEXT_NORMAL_SIZE,
+              color: Colors.black,
+              fontWeight: FontWeight.w400,
+              letterSpacing: 1,
+              height: 0,
+            ),
+            border: InputBorder.none,
+          ),
           maxLines: maxLines,
-          obscureText: obSecure,
+          obscureText: obscure,
         )
       ],
     );
@@ -211,7 +212,7 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
       flex: 1,
       child: ListView(
         children: <Widget>[
-          inputText("Company", 'Enter you company name', _companyName, false),
+          inputText("Company", 'Enter your company name', _companyName, false),
           SizedBox(height: 24.0),
           chipsInput(),
           SizedBox(height: 24.0),
@@ -287,7 +288,7 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
                       child: Align(
                         alignment: Alignment.bottomRight,
                         child: FinoppPrimaryButton(
-                          width: MediaQuery.of(context).size.width /3,
+                          width: MediaQuery.of(context).size.width / 3,
                           action: _proceedToNextStep,
                         ),
                       ),
@@ -333,7 +334,7 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
                       child: Align(
                         alignment: Alignment.bottomRight,
                         child: FinoppPrimaryButton(
-                          width: MediaQuery.of(context).size.width /3,
+                          width: MediaQuery.of(context).size.width / 3,
                           action: _proceedToNextStep,
                         ),
                       ),

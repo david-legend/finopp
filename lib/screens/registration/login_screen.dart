@@ -189,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    StringConst.SIGN_IN_TEXT,
+                    StringConst.SIGN_UP_TEXT,
                     style: TextStyle(
                       fontSize: 16.0,
                     ),

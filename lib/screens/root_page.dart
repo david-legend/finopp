@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-//TODO:: replicate the same for investor startup
-//TODO:: work on logo
-//TODO:: fix onboarding slide issue -- make sure you can't slide again when you're on last index
+//TODO:: build home screen - make card reusable
+//TODO:: Add get started to onboarding screens
+//TODO:: fix login and signUp screens overflow issues
 
 enum AuthStatus {
   NOT_DETERMINED,

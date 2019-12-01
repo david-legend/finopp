@@ -18,6 +18,7 @@ class ImagePath {
 class AppImagePath {
   static const String image_path = "assets/images/finopp";
   static const String finoppLogo = "$image_path/finopp.png";
+  static const String accountProfilePhoto = "$image_path/garyvee.jpg";
 }
 
 class RegistrationImagePath {

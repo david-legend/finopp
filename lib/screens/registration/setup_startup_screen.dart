@@ -211,7 +211,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         children: <Widget>[
-          inputText("Email", 'example@gmail.com', _companyName, false),
+          inputText("Company", 'Enter name of startup', _companyName, false),
           SizedBox(height: 14.0),
           chipsInput(),
           SizedBox(height: 14.0),

@@ -52,10 +52,17 @@ TextStyle textWithTextColorStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+
 TextStyle textWithBlack = TextStyle(
   color: Colors.black,
   fontSize: 16.0,
   fontWeight: FontWeight.w400,
+);
+
+TextStyle boldTextWithBlack = TextStyle(
+  color: Colors.black,
+  fontSize: 16.0,
+  fontWeight: FontWeight.bold,
 );
 
 TextStyle regularHintStyle = TextStyle(
@@ -67,5 +74,11 @@ TextStyle regularHintStyle = TextStyle(
 TextStyle proceedButtonStyle = TextStyle(
   fontSize: 14,
   color: Colors.white,
+  fontWeight: FontWeight.w600,
+);
+
+TextStyle verySmallText = TextStyle(
+  fontSize: 12,
+  color: Colors.grey,
   fontWeight: FontWeight.w600,
 );

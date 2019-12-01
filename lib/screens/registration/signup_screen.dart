@@ -188,7 +188,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    StringConst.SIGN_UP_TEXT,
+                    StringConst.SIGN_IN_TEXT,
                     style: TextStyle(
                       fontSize: 16.0,
                     ),
