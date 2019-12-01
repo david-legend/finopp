@@ -10,9 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-//TODO:: build home screen - make card reusable
+//TODO:: build startup screen - with reusable cards
+//TODO:: build investor screen - with reusable cards
+//TODO:: build investor profile page
+//TODO:: build startup profile page
 //TODO:: Add get started to onboarding screens
 //TODO:: fix login and signUp screens overflow issues
+//TODO:: fix login and signUp background colors
+//TODO:: fix sharedprefs nav.
 
 enum AuthStatus {
   NOT_DETERMINED,
