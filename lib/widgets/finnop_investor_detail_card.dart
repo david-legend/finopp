@@ -57,7 +57,7 @@ class _FinoppInvestorDetailCardState extends State<FinoppInvestorDetailCard> {
             ),
             Container(
               margin: EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0),
-              child: Text(widget.description),
+              child: Text(widget.description, style: TextStyle(fontFamily: 'Raleway',),),
             ),
             SizedBox(height: 16.0),
             Container(

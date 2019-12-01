@@ -1,5 +1,6 @@
 import 'package:finop/const/color_const.dart';
 import 'package:finop/const/images_const.dart';
+import 'package:finop/const/styles.dart';
 import 'package:finop/screens/app/home.dart';
 import 'package:finop/screens/app/startup_feed.dart';
 import 'package:finop/screens/app/user_profile_screen.dart';
@@ -28,6 +29,9 @@ class NavigationIconView {
             padding: const EdgeInsets.all(4.0),
             child: Text(
               title,
+              style: TextStyle(
+                fontFamily: 'Raleway',
+              ),
             ),
           ),
           backgroundColor: color,
@@ -279,7 +283,10 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
                 onPressed: () {},
               ),
               filled: true,
-              hintStyle: TextStyle(color: Colors.grey[800]),
+              hintStyle: TextStyle(
+                color: Colors.grey[800],
+                fontFamily: 'Raleway',
+              ),
               hintText: "Search for startups or investors",
               fillColor: kFINOP_SEARCH_BAR_BG,
             ),
@@ -328,8 +335,16 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
             Container(
               color: Colors.white,
               child: UserAccountsDrawerHeader(
-                accountName: const Text('David Cobbina'),
-                accountEmail: const Text('david.cobbina@example.com'),
+                accountName: const Text(
+                  'David Cobbina',
+                  style: settingsTextStyle,
+                ),
+                accountEmail: const Text(
+                  'david.cobbina@example.com',
+                  style: TextStyle(
+                    fontFamily: 'Raleway',
+                  ),
+                ),
                 currentAccountPicture: const CircleAvatar(
                   backgroundImage: AssetImage(AppImagePath.accountProfilePhoto),
                 ),
@@ -363,7 +378,10 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
                             children: <Widget>[
                               ListTile(
                                 leading: Icon(Icons.person),
-                                title: Text('Profile'),
+                                title: Text(
+                                  'Profile',
+                                  style: settingsTextStyle,
+                                ),
                                 onTap: () {
                                   Navigator.pushNamed(
                                       context, UserProfileScreen.ROUTE_NAME);
@@ -371,7 +389,10 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
                               ),
                               ListTile(
                                 leading: Icon(Icons.chat),
-                                title: Text('Chat'),
+                                title: Text(
+                                  'Chat',
+                                  style: settingsTextStyle,
+                                ),
                                 onTap: () {
                                   Navigator.pushNamed(
                                       context, Chats.ROUTE_NAME);
@@ -379,12 +400,18 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
                               ),
                               ListTile(
                                 leading: Icon(Icons.settings),
-                                title: Text('Settings'),
+                                title: Text(
+                                  'Settings',
+                                  style: settingsTextStyle,
+                                ),
                                 onTap: _showNotImplementedMessage,
                               ),
                               ListTile(
                                 leading: Icon(Icons.power_settings_new),
-                                title: Text('Sign Out'),
+                                title: Text(
+                                  'Sign Out',
+                                  style: settingsTextStyle,
+                                ),
                                 onTap: _showNotImplementedMessage,
                               ),
                             ],
@@ -401,12 +428,18 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
                               children: <Widget>[
                                 ListTile(
                                   leading: const Icon(Icons.add),
-                                  title: const Text('Create a new account'),
+                                  title: const Text(
+                                    'Create a new account',
+                                    style: settingsTextStyle,
+                                  ),
                                   onTap: _showNotImplementedMessage,
                                 ),
                                 ListTile(
                                   leading: const Icon(Icons.settings),
-                                  title: const Text('Manage accounts'),
+                                  title: const Text(
+                                    'Manage accounts',
+                                    style: settingsTextStyle,
+                                  ),
                                   onTap: _showNotImplementedMessage,
                                 ),
                               ],

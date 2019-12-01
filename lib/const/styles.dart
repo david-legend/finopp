@@ -113,3 +113,8 @@ const TextStyle mediumGreyText = TextStyle(
     fontWeight: FontWeight.w600,
     fontFamily: 'Raleway'
 );
+
+
+const TextStyle settingsTextStyle = TextStyle(
+  fontFamily: 'Raleway'
+);
