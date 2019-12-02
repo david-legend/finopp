@@ -10,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-//TODO:: build startup screen - with reusable cards
-//TODO:: build investor screen - with reusable cards
 //TODO:: build investor profile page
 //TODO:: build startup profile page
 //TODO:: Add get started to onboarding screens

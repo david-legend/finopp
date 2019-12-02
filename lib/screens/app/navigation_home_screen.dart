@@ -3,6 +3,7 @@ import 'package:finop/const/images_const.dart';
 import 'package:finop/const/styles.dart';
 import 'package:finop/screens/app/home.dart';
 import 'package:finop/screens/app/startup_feed.dart';
+import 'package:finop/screens/app/startup_profile.dart';
 import 'package:finop/screens/app/user_profile_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -337,7 +338,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
               child: UserAccountsDrawerHeader(
                 accountName: const Text(
                   'David Cobbina',
-                  style: settingsTextStyle,
+                  style: onlyFontTextStyle,
                 ),
                 accountEmail: const Text(
                   'david.cobbina@example.com',
@@ -380,18 +381,18 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
                                 leading: Icon(Icons.person),
                                 title: Text(
                                   'Profile',
-                                  style: settingsTextStyle,
+                                  style: onlyFontTextStyle,
                                 ),
                                 onTap: () {
                                   Navigator.pushNamed(
-                                      context, UserProfileScreen.ROUTE_NAME);
+                                      context, StartUpProfile.ROUTE_NAME);
                                 },
                               ),
                               ListTile(
                                 leading: Icon(Icons.chat),
                                 title: Text(
                                   'Chat',
-                                  style: settingsTextStyle,
+                                  style: onlyFontTextStyle,
                                 ),
                                 onTap: () {
                                   Navigator.pushNamed(
@@ -402,7 +403,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
                                 leading: Icon(Icons.settings),
                                 title: Text(
                                   'Settings',
-                                  style: settingsTextStyle,
+                                  style: onlyFontTextStyle,
                                 ),
                                 onTap: _showNotImplementedMessage,
                               ),
@@ -410,7 +411,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
                                 leading: Icon(Icons.power_settings_new),
                                 title: Text(
                                   'Sign Out',
-                                  style: settingsTextStyle,
+                                  style: onlyFontTextStyle,
                                 ),
                                 onTap: _showNotImplementedMessage,
                               ),
@@ -430,7 +431,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
                                   leading: const Icon(Icons.add),
                                   title: const Text(
                                     'Create a new account',
-                                    style: settingsTextStyle,
+                                    style: onlyFontTextStyle,
                                   ),
                                   onTap: _showNotImplementedMessage,
                                 ),
@@ -438,7 +439,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
                                   leading: const Icon(Icons.settings),
                                   title: const Text(
                                     'Manage accounts',
-                                    style: settingsTextStyle,
+                                    style: onlyFontTextStyle,
                                   ),
                                   onTap: _showNotImplementedMessage,
                                 ),

@@ -5,8 +5,13 @@ import 'package:finop/widgets/finopp_primary_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:video_player/video_player.dart';
+
+import 'finop_video_player.dart';
 
 class FinoppPostCard extends StatefulWidget {
+  final VideoPlayerController controller;
+  final String dataSource;
   final String profileImagePath;
   final String postImagePath;
   final String companyName;
@@ -24,8 +29,11 @@ class FinoppPostCard extends StatefulWidget {
   final double bulletHeight;
   final Color bulletColor;
   final BoxShape bulletShape;
+  final bool isInvestor;
 
   FinoppPostCard({
+    this.controller,
+    this.dataSource = 'assets/videos/pitch1.mp4',
     this.profileImagePath = AppImagePath.accountProfilePhoto,
     this.postImagePath = AppImagePath.accountProfilePhoto,
     this.companyName = 'Fedds Group of Company',
@@ -44,6 +52,7 @@ class FinoppPostCard extends StatefulWidget {
     this.bulletShape = BoxShape.circle,
     this.bulletHeight = 4.0,
     this.bulletWidth = 4.0,
+    this.isInvestor = true,
   });
 
   @override
@@ -119,12 +128,36 @@ class _FinoppPostCardState extends State<FinoppPostCard> {
               child: Row(
                 children: <Widget>[
                   Container(
-                    child: Image.asset(
-                      widget.postImagePath,
-                      width: MediaQuery.of(context).size.width - 40.0,
-                      height: 200,
-                      fit: BoxFit.cover,
-                    ),
+                    child: widget.isInvestor
+                        ? Image.asset(
+                            widget.postImagePath,
+                            width: MediaQuery.of(context).size.width - 40.0,
+                            height: 200,
+                            fit: BoxFit.cover,
+                          )
+                        : Container(
+                            width: MediaQuery.of(context).size.width - 40.0,
+                            height: 200.0,
+                            child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  // If the video is playing, pause it.
+                                  if (widget.controller.value.isPlaying) {
+                                    widget.controller.pause();
+                                  } else {
+                                    // If the video is paused, play it.
+                                    widget.controller.play();
+                                  }
+                                });
+                              },
+                              child: AssetPlayerLifeCycle(
+                                widget.dataSource,
+                                (BuildContext context,
+                                        VideoPlayerController controller) =>
+                                    AspectRatioVideo(controller),
+                              ),
+                            ),
+                          ),
                   )
                 ],
               ),

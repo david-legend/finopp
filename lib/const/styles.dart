@@ -115,6 +115,6 @@ const TextStyle mediumGreyText = TextStyle(
 );
 
 
-const TextStyle settingsTextStyle = TextStyle(
+const TextStyle onlyFontTextStyle = TextStyle(
   fontFamily: 'Raleway'
 );
