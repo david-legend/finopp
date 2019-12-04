@@ -16,6 +16,7 @@ class FinoppStartUpDetailCard extends StatefulWidget {
   final String industry;
   final String description;
   final String buttonTitle;
+  final Function action;
   final bool followPressed;
 
   FinoppStartUpDetailCard({
@@ -28,6 +29,7 @@ class FinoppStartUpDetailCard extends StatefulWidget {
     this.description =
     'We attended a tech event and we gave a talk on our product',
     this.buttonTitle = "Follow",
+    this.action,
     this.followPressed = false,
   });
 
@@ -101,6 +103,7 @@ class _FinoppStartUpDetailCardState extends State<FinoppStartUpDetailCard> {
                     title: widget.buttonTitle,
                     width: MediaQuery.of(context).size.width / 5,
                     buttonPadding: 0.0,
+                    action: widget.action(),
                   )
                       : FinoppPrimaryButton(
                     title: widget.buttonTitle,
@@ -109,6 +112,7 @@ class _FinoppStartUpDetailCardState extends State<FinoppStartUpDetailCard> {
                     buttonTextStyle: lightButtonStyle,
                     width: MediaQuery.of(context).size.width / 5,
                     buttonPadding: 0.0,
+                    action: widget.action,
                   )
                 ],
               ),

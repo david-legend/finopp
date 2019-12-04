@@ -83,20 +83,20 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
                       StringConst.SETUP_TITLE,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 24.0,
-                        color: Colors.black,
-                      ),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 24.0,
+                          color: Colors.black,
+                          fontFamily: 'Raleway'),
                     ),
                     SizedBox(height: 14.0),
                     Text(
                       subtitle,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                        fontSize: 16.0,
-                        color: Colors.grey,
-                      ),
+                          fontWeight: FontWeight.w300,
+                          fontSize: 16.0,
+                          color: Colors.grey,
+                          fontFamily: 'Raleway'),
                     ),
                   ],
                 ),
@@ -236,7 +236,12 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
                 .map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Text(value),
+                child: Text(
+                  value,
+                  style: TextStyle(
+                    fontFamily: 'Raleway',
+                  ),
+                ),
               );
             }).toList(),
           ),
@@ -274,10 +279,19 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
               value: locationDropdownValue,
               isExpanded: true,
               icon: Icon(Icons.arrow_drop_down),
-              hint: Text(' Country/Region'),
+              hint: Text(
+                ' Country/Region',
+                style: TextStyle(
+                  fontFamily: 'Raleway',
+                ),
+              ),
               iconSize: 24,
               elevation: 16,
-              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey[600],
+                fontFamily: 'Raleway',
+              ),
               underline: Container(
                 height: 2,
                 color: Colors.grey,
@@ -297,7 +311,12 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
               ].map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
-                  child: Text(value),
+                  child: Text(
+                    value,
+                    style: TextStyle(
+                      fontFamily: 'Raleway',
+                    ),
+                  ),
                 );
               }).toList(),
             ),
@@ -313,7 +332,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
                       child: Align(
                         alignment: Alignment.bottomRight,
                         child: FinoppPrimaryButton(
-                          width: MediaQuery.of(context).size.width /3,
+                          width: MediaQuery.of(context).size.width / 3,
                           action: _proceedToNextStep,
                         ),
                       ),
@@ -359,7 +378,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
                       child: Align(
                         alignment: Alignment.bottomRight,
                         child: FinoppPrimaryButton(
-                          width: MediaQuery.of(context).size.width /3,
+                          width: MediaQuery.of(context).size.width / 3,
                           action: _proceedToNextStep,
                         ),
                       ),
@@ -389,6 +408,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
             color: Colors.grey[600],
             fontSize: 16.0,
             fontWeight: FontWeight.w500,
+            fontFamily: 'Raleway',
           ),
         ),
       ],
@@ -409,6 +429,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
               style: TextStyle(
                 fontSize: 16.0,
                 fontWeight: FontWeight.w500,
+                fontFamily: 'Raleway'
               ),
             ),
           ),
@@ -551,4 +572,3 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
     });
   }
 }
-

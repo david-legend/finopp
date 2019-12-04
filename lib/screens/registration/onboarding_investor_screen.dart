@@ -95,9 +95,9 @@ class _InvestorOnboardingScreenState extends State<InvestorOnboardingScreen> {
                           text1[info.index],
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.black,
-                          ),
+                              fontSize: 16.0,
+                              color: Colors.black,
+                              fontFamily: 'Raleway'),
                         ),
                         position: info.position,
                         translationFactor: 300.0,
@@ -118,7 +118,8 @@ class _InvestorOnboardingScreenState extends State<InvestorOnboardingScreen> {
                       ),
                       InkWell(
                         onTap: () {
-                          bool didSliderMove = moveSlider(_slideIndex, images.length);
+                          bool didSliderMove =
+                              moveSlider(_slideIndex, images.length);
                           if (didSliderMove == false) {
                             Navigator.pushNamed(
                                 context, SignUpScreen.ROUTE_NAME);
@@ -129,8 +130,10 @@ class _InvestorOnboardingScreenState extends State<InvestorOnboardingScreen> {
                           child: Text(
                             'Next',
                             style: TextStyle(
-                                color: kFINOP_PRIMARY,
-                                fontWeight: FontWeight.bold),
+                              color: kFINOP_PRIMARY,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Raleway',
+                            ),
                           ),
                         ),
                       ),

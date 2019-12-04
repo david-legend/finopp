@@ -97,6 +97,7 @@ class _StartUpOnboardingScreenState extends State<StartUpOnboardingScreen> {
                           style: TextStyle(
                             fontSize: 16.0,
                             color: Colors.black,
+                            fontFamily: 'Raleway',
                           ),
                         ),
                         position: info.position,
@@ -130,8 +131,10 @@ class _StartUpOnboardingScreenState extends State<StartUpOnboardingScreen> {
                           child: Text(
                             'Next',
                             style: TextStyle(
-                                color: kFINOP_PRIMARY,
-                                fontWeight: FontWeight.bold),
+                              color: kFINOP_PRIMARY,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Raleway',
+                            ),
                           ),
                         ),
                       ),

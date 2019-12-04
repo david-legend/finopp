@@ -9,6 +9,12 @@ class StartUpFeed extends StatefulWidget {
 }
 
 class _StartUpFeedState extends State<StartUpFeed> {
+  bool _isFollowPressed = false;
+
+  void followStartup() {
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

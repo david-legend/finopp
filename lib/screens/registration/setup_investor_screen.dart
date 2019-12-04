@@ -88,6 +88,7 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
                         fontWeight: FontWeight.w700,
                         fontSize: 24.0,
                         color: Colors.black,
+                        fontFamily: 'Raleway',
                       ),
                     ),
                     SizedBox(height: 14.0),
@@ -98,6 +99,7 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
                         fontWeight: FontWeight.w300,
                         fontSize: 16.0,
                         color: Colors.grey,
+                        fontFamily: 'Raleway',
                       ),
                     ),
                   ],
@@ -249,10 +251,19 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
               value: locationDropdownValue,
               isExpanded: true,
               icon: Icon(Icons.arrow_drop_down),
-              hint: Text(' Country/Region'),
+              hint: Text(
+                ' Country/Region',
+                style: TextStyle(
+                  fontFamily: 'Raleway',
+                ),
+              ),
               iconSize: 24,
               elevation: 16,
-              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey[600],
+                fontFamily: 'Raleway',
+              ),
               underline: Container(
                 height: 2,
                 color: Colors.grey,
@@ -272,7 +283,12 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
               ].map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
-                  child: Text(value),
+                  child: Text(
+                    value,
+                    style: TextStyle(
+                      fontFamily: 'Raleway',
+                    ),
+                  ),
                 );
               }).toList(),
             ),
@@ -364,6 +380,7 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
             color: Colors.grey[600],
             fontSize: 16.0,
             fontWeight: FontWeight.w500,
+            fontFamily: 'Raleway',
           ),
         ),
       ],
@@ -384,6 +401,7 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
               style: TextStyle(
                 fontSize: 16.0,
                 fontWeight: FontWeight.w500,
+                fontFamily: 'Raleway'
               ),
             ),
           ),
@@ -440,7 +458,9 @@ class _SetupInvestorScreenState extends State<SetupInvestorScreen>
                             color: kFINOP_DARK_SHADE,
                           ),
                           SizedBox(height: 10),
-                          Text('Camera')
+                          Text('Camera', style: TextStyle(
+                            fontFamily: 'Raleway',
+                          ),)
                         ],
                       ),
                     ),

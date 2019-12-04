@@ -102,7 +102,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Container(
                     height: 300.0,
                     decoration: BoxDecoration(
-                      color: kFINOP_DARK_SHADE,
+                      color: kFINOP_LIGHT,
                       borderRadius: BorderRadius.circular(15),
                       boxShadow: [
                         BoxShadow(
@@ -191,6 +191,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     StringConst.SIGN_IN_TEXT,
                     style: TextStyle(
                       fontSize: 16.0,
+                      fontFamily: 'Raleway',
                     ),
                   ),
                   SizedBox(
@@ -205,7 +206,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       style: TextStyle(
                           color: kFINOP_SECONDARY,
                           fontSize: 16.0,
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.bold,
+                        fontFamily: 'Raleway',
+                      ),
                     ),
                   ),
                 ],
