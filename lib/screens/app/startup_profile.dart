@@ -1,8 +1,11 @@
 import 'package:finop/const/_const.dart';
 import 'package:finop/const/styles.dart';
+import 'package:finop/widgets/finnop_post_card.dart';
 import 'package:finop/widgets/finopp_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'chat_screen.dart';
 
 class StartUpProfile extends StatefulWidget {
   static const String ROUTE_NAME = '/viewStartUpProfileScreen';
@@ -12,11 +15,15 @@ class StartUpProfile extends StatefulWidget {
 }
 
 class _StartUpProfileState extends State<StartUpProfile> {
+  ScreenArguments args;
+
   @override
   Widget build(BuildContext context) {
+    args = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('David Cobbina', style: onlyFontTextStyle),
+        title: Text(args.companyName, style: onlyFontTextStyle),
       ),
       body: Container(
         child: ListView(
@@ -27,7 +34,7 @@ class _StartUpProfileState extends State<StartUpProfile> {
                 bottomLeft: Radius.circular(10),
               ),
               child: Image.asset(
-                AppImagePath.garyVee,
+                args.imageUrl,
                 height: 300.0,
                 width: MediaQuery.of(context).size.width,
                 fit: BoxFit.cover,
@@ -43,11 +50,11 @@ class _StartUpProfileState extends State<StartUpProfile> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        'Bare hands',
+                        args.companyName,
                         style: profileTextStyle,
                       ),
                       Text(
-                        'Technology',
+                        args.industry,
                         style: smallTextWithSecondaryColorStyle,
                       ),
                     ],
@@ -55,9 +62,11 @@ class _StartUpProfileState extends State<StartUpProfile> {
                   SizedBox(height: 16.0),
                   Container(
                     child: Text(
-                      'Lorem ipsum dolor sit amet, consectetur '
-                      'adipiscing elit, sed do eiusmod tempor incididunt ut '
-                      'labore et dolore magna aliqua.',
+                      '${args.companyName} is a ${args.industry} company which believes strongly '
+                      'in challenging conventions. ${args.companyName} are passionate people '
+                      'who care about solving our everyday problems using technology. '
+                      'Everything we do is value-centered and geared towards the '
+                      'redefining of the African stereotype.',
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -69,6 +78,7 @@ class _StartUpProfileState extends State<StartUpProfile> {
                         title: 'Message',
                         buttonIcon: Icons.message,
                         width: MediaQuery.of(context).size.width / 3,
+                        action: message,
                       ),
                       FinoppPrimaryButton(
                         color: Colors.white,
@@ -151,7 +161,7 @@ class _StartUpProfileState extends State<StartUpProfile> {
                             width: 25.0,
                           ),
                           Text(
-                            'Barehands.com',
+                            args.companyWebsite,
                             style: belowMediumDarkerTextStyle,
                           ),
                         ],
@@ -165,14 +175,16 @@ class _StartUpProfileState extends State<StartUpProfile> {
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     child: Container(
-                      margin: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+                      margin: EdgeInsets.symmetric(
+                          vertical: 16.0, horizontal: 16.0),
                       child: Row(
                         children: <Widget>[
                           SvgPicture.asset(AppIconsPath.sitemap),
-                          SizedBox(
-                            width: 25.0
+                          SizedBox(width: 25.0),
+                          Text(
+                            'Equity',
+                            style: belowMediumDarkerTextStyle,
                           ),
-                          Text('Equity', style: belowMediumDarkerTextStyle,),
                           SizedBox(
                             width: 10.0,
                           ),
@@ -186,7 +198,7 @@ class _StartUpProfileState extends State<StartUpProfile> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 16.0, vertical: 4.0),
                               child: Text(
-                                '34%',
+                                args.equity,
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
@@ -199,7 +211,10 @@ class _StartUpProfileState extends State<StartUpProfile> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Profile', style: belowMediumDarkerTextStyle,),
+                      Text(
+                        'Profile',
+                        style: belowMediumDarkerTextStyle,
+                      ),
                       SizedBox(height: 10.0),
                       Card(
                         elevation: 4.0,
@@ -211,7 +226,7 @@ class _StartUpProfileState extends State<StartUpProfile> {
                               Row(
                                 children: <Widget>[
                                   Image.asset(
-                                    AppImagePath.garyVee,
+                                    args.imageUrl,
                                     width: 80,
                                     height: 80,
                                   ),
@@ -230,7 +245,7 @@ class _StartUpProfileState extends State<StartUpProfile> {
                                         ),
                                         Container(
                                           child: Text(
-                                            'We show cased the potential of using finnop.',
+                                            args.postDescription,
                                             style: normalDarkerTextStyle,
                                           ),
                                         ),
@@ -239,10 +254,11 @@ class _StartUpProfileState extends State<StartUpProfile> {
                                   )
                                 ],
                               ),
+                              SizedBox(height: 10.0),
                               Row(
                                 children: <Widget>[
                                   Image.asset(
-                                    AppImagePath.garyVee,
+                                    args.imageUrl,
                                     width: 80,
                                     height: 80,
                                   ),
@@ -255,7 +271,7 @@ class _StartUpProfileState extends State<StartUpProfile> {
                                         Container(
                                           margin: EdgeInsets.only(bottom: 5.0),
                                           child: Text(
-                                            'Participated in Tech Crunch',
+                                            'Pitched our idea at the AAL Cup Finals',
                                             style: belowMediumDarkerTextStyle,
                                           ),
                                         ),
@@ -283,5 +299,15 @@ class _StartUpProfileState extends State<StartUpProfile> {
         ),
       ),
     );
+  }
+
+   message() {
+    var route = new MaterialPageRoute(
+      builder: (BuildContext context) => ChatScreen(
+        name: args.companyName,
+        profileImage: args.imageUrl,
+      ),
+    );
+    Navigator.of(context).push(route);
   }
 }

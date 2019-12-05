@@ -1,6 +1,8 @@
 import 'package:finop/const/color_const.dart';
 import 'package:finop/const/images_const.dart';
 import 'package:finop/const/styles.dart';
+import 'package:finop/screens/app/investor_profile.dart';
+import 'package:finop/screens/app/startup_profile.dart';
 import 'package:finop/widgets/finopp_primary_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,9 @@ class FinoppPostCard extends StatefulWidget {
   final String profileImagePath;
   final String postImagePath;
   final String companyName;
+  final String name;
+  final String position;
+  final String companyWebsite;
   final String industry;
   final String postDate;
   final String postDescription;
@@ -30,6 +35,7 @@ class FinoppPostCard extends StatefulWidget {
   final Color bulletColor;
   final BoxShape bulletShape;
   final bool isInvestor;
+  final String equity;
 
   FinoppPostCard({
     this.controller,
@@ -37,6 +43,9 @@ class FinoppPostCard extends StatefulWidget {
     this.profileImagePath = AppImagePath.accountProfilePhoto,
     this.postImagePath = AppImagePath.accountProfilePhoto,
     this.companyName = 'Fedds Group of Company',
+    this.name = 'Gary Vee',
+    this.position = 'CEO',
+    this.companyWebsite = 'www.gmx.com',
     this.industry = 'Technology',
     this.postDate = '1d',
     this.postDescription =
@@ -53,6 +62,7 @@ class FinoppPostCard extends StatefulWidget {
     this.bulletHeight = 4.0,
     this.bulletWidth = 4.0,
     this.isInvestor = true,
+    this.equity = '12%',
   });
 
   @override
@@ -73,14 +83,23 @@ class _FinoppPostCardState extends State<FinoppPostCard> {
               margin: EdgeInsets.only(left: 24.0, top: 16.0),
               child: Row(
                 children: <Widget>[
-                  CircleAvatar(
-                    backgroundImage: AssetImage(widget.profileImagePath),
+                  InkWell(
+                    onTap: () => navigateToUserProfile(),
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage(widget.profileImagePath),
+                    ),
                   ),
                   SizedBox(width: 16.0),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(widget.companyName, style: boldTextWithBlack),
+                      InkWell(
+                        onTap: () => navigateToUserProfile(),
+                        child: Text(
+                          widget.companyName,
+                          style: boldTextWithBlack,
+                        ),
+                      ),
                       SizedBox(height: 5.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -213,4 +232,54 @@ class _FinoppPostCardState extends State<FinoppPostCard> {
       ),
     );
   }
+
+  void navigateToUserProfile() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            widget.isInvestor ? InvestorProfile() : StartUpProfile(),
+        settings: RouteSettings(
+          arguments: ScreenArguments(
+            name: widget.name,
+            position: widget.position,
+//            logo: logo,
+            companyName: widget.companyName,
+            industry: widget.industry,
+            companyWebsite: widget.companyWebsite,
+            imageUrl: widget.profileImagePath,
+            postDescription: widget.postDescription,
+            postImagePath: widget.postImagePath,
+            equity: widget.equity,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ScreenArguments {
+  String name;
+  String companyName;
+  String industry;
+  String logo;
+  String position;
+  String companyWebsite;
+  String imageUrl;
+  String postDescription;
+  String postImagePath;
+  String equity;
+
+  ScreenArguments({
+    this.name = '',
+    this.companyName = '',
+    this.logo = '',
+    this.industry = '',
+    this.position = '',
+    this.imageUrl = '',
+    this.companyWebsite = '',
+    this.postDescription = '',
+    this.postImagePath = '',
+    this.equity = '',
+  });
 }
