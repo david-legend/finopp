@@ -35,35 +35,54 @@ class _StartUpProfileState extends State<StartUpProfile> {
             ),
             SizedBox(height: 16.0),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 16.0),
+              margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text('Bare hands'),
-                      Text('Technology'),
+                      Text(
+                        'Bare hands',
+                        style: profileTextStyle,
+                      ),
+                      Text(
+                        'Technology',
+                        style: smallTextWithSecondaryColorStyle,
+                      ),
                     ],
                   ),
                   SizedBox(height: 16.0),
                   Container(
-                    child: Text('blah blah blah blah'),
+                    child: Text(
+                      'Lorem ipsum dolor sit amet, consectetur '
+                      'adipiscing elit, sed do eiusmod tempor incididunt ut '
+                      'labore et dolore magna aliqua.',
+                      textAlign: TextAlign.center,
+                    ),
                   ),
+                  SizedBox(height: 20.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       FinoppPrimaryButton(
                         title: 'Message',
+                        buttonIcon: Icons.message,
                         width: MediaQuery.of(context).size.width / 3,
                       ),
                       FinoppPrimaryButton(
+                        color: Colors.white,
                         title: 'Follow',
                         width: MediaQuery.of(context).size.width / 3,
+                        buttonIcon: Icons.add,
+                        buttonIconColor: kFINOP_DARK_SHADE,
+                        buttonTextStyle: lightButtonWithDarkTextStyle,
+                        borderWidth: 1.0,
+                        borderColor: kFINOP_DARK_SHADE,
                       ),
                     ],
                   ),
-                  SizedBox(height: 16.0),
+                  SizedBox(height: 20.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
@@ -71,19 +90,13 @@ class _StartUpProfileState extends State<StartUpProfile> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            '9K',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w600,
-                            ),
+                            '30',
+                            style: mediumDarkerTextStyle,
                           ),
+                          SizedBox(height: 5.0),
                           Text(
-                            'UPVOTES',
-                            style: TextStyle(
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.grey[500],
-                            ),
+                            'Posts',
+                            style: normalDarkerTextStyle,
                           ),
                         ],
                       ),
@@ -94,20 +107,11 @@ class _StartUpProfileState extends State<StartUpProfile> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            '3K',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w600,
-                            ),
+                            '200',
+                            style: mediumDarkerTextStyle,
                           ),
-                          Text(
-                            'FOLLOWERS',
-                            style: TextStyle(
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.grey[500],
-                            ),
-                          ),
+                          SizedBox(height: 5.0),
+                          Text('FOLLOWERS', style: normalDarkerTextStyle),
                         ],
                       ),
                       SizedBox(
@@ -117,58 +121,86 @@ class _StartUpProfileState extends State<StartUpProfile> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            '154',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w600,
-                            ),
+                            '200',
+                            style: mediumDarkerTextStyle,
                           ),
+                          SizedBox(height: 5.0),
                           Text(
-                            'REVIEWS',
-                            style: TextStyle(
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.grey[500],
-                            ),
+                            'Upvote',
+                            style: normalDarkerTextStyle,
                           ),
                         ],
                       ),
                     ],
                   ),
-                  SizedBox(height: 16.0),
-                  Row(
-                    children: <Widget>[
-                      SvgPicture.asset(AppIconsPath.globe),
-                      Text('Barehands.com'),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      SvgPicture.asset(AppIconsPath.sitemap),
-                      Text('Equity'),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: kFINOP_PRIMARY,
-                          borderRadius:
-                              new BorderRadius.all(Radius.circular(20.0)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0, vertical: 4.0),
-                          child: Text(
-                            '34%',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
+                  SizedBox(height: 30.0),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: kFINOP_LIGHT,
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    child: Container(
+                      margin: EdgeInsets.symmetric(
+                        vertical: 16.0,
+                        horizontal: 16.0,
                       ),
-                    ],
+                      child: Row(
+                        children: <Widget>[
+                          SvgPicture.asset(AppIconsPath.globe),
+                          SizedBox(
+                            width: 25.0,
+                          ),
+                          Text(
+                            'Barehands.com',
+                            style: belowMediumDarkerTextStyle,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 30.0),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: kFINOP_LIGHT,
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    child: Container(
+                      margin: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+                      child: Row(
+                        children: <Widget>[
+                          SvgPicture.asset(AppIconsPath.sitemap),
+                          SizedBox(
+                            width: 25.0
+                          ),
+                          Text('Equity', style: belowMediumDarkerTextStyle,),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: kFINOP_PRIMARY,
+                              borderRadius:
+                                  new BorderRadius.all(Radius.circular(20.0)),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 4.0),
+                              child: Text(
+                                '34%',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                   SizedBox(height: 20.0),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Profile'),
-                      SizedBox(height: 20.0),
+                      Text('Profile', style: belowMediumDarkerTextStyle,),
+                      SizedBox(height: 10.0),
                       Card(
                         elevation: 4.0,
                         child: Container(
@@ -190,15 +222,16 @@ class _StartUpProfileState extends State<StartUpProfile> {
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
                                         Container(
+                                          margin: EdgeInsets.only(bottom: 5.0),
                                           child: Text(
                                             'Participated in Tech Crunch',
-                                            softWrap: true,
+                                            style: belowMediumDarkerTextStyle,
                                           ),
                                         ),
                                         Container(
                                           child: Text(
                                             'We show cased the potential of using finnop.',
-                                            softWrap: true,
+                                            style: normalDarkerTextStyle,
                                           ),
                                         ),
                                       ],
@@ -219,10 +252,18 @@ class _StartUpProfileState extends State<StartUpProfile> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        Text('Participated in Tech Crunch'),
-                                        Text(
-                                          'We show cased the potential of using finnop.',
-                                          softWrap: true,
+                                        Container(
+                                          margin: EdgeInsets.only(bottom: 5.0),
+                                          child: Text(
+                                            'Participated in Tech Crunch',
+                                            style: belowMediumDarkerTextStyle,
+                                          ),
+                                        ),
+                                        Container(
+                                          child: Text(
+                                            'We show cased the potential of using finnop.',
+                                            style: normalDarkerTextStyle,
+                                          ),
                                         ),
                                       ],
                                     ),

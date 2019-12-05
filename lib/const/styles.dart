@@ -99,6 +99,12 @@ const TextStyle lightButtonStyle = TextStyle(
     fontFamily: 'Raleway'
 );
 
+const TextStyle lightButtonWithDarkTextStyle = TextStyle(
+    fontSize: 14,
+    color: kFINOP_DARK_SHADE,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Raleway'
+);
 //Grey TextStyles
 const TextStyle smallGreyText = TextStyle(
   fontSize: 12,
@@ -117,4 +123,32 @@ const TextStyle mediumGreyText = TextStyle(
 
 const TextStyle onlyFontTextStyle = TextStyle(
   fontFamily: 'Raleway'
+);
+
+const TextStyle profileTextStyle = TextStyle(
+    color: kFINOP_DARK_SHADE,
+    fontWeight: FontWeight.bold,
+    fontSize: 24.0,
+    fontFamily: 'Raleway'
+);
+
+const TextStyle mediumDarkerTextStyle =  TextStyle(
+  fontSize: 18.0,
+  fontWeight: FontWeight.bold,
+  color: kFINOP_DARK_SHADE,
+  fontFamily: 'Raleway',
+);
+
+const TextStyle belowMediumDarkerTextStyle =  TextStyle(
+  fontSize: 16.0,
+  fontWeight: FontWeight.bold,
+  color: kFINOP_DARK_SHADE,
+  fontFamily: 'Raleway',
+);
+
+ TextStyle normalDarkerTextStyle = TextStyle(
+    fontSize: 14.0,
+    fontWeight: FontWeight.w600,
+    color: Colors.grey[500],
+    fontFamily: 'Raleway'
 );

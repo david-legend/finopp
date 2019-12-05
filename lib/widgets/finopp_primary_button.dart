@@ -9,6 +9,9 @@ class FinoppPrimaryButton extends StatelessWidget {
   final double radius;
   final TextStyle buttonTextStyle;
   final double buttonPadding;
+  final IconData buttonIcon;
+  final double buttonIconSize;
+  final Color buttonIconColor;
   final Color color;
   final Color borderColor;
   final Function action;
@@ -20,6 +23,9 @@ class FinoppPrimaryButton extends StatelessWidget {
     this.radius = 30.0,
     this.buttonTextStyle = proceedButtonStyle,
     this.buttonPadding = 14.0,
+    this.buttonIcon,
+    this.buttonIconSize = 18.0,
+    this.buttonIconColor = Colors.white,
     this.color = kFINOP_PRIMARY,
     this.borderColor = kFINOP_PRIMARY,
     this.action,
@@ -40,13 +46,23 @@ class FinoppPrimaryButton extends StatelessWidget {
         child: RaisedButton(
           onPressed: () => action(),
           color: color,
-          child: Padding(
-            padding: EdgeInsets.all(buttonPadding),
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              style: buttonTextStyle,
-            ),
+          child: Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(buttonPadding),
+                    child: Text(
+                      title,
+                      textAlign: TextAlign.center,
+                      style: buttonTextStyle,
+                    ),
+                  ),
+                  buttonIcon != null ? Icon(buttonIcon, color: buttonIconColor, size: buttonIconSize,) : Container(),
+                ],
+              ),
+
+            ],
           ),
         ),
       ),
