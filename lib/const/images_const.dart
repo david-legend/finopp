@@ -33,6 +33,24 @@ class AppImagePath {
   static const String mehakMalik = "$image_path/mehak_malik.jpg";
 }
 
+class AppIconsPath {
+  static const String image_path = "assets/images/icons";
+  static const String arrowLeft = "$image_path/arrow-left.svg";
+  static const String camera = "$image_path/camera.svg";
+  static const String chartLine = "$image_path/chart-line.svg";
+  static const String commentMessage = "$image_path/comment-message.svg";
+  static const String comments = "$image_path/comments.svg";
+  static const String globe = "$image_path/globe.svg";
+  static const String image = "$image_path/image.svg";
+  static const String pen = "$image_path/pen.svg";
+  static const String plusCircle = "$image_path/plus-circle.svg";
+  static const String shareAlt = "$image_path/share-alt.svg";
+  static const String sitemap = "$image_path/sitemap.svg";
+  static const String thumbsUp = "$image_path/thumbs-up.svg";
+  static const String times = "$image_path/times.svg";
+  static const String trees = "$image_path/trees.svg";
+}
+
 class RegistrationImagePath {
   static const String image_path = "assets/images/registration";
   static const String choiceScreen = "$image_path/welcome.svg";

@@ -29,9 +29,9 @@ class _StartUpOnboardingScreenState extends State<StartUpOnboardingScreen> {
   ];
 
   final List<String> text1 = [
-    "App for food lovers, satisfy your taste",
-    "Find best meals in your area, simply",
-    "Have fun while eating your relatives and more",
+    "Pitch your ideas and meet people",
+    "Get in touch and pitch to  investors",
+    "Take your company to the level by getting funds",
   ];
 
   final IndexController _controller = IndexController();
