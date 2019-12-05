@@ -152,3 +152,17 @@ const TextStyle belowMediumDarkerTextStyle =  TextStyle(
     color: Colors.grey[500],
     fontFamily: 'Raleway'
 );
+
+const TextStyle whiteProfileTextStyle = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: 24.0,
+    fontFamily: 'Raleway'
+);
+
+const TextStyle mediumWhiteTextStyle =  TextStyle(
+  fontSize: 18.0,
+  fontWeight: FontWeight.bold,
+  color: Colors.white,
+  fontFamily: 'Raleway',
+);

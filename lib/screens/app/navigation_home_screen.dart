@@ -2,6 +2,7 @@ import 'package:finop/const/color_const.dart';
 import 'package:finop/const/images_const.dart';
 import 'package:finop/const/styles.dart';
 import 'package:finop/screens/app/home.dart';
+import 'package:finop/screens/app/investor_profile.dart';
 import 'package:finop/screens/app/startup_feed.dart';
 import 'package:finop/screens/app/startup_profile.dart';
 import 'package:finop/screens/app/user_profile_screen.dart';
@@ -296,12 +297,15 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
         actions: <Widget>[
           Stack(
             children: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.chat,
-                  color: Colors.black,
+              Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.chat,
+                    color: Colors.black,
+                  ),
+                  onPressed: () => Navigator.pushNamed(context, Chats.ROUTE_NAME),
                 ),
-                onPressed: () => Navigator.pushNamed(context, Chats.ROUTE_NAME),
               ),
               Positioned(
                 right: 11,
@@ -385,7 +389,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
                                 ),
                                 onTap: () {
                                   Navigator.pushNamed(
-                                      context, StartUpProfile.ROUTE_NAME);
+                                      context, InvestorProfile.ROUTE_NAME);
                                 },
                               ),
                               ListTile(

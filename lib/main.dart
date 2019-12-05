@@ -1,4 +1,5 @@
 import 'package:finop/screens/app/chats.dart';
+import 'package:finop/screens/app/investor_profile.dart';
 import 'package:finop/screens/app/investor_profile_screen.dart';
 import 'package:finop/screens/app/navigation_home_screen.dart';
 import 'package:finop/screens/app/startup_profile.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         SetupInvestorScreen.ROUTE_NAME: (context) => SetupInvestorScreen(),
         NavigationHomeScreen.ROUTE_NAME: (context) => NavigationHomeScreen(),
         StartUpProfile.ROUTE_NAME: (context) => StartUpProfile(),
+        InvestorProfile.ROUTE_NAME: (context) => InvestorProfile(),
 //        ViewStartUpProfileScreen.ROUTE_NAME: (context) => ViewStartUpProfileScreen(),
         InvestorProfileScreen.ROUTE_NAME: (context) => InvestorProfileScreen(),
         UserProfileScreen.ROUTE_NAME: (context) => UserProfileScreen(),
