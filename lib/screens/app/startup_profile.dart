@@ -120,6 +120,11 @@ class _StartUpProfileState extends State<StartUpProfile> {
                     ),
                   ],
                 ),
+                Row(
+                  children: <Widget>[
+//                    Icon(Icons.)
+                  ],
+                )
               ],
             )
           ],

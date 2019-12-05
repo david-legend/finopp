@@ -66,6 +66,7 @@ flutter:
     - assets/images/onboarding/startup/
     - assets/images/onboarding/investor/
     - assets/images/finopp/
+    - assets/images/icons/
     - assets/
     - assets/videos/
 

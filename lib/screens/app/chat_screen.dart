@@ -1,3 +1,4 @@
+import 'package:finop/const/_const.dart';
 import 'package:finop/models/chat_model.dart';
 import 'package:flutter/material.dart';
 
@@ -160,7 +161,7 @@ class ChatMessage extends StatelessWidget {
               margin: const EdgeInsets.only(right: 16.0),
               child: new CircleAvatar(
                 backgroundImage:
-                    AssetImage('assets/images/finop/david_cobbina.jpg'),
+                    AssetImage(AppImagePath.accountProfilePhoto),
                 maxRadius: 25.0,
               ),
             ),
