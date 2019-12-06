@@ -1,6 +1,7 @@
 import 'package:finop/const/color_const.dart';
 import 'package:finop/const/images_const.dart';
 import 'package:finop/const/styles.dart';
+import 'package:finop/models/screen_arguments.dart';
 import 'package:finop/screens/app/investor_profile.dart';
 import 'package:finop/screens/app/startup_profile.dart';
 import 'package:finop/widgets/finopp_primary_button.dart';
@@ -258,28 +259,3 @@ class _FinoppPostCardState extends State<FinoppPostCard> {
   }
 }
 
-class ScreenArguments {
-  String name;
-  String companyName;
-  String industry;
-  String logo;
-  String position;
-  String companyWebsite;
-  String imageUrl;
-  String postDescription;
-  String postImagePath;
-  String equity;
-
-  ScreenArguments({
-    this.name = '',
-    this.companyName = '',
-    this.logo = '',
-    this.industry = '',
-    this.position = '',
-    this.imageUrl = '',
-    this.companyWebsite = '',
-    this.postDescription = '',
-    this.postImagePath = '',
-    this.equity = '',
-  });
-}

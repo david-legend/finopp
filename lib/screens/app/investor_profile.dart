@@ -1,6 +1,6 @@
 import 'package:finop/const/_const.dart';
 import 'package:finop/const/styles.dart';
-import 'package:finop/widgets/finnop_post_card.dart';
+import 'package:finop/models/screen_arguments.dart';
 import 'package:finop/widgets/finopp_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

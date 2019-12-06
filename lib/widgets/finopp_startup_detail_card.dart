@@ -1,6 +1,9 @@
 import 'package:finop/const/color_const.dart';
 import 'package:finop/const/images_const.dart';
 import 'package:finop/const/styles.dart';
+import 'package:finop/models/screen_arguments.dart';
+import 'package:finop/screens/app/investor_profile.dart';
+import 'package:finop/screens/app/startup_profile.dart';
 import 'package:finop/widgets/finopp_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -14,10 +17,14 @@ class FinoppStartUpDetailCard extends StatefulWidget {
   final String dataSource;
   final String equity;
   final String industry;
-  final String description;
+  final String postDescription;
   final String buttonTitle;
   final Function action;
   final bool followPressed;
+
+  final String name;
+  final String companyWebsite;
+  final String position;
 
   FinoppStartUpDetailCard({
     this.controller,
@@ -26,15 +33,19 @@ class FinoppStartUpDetailCard extends StatefulWidget {
     this.dataSource = 'assets/videos/pitch1.mp4',
     this.equity = '18%',
     this.industry = 'Technology',
-    this.description =
-    'We attended a tech event and we gave a talk on our product',
+    this.postDescription =
+        'We attended a tech event and we gave a talk on our product',
     this.buttonTitle = "Follow",
     this.action,
     this.followPressed = false,
+    this.name = '',
+    this.companyWebsite = '',
+    this.position = '',
   });
 
   @override
-  _FinoppStartUpDetailCardState createState() => _FinoppStartUpDetailCardState();
+  _FinoppStartUpDetailCardState createState() =>
+      _FinoppStartUpDetailCardState();
 }
 
 class _FinoppStartUpDetailCardState extends State<FinoppStartUpDetailCard> {
@@ -65,8 +76,7 @@ class _FinoppStartUpDetailCardState extends State<FinoppStartUpDetailCard> {
                 },
                 child: AssetPlayerLifeCycle(
                   widget.dataSource,
-                      (BuildContext context,
-                      VideoPlayerController controller) =>
+                  (BuildContext context, VideoPlayerController controller) =>
                       AspectRatioVideo(controller),
                 ),
               ),
@@ -76,7 +86,13 @@ class _FinoppStartUpDetailCardState extends State<FinoppStartUpDetailCard> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(widget.startUpName, style: cardHeadingStyle),
+                  InkWell(
+                    onTap: () => navigateToUserProfile(),
+                    child: Text(
+                      widget.startUpName,
+                      style: cardHeadingStyle,
+                    ),
+                  ),
                   Text('${widget.equity} Equity', style: mediumGreyText)
                 ],
               ),
@@ -90,7 +106,12 @@ class _FinoppStartUpDetailCardState extends State<FinoppStartUpDetailCard> {
             ),
             Container(
               margin: EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0),
-              child: Text(widget.description, style: TextStyle(fontFamily: 'Raleway',),),
+              child: Text(
+                widget.postDescription,
+                style: TextStyle(
+                  fontFamily: 'Raleway',
+                ),
+              ),
             ),
             SizedBox(height: 16.0),
             Container(
@@ -100,24 +121,44 @@ class _FinoppStartUpDetailCardState extends State<FinoppStartUpDetailCard> {
                 children: <Widget>[
                   widget.followPressed
                       ? FinoppPrimaryButton(
-                    title: widget.buttonTitle,
-                    width: MediaQuery.of(context).size.width / 5,
-                    buttonPadding: 0.0,
-                    action: widget.action(),
-                  )
+                          title: widget.buttonTitle,
+                          width: MediaQuery.of(context).size.width / 5,
+                          buttonPadding: 0.0,
+                          action: widget.action(),
+                        )
                       : FinoppPrimaryButton(
-                    title: widget.buttonTitle,
-                    borderWidth: 1.0,
-                    color: Colors.white,
-                    buttonTextStyle: lightButtonStyle,
-                    width: MediaQuery.of(context).size.width / 5,
-                    buttonPadding: 0.0,
-                    action: widget.action,
-                  )
+                          title: widget.buttonTitle,
+                          borderWidth: 1.0,
+                          color: Colors.white,
+                          buttonTextStyle: lightButtonStyle,
+                          width: MediaQuery.of(context).size.width / 5,
+                          buttonPadding: 0.0,
+                          action: widget.action,
+                        )
                 ],
               ),
             )
           ],
+        ),
+      ),
+    );
+  }
+
+  void navigateToUserProfile() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => StartUpProfile(),
+        settings: RouteSettings(
+          arguments: ScreenArguments(
+            companyName: widget.startUpName,
+            industry: widget.industry,
+            companyWebsite: widget.companyWebsite,
+            imageUrl: widget.profileImagePath,
+            postDescription: widget.postDescription,
+            postImagePath: widget.profileImagePath,
+            equity: widget.equity,
+          ),
         ),
       ),
     );
