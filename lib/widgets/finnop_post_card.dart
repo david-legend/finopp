@@ -7,6 +7,7 @@ import 'package:finop/screens/app/startup_profile.dart';
 import 'package:finop/widgets/finopp_primary_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 
@@ -186,10 +187,10 @@ class _FinoppPostCardState extends State<FinoppPostCard> {
               margin: EdgeInsets.only(top: 12.0),
               child: Row(
                 children: <Widget>[
-                  customIconText(icon: widget.likeIconData, iconText: "Like"),
+                  customIconText(icon: AppIconsPath.thumbsUp, iconText: "Like"),
                   customIconText(
-                      icon: widget.commentIconData, iconText: "Comment"),
-                  customIconText(icon: widget.shareIconData, iconText: "Share"),
+                      icon: AppIconsPath.comments, iconText: "Comment"),
+                  customIconText(icon: AppIconsPath.shareAlt, iconText: "Share"),
 //                FinoppPrimaryButton(title: "Follow", width: MediaQuery.of(context).size.width / 8,)
                 ],
               ),
@@ -200,20 +201,24 @@ class _FinoppPostCardState extends State<FinoppPostCard> {
     );
   }
 
-  Widget customIconText({IconData icon, String iconText}) {
+  Widget customIconText({String icon, String iconText}) {
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          IconButton(
-            padding: const EdgeInsets.all(0.0),
-            icon: Icon(
-              icon,
-              size: 16,
-              color: Colors.grey,
-            ),
-            onPressed: () {},
+          Padding(
+            padding: const EdgeInsets.only(left: 12.0, right: 8.0, top: 8.0, bottom: 8.0),
+            child: SvgPicture.asset(icon, color: Colors.grey,),
           ),
+//          IconButton(
+//            padding: const EdgeInsets.all(0.0),
+//            icon: Icon(
+//              icon,
+//              size: 16,
+//              color: Colors.grey,
+//            ),
+//            onPressed: () {},
+//          ),
           Text(
             iconText,
             style: TextStyle(color: Colors.grey),

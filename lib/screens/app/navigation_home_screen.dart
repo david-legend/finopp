@@ -8,6 +8,7 @@ import 'package:finop/screens/app/startup_profile.dart';
 import 'package:finop/screens/app/user_profile_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'chats.dart';
@@ -145,30 +146,32 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
     _drawerDetailsPosition = _controller.drive(_drawerDetailsTween);
     _navigationViews = <NavigationIconView>[
       NavigationIconView(
-        icon: const Icon(
-          FontAwesomeIcons.home,
+        icon: SvgPicture.asset(
+          AppIconsPath.homeAlt,
+          color: Colors.grey,
+        ),
+        activeIcon: SvgPicture.asset(
+          AppIconsPath.homeAlt,
+          color: kFINOP_PRIMARY,
         ),
         title: 'Home',
         vsync: this,
       ),
       NavigationIconView(
-        icon: const Icon(
-          FontAwesomeIcons.chartLine,
-        ),
+        icon: SvgPicture.asset(AppIconsPath.trees, color: Colors.grey,),
+        activeIcon: SvgPicture.asset(AppIconsPath.trees, color: kFINOP_PRIMARY,),
         title: 'Startups',
         vsync: this,
       ),
       NavigationIconView(
-        icon: const Icon(
-          FontAwesomeIcons.donate,
-        ),
+        icon: SvgPicture.asset(AppIconsPath.chartLine, color: Colors.grey,),
+        activeIcon: SvgPicture.asset(AppIconsPath.chartLine, color: kFINOP_PRIMARY,),
         title: 'Investors',
         vsync: this,
       ),
       NavigationIconView(
-        icon: const Icon(
-          FontAwesomeIcons.plus,
-        ),
+        icon: SvgPicture.asset(AppIconsPath.plusCircle, color: Colors.grey,),
+        activeIcon: SvgPicture.asset(AppIconsPath.plusCircle, color: kFINOP_PRIMARY,),
         title: 'Add',
         vsync: this,
       ),
@@ -304,7 +307,8 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
                     Icons.chat,
                     color: Colors.black,
                   ),
-                  onPressed: () => Navigator.pushNamed(context, Chats.ROUTE_NAME),
+                  onPressed: () =>
+                      Navigator.pushNamed(context, Chats.ROUTE_NAME),
                 ),
               ),
               Positioned(

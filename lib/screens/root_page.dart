@@ -10,9 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-//TODO:: add navigation for all 3 cards
-//TODO:: add navigation to message on profile screens
-//TODO:: add actual icons
+//TODO:: let back button show on chat screens
+
 //TODO:: Add get started to onboarding screens
 //TODO:: fix login and signUp screens overflow issues
 //TODO:: fix login and signUp background colors

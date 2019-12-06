@@ -36,6 +36,7 @@ class AppImagePath {
 class AppIconsPath {
   static const String image_path = "assets/images/icons";
   static const String arrowLeft = "$image_path/arrow-left.svg";
+  static const String homeAlt = "$image_path/home-alt.svg";
   static const String camera = "$image_path/camera.svg";
   static const String chartLine = "$image_path/chart-line.svg";
   static const String commentMessage = "$image_path/comment-message.svg";
