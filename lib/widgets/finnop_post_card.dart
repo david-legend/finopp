@@ -244,7 +244,6 @@ class _FinoppPostCardState extends State<FinoppPostCard> {
           arguments: ScreenArguments(
             name: widget.name,
             position: widget.position,
-//            logo: logo,
             companyName: widget.companyName,
             industry: widget.industry,
             companyWebsite: widget.companyWebsite,
