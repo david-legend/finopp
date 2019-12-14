@@ -2,6 +2,7 @@ import 'package:finop/const/_const.dart';
 import 'package:finop/screens/registration/login_screen.dart';
 import 'package:finop/screens/registration/onboarding_investor_screen.dart';
 import 'package:finop/screens/registration/signup_screen.dart';
+import 'package:finop/services/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -113,7 +114,7 @@ class ChoiceScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => LoginScreen(),
+                                builder: (context) => LoginScreen(auth: Auth(),),
                                 settings: RouteSettings(
                                   arguments: OriginArguments(
                                     true,

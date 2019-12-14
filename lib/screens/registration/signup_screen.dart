@@ -199,7 +199,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, LoginScreen.ROUTE_NAME);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginScreen(auth: Auth(),),
+                        ),
+                      );
+//                      Navigator.pushNamed(context, LoginScreen.ROUTE_NAME);
                     },
                     child: Text(
                       StringConst.SIGN_IN,
