@@ -1,19 +1,16 @@
 import 'package:finop/const/color_const.dart';
 import 'package:finop/const/images_const.dart';
 import 'package:finop/const/styles.dart';
+import 'package:finop/models/screen_arguments.dart';
 import 'package:finop/screens/app/home.dart';
 import 'package:finop/screens/app/investor_profile.dart';
 import 'package:finop/screens/app/startup_feed.dart';
-import 'package:finop/screens/app/startup_profile.dart';
-import 'package:finop/screens/app/user_profile_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'chats.dart';
 import 'investor_feed.dart';
-import 'investor_feed_screen.dart';
 
 class NavigationIconView {
   NavigationIconView({
@@ -392,8 +389,15 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen>
                                   style: onlyFontTextStyle,
                                 ),
                                 onTap: () {
-                                  Navigator.pushNamed(
-                                      context, InvestorProfile.ROUTE_NAME);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => InvestorProfile(),
+                                      settings: RouteSettings(
+                                        arguments: ScreenArguments(),
+                                      ),
+                                    ),
+                                  );
                                 },
                               ),
                               ListTile(

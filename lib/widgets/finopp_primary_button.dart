@@ -47,8 +47,10 @@ class FinoppPrimaryButton extends StatelessWidget {
           onPressed: () => action(),
           color: color,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Row(
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.all(buttonPadding),

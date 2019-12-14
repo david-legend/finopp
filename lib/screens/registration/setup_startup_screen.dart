@@ -259,9 +259,11 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
           Align(
             alignment: Alignment.bottomRight,
             child: FinoppPrimaryButton(
+              title: 'Proceed',
               width: MediaQuery.of(context).size.width / 3,
               action: _proceedToNextStep,
             ),
+
           ),
         ],
       ),
@@ -332,6 +334,7 @@ class _SetupStartUpScreenState extends State<SetupStartUpScreen>
                       child: Align(
                         alignment: Alignment.bottomRight,
                         child: FinoppPrimaryButton(
+                          title: 'Proceed',
                           width: MediaQuery.of(context).size.width / 3,
                           action: _proceedToNextStep,
                         ),
