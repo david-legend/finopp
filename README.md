@@ -5,10 +5,9 @@ Built With Flutter
 ## Finopp
 
 This app aims to connect startUps with Investors.
-It was built to compete in the competition for African StartUps on App and Game Development 
-in Egypt(http://techleaders.eg/aal/competition) in less than two weeks. Such is the power of flutter.
-For now it is mostly UI, But Login and SignUp connects to FireBase
-I hope I make through.. :pray: :pray: :pray:
+It was built to compete in the competition (African App Launchpad) in 
+Egypt(http://techleaders.eg/aal/competition) during the RiseUpSummit 2019
+My team was able to make it through to the final phase of the competition.
 
 ![Screenshot](assets/images/screen_pics/welcome.png)
 ![Screenshot](assets/images/screen_pics/onboarding1.png)
